@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Once Builder</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>⚽ Once Builder</h1>
+  </header>
+
+  <main class="layout">
+    <section class="panel formation-panel">
+      <h2>Formación</h2>
+      <select id="formation-select"></select>
+      <div id="pitch-container"></div>
+      <button id="save-lineup-btn">Guardar alineación</button>
+    </section>
+
+    <section class="panel players-panel">
+      <h2>Plantilla</h2>
+      <div class="team-search">
+        <input type="text" id="team-search" placeholder="Buscar equipo (ej: Real Madrid)">
+        <button id="team-search-btn">Buscar</button>
+      </div>
+      <ul id="player-list"></ul>
+
+      <h3>Añadir jugador manual</h3>
+      <form id="manual-player-form">
+        <input type="text" name="name" placeholder="Nombre" required>
+        <input type="text" name="position" placeholder="Posición (GK/DF/MF/FW)">
+        <input type="number" name="number" placeholder="Dorsal">
+        <button type="submit">Añadir</button>
+      </form>
+    </section>
+
+    <section class="panel jersey-panel">
+      <h2>Camiseta</h2>
+      <div id="jersey-container"></div>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
