@@ -19,18 +19,43 @@ export function renderPitch(container, formationName, onSlotClick) {
     el.style.bottom = `${slot.y}%`;
 
     const assigned = slotAssignments[slot.id];
-    el.innerHTML = assigned
-      ? `<div class="slot-jersey"></div><span class="slot-name">${assigned.name}</span>`
-      : `<div class="slot-empty">${slot.label}</div>`;
+    if (assigned) {
+      el.classList.add('filled');
+      el.innerHTML = `<div class="slot-jersey" style="background: var(--bg-color)">${assigned.number || ''}</div><span class="slot-name">${assigned.name}</span>`;
+    } else {
+      el.innerHTML = `<div class="slot-empty">${slot.label}</div>`;
+    }
 
     el.addEventListener('click', () => onSlotClick(slot));
+    
+    // Doble click para remover jugador
+    el.addEventListener('dblclick', () => {
+      if (assigned) {
+        delete slotAssignments[slot.id];
+        renderPitch(container, currentFormation, onSlotClick);
+      }
+    });
+
+    el.addEventListener('dragenter', e => {
+      e.preventDefault();
+      el.classList.add('drag-over');
+    });
+
+    el.addEventListener('dragleave', e => {
+      e.preventDefault();
+      el.classList.remove('drag-over');
+    });
+
     el.addEventListener('dragover', e => e.preventDefault());
+
     el.addEventListener('drop', e => {
       e.preventDefault();
+      el.classList.remove('drag-over');
       const playerId = e.dataTransfer.getData('playerId');
       const playerName = e.dataTransfer.getData('playerName');
+      const playerNumber = e.dataTransfer.getData('playerNumber');
       if (playerId) {
-        slotAssignments[slot.id] = { id: playerId, name: playerName };
+        slotAssignments[slot.id] = { id: playerId, name: playerName, number: playerNumber };
         renderPitch(container, currentFormation, onSlotClick);
       }
     });
@@ -59,7 +84,8 @@ export function exportLineup() {
     slots: Object.entries(slotAssignments).map(([slotId, player]) => ({
       slotId,
       playerId: player.id,
-      playerName: player.name
+      playerName: player.name,
+      number: player.number
     }))
   };
 }

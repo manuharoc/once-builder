@@ -4,40 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Once Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  <!-- Toast Container para notificaciones -->
+  <div id="toast-container"></div>
+
   <header>
-    <h1>⚽ Once Builder</h1>
+    <div class="header-content">
+      <h1><i class="fa-solid fa-futbol"></i> Once Builder</h1>
+      <p>Crea tu alineación perfecta</p>
+    </div>
   </header>
 
   <main class="layout">
     <section class="panel formation-panel">
-      <h2>Formación</h2>
-      <select id="formation-select"></select>
+      <div class="panel-header">
+        <h2><i class="fa-solid fa-chess-board"></i> Formación</h2>
+        <select id="formation-select" class="modern-input" style="width: auto;"></select>
+      </div>
       <div id="pitch-container"></div>
-      <button id="save-lineup-btn">Guardar alineación</button>
+      <button id="save-lineup-btn" class="primary-btn"><i class="fa-solid fa-download"></i> Guardar alineación</button>
     </section>
 
     <section class="panel players-panel">
-      <h2>Plantilla</h2>
+      <h2><i class="fa-solid fa-users"></i> Plantilla</h2>
       <div class="team-search">
-        <input type="text" id="team-search" placeholder="Buscar equipo (ej: Real Madrid)">
-        <button id="team-search-btn">Buscar</button>
+        <input type="text" id="team-search" class="modern-input" placeholder="Buscar equipo (ej: Real Madrid)">
+        <button id="team-search-btn" class="primary-btn search-btn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span class="btn-text">Buscar</span>
+        </button>
       </div>
+      <div id="loader" class="loader hidden"></div>
       <ul id="player-list"></ul>
 
-      <h3>Añadir jugador manual</h3>
-      <form id="manual-player-form">
-        <input type="text" name="name" placeholder="Nombre" required>
-        <input type="text" name="position" placeholder="Posición (GK/DF/MF/FW)">
-        <input type="number" name="number" placeholder="Dorsal">
-        <button type="submit">Añadir</button>
+      <div class="divider"></div>
+      
+      <h3><i class="fa-solid fa-user-plus"></i> Añadir jugador</h3>
+      <form id="manual-player-form" class="modern-form">
+        <input type="text" name="name" class="modern-input" placeholder="Nombre" required>
+        <div class="form-row">
+          <select name="position" class="modern-input" required>
+            <option value="" disabled selected>Posición...</option>
+            <option value="Goalkeeper">Portero</option>
+            <option value="Defender">Defensa</option>
+            <option value="Midfielder">Medio</option>
+            <option value="Attacker">Delantero</option>
+          </select>
+          <input type="number" name="number" class="modern-input" placeholder="Dorsal" min="1" max="99">
+        </div>
+        <button type="submit" class="secondary-btn"><i class="fa-solid fa-plus"></i> Añadir</button>
       </form>
     </section>
 
     <section class="panel jersey-panel">
-      <h2>Camiseta</h2>
+      <h2><i class="fa-solid fa-shirt"></i> Camiseta</h2>
       <div id="jersey-container"></div>
     </section>
   </main>

@@ -1,107 +1,113 @@
-import { supabase } from './supabase-client.js';
+// Mock de datos locales
+const MOCK_TEAMS = [
+  { id: 1, name: 'Real Madrid', code: 'RMA', country: 'Spain', logo: '' },
+  { id: 2, name: 'Barcelona', code: 'FCB', country: 'Spain', logo: '' },
+  { id: 3, name: 'Manchester City', code: 'MCI', country: 'England', logo: '' },
+  { id: 4, name: 'Bayern Munich', code: 'BAY', country: 'Germany', logo: '' }
+];
 
-// API-Football (RapidAPI o api-sports.io directo). Requiere API key propia.
-const API_FOOTBALL_KEY = 'TU-API-KEY';
-const API_FOOTBALL_HOST = 'v3.football.api-sports.io';
+const MOCK_SQUADS = {
+  1: [
+    { id: 101, name: 'Thibaut Courtois', position: 'Goalkeeper', number: 1 },
+    { id: 102, name: 'Dani Carvajal', position: 'Defender', number: 2 },
+    { id: 103, name: 'Eder Militao', position: 'Defender', number: 3 },
+    { id: 104, name: 'David Alaba', position: 'Defender', number: 4 },
+    { id: 105, name: 'Jude Bellingham', position: 'Midfielder', number: 5 },
+    { id: 106, name: 'Vinicius Junior', position: 'Attacker', number: 7 },
+    { id: 107, name: 'Rodrygo', position: 'Attacker', number: 11 },
+    { id: 108, name: 'Luka Modric', position: 'Midfielder', number: 10 },
+    { id: 109, name: 'Toni Kroos', position: 'Midfielder', number: 8 },
+    { id: 110, name: 'Federico Valverde', position: 'Midfielder', number: 15 },
+    { id: 111, name: 'Aurelien Tchouameni', position: 'Midfielder', number: 18 }
+  ],
+  2: [
+    { id: 201, name: 'Marc-Andre ter Stegen', position: 'Goalkeeper', number: 1 },
+    { id: 202, name: 'Ronald Araujo', position: 'Defender', number: 4 },
+    { id: 203, name: 'Pedri', position: 'Midfielder', number: 8 },
+    { id: 204, name: 'Robert Lewandowski', position: 'Attacker', number: 9 },
+    { id: 205, name: 'Lamine Yamal', position: 'Attacker', number: 27 },
+    { id: 206, name: 'Frenkie de Jong', position: 'Midfielder', number: 21 },
+    { id: 207, name: 'Jules Kounde', position: 'Defender', number: 23 },
+    { id: 208, name: 'Ilkay Gundogan', position: 'Midfielder', number: 22 }
+  ],
+  3: [
+    { id: 301, name: 'Ederson', position: 'Goalkeeper', number: 31 },
+    { id: 302, name: 'Ruben Dias', position: 'Defender', number: 3 },
+    { id: 303, name: 'Kevin De Bruyne', position: 'Midfielder', number: 17 },
+    { id: 304, name: 'Erling Haaland', position: 'Attacker', number: 9 },
+    { id: 305, name: 'Rodri', position: 'Midfielder', number: 16 },
+    { id: 306, name: 'Bernardo Silva', position: 'Midfielder', number: 20 },
+    { id: 307, name: 'Phil Foden', position: 'Attacker', number: 47 },
+    { id: 308, name: 'Kyle Walker', position: 'Defender', number: 2 }
+  ]
+};
 
-/**
- * Busca un equipo por nombre en API-Football.
- */
+function getLocalData(key, defaultVal) {
+  try {
+    const val = localStorage.getItem(key);
+    return val ? JSON.parse(val) : defaultVal;
+  } catch {
+    return defaultVal;
+  }
+}
+
+function setLocalData(key, val) {
+  localStorage.setItem(key, JSON.stringify(val));
+}
+
 export async function searchTeamAPI(teamName) {
-  try {
-    const res = await fetch(`https://${API_FOOTBALL_HOST}/teams?name=${encodeURIComponent(teamName)}`, {
-      headers: { 'x-apisports-key': API_FOOTBALL_KEY }
-    });
-    if (!res.ok) throw new Error('API-Football error ' + res.status);
-    const data = await res.json();
-    return data.response ?? [];
-  } catch (err) {
-    console.warn('Fallo API-Football, usando fallback manual:', err.message);
-    return [];
-  }
+  // Simular delay de red para que los loaders se vean
+  await new Promise(r => setTimeout(r, 600));
+  const query = teamName.toLowerCase();
+  const results = MOCK_TEAMS.filter(t => t.name.toLowerCase().includes(query));
+  return results.map(t => ({ team: t }));
 }
 
-/**
- * Obtiene la plantilla de un equipo por su id en API-Football.
- */
 export async function getSquadAPI(apiTeamId) {
-  try {
-    const res = await fetch(`https://${API_FOOTBALL_HOST}/players/squads?team=${apiTeamId}`, {
-      headers: { 'x-apisports-key': API_FOOTBALL_KEY }
-    });
-    if (!res.ok) throw new Error('API-Football error ' + res.status);
-    const data = await res.json();
-    return data.response?.[0]?.players ?? [];
-  } catch (err) {
-    console.warn('Fallo API-Football squad, usando fallback manual:', err.message);
-    return [];
-  }
+  await new Promise(r => setTimeout(r, 400));
+  return MOCK_SQUADS[apiTeamId] || [];
 }
 
-/**
- * Guarda un equipo + plantilla (venga de API o carga manual) en Supabase.
- */
 export async function saveTeamWithPlayers(team, players, source = 'api') {
-  const { data: teamRow, error: teamErr } = await supabase
-    .from('teams')
-    .insert({
-      name: team.name,
-      short_name: team.code ?? null,
-      country: team.country ?? null,
-      logo_url: team.logo ?? null,
-      source,
-      api_team_id: team.id ?? null
-    })
-    .select()
-    .single();
-
-  if (teamErr) throw teamErr;
-
-  const rows = players.map(p => ({
-    team_id: teamRow.id,
-    name: p.name,
-    position: p.position ?? null,
-    number: p.number ?? null,
-    nationality: p.nationality ?? null,
-    photo_url: p.photo ?? null,
-    source,
-    api_player_id: p.id ?? null
-  }));
-
-  const { error: playersErr } = await supabase.from('players').insert(rows);
-  if (playersErr) throw playersErr;
-
-  return teamRow;
+  const savedTeams = getLocalData('ob_teams', []);
+  const savedPlayers = getLocalData('ob_players', []);
+  
+  let existingTeam = savedTeams.find(t => t.api_team_id === team.id);
+  if (!existingTeam) {
+    existingTeam = { id: Date.now().toString(), name: team.name, api_team_id: team.id };
+    savedTeams.push(existingTeam);
+    setLocalData('ob_teams', savedTeams);
+    
+    const newPlayers = players.map(p => ({
+      id: p.id || Math.random().toString(36).substr(2, 9),
+      team_id: existingTeam.id,
+      name: p.name,
+      position: p.position,
+      number: p.number
+    }));
+    savedPlayers.push(...newPlayers);
+    setLocalData('ob_players', savedPlayers);
+  }
+  return existingTeam;
 }
 
-/**
- * Carga manual de un jugador (fallback cuando no hay datos de API).
- */
 export async function addManualPlayer(teamId, player) {
-  const { data, error } = await supabase
-    .from('players')
-    .insert({ team_id: teamId, ...player, source: 'manual' })
-    .select()
-    .single();
-  if (error) throw error;
-  return data;
+  const savedPlayers = getLocalData('ob_players', []);
+  const newPlayer = {
+    id: 'manual_' + Date.now().toString(),
+    team_id: teamId,
+    ...player
+  };
+  savedPlayers.push(newPlayer);
+  setLocalData('ob_players', savedPlayers);
+  return newPlayer;
 }
 
-/**
- * Lee la plantilla guardada de un equipo desde Supabase.
- */
 export async function getTeamPlayers(teamId) {
-  const { data, error } = await supabase
-    .from('players')
-    .select('*')
-    .eq('team_id', teamId)
-    .order('number', { ascending: true });
-  if (error) throw error;
-  return data;
+  const savedPlayers = getLocalData('ob_players', []);
+  return savedPlayers.filter(p => p.team_id === teamId).sort((a, b) => (a.number || 99) - (b.number || 99));
 }
 
 export async function listTeams() {
-  const { data, error } = await supabase.from('teams').select('*').order('name');
-  if (error) throw error;
-  return data;
+  return getLocalData('ob_teams', []);
 }
