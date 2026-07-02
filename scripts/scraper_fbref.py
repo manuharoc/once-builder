@@ -1,8 +1,12 @@
 import json
 import time
 import requests
+import urllib3
 from bs4 import BeautifulSoup
 import os
+
+# Desactivar advertencias de SSL al usar verify=False
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # ==============================================================================
 # SCRIPT DE SCRAPING AUTOMATIZADO - FBRef
@@ -57,9 +61,10 @@ def parse_position(fbref_pos):
 def scrape_team(team_info):
     print(f"[{team_info['name']}] Descargando datos...")
     
-    response = requests.get(team_info["url"], headers=HEADERS)
+    # Usamos verify=False para evitar problemas con los certificados corporativos (proxy)
+    response = requests.get(team_info["url"], headers=HEADERS, verify=False)
     if response.status_code != 200:
-        print(f"❌ Error {response.status_code} al acceder a {team_info['name']}")
+        print(f"Error {response.status_code} al acceder a {team_info['name']}")
         return []
 
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -67,7 +72,7 @@ def scrape_team(team_info):
     # La tabla principal de estadísticas tiene la clase 'stats_table'
     table = soup.find('table', class_='stats_table')
     if not table:
-        print(f"❌ No se encontró la tabla de jugadores para {team_info['name']}")
+        print(f"No se encontró la tabla de jugadores para {team_info['name']}")
         return []
 
     players = []
@@ -107,7 +112,7 @@ def scrape_team(team_info):
             'number': number
         })
         
-    print(f"✅ Encontrados {len(players)} jugadores.")
+    print(f"Encontrados {len(players)} jugadores.")
     
     # CRÍTICO: Pausa obligatoria para no ser baneado por FBRef (límite de 20 por min)
     time.sleep(4) 
@@ -128,7 +133,7 @@ def main():
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(all_squads, f, indent=2, ensure_ascii=False)
         
-    print(f"\n🎉 ¡Proceso terminado! Los datos se han guardado en {output_path}")
+    print(f"\n¡Proceso terminado! Los datos se han guardado en {output_path}")
     print("Para aplicarlos a la web, copia y pega el contenido del JSON dentro")
     print("del objeto MOCK_SQUADS en el archivo js/players.js")
 
