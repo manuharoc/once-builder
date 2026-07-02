@@ -208,11 +208,18 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   display: flex; align-items: center; justify-content: center;
   transition: transform 0.2s;
 }
+.slot.filled {
+  cursor: grab;
+}
+.slot.filled:active {
+  cursor: grabbing;
+}
 .slot.filled:hover .slot-chapa { transform: scale(1.15); }
-.slot.dragging { opacity: 0.35; }
+.slot.dragging { opacity: 0.35; cursor: grabbing !important; }
 .slot-name {
   font-size: 0.7rem; position: absolute; bottom: -20px; white-space: nowrap;
   background: rgba(0, 0, 0, 0.7); color: white; padding: 0.2rem 0.5rem; border-radius: 12px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  pointer-events: none; /* prevent drag intercept */
 }
 
 /* Field hint */

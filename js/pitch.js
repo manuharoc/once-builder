@@ -70,10 +70,19 @@ function renderPitch(container, formationName, onSlotClick) {
     var el = document.createElement('div');
     el.className = 'slot';
     el.dataset.slotId = slot.id;
-    el.style.left   = slot.x + '%';
-    el.style.bottom = slot.y + '%';
-
+    
+    // Si tiene una posición personalizada, la usamos; si no, la de la formación
     var assigned = _slotAssignments[slot.id];
+    var posX = slot.x;
+    var posY = slot.y;
+    if (assigned && assigned.customX !== undefined) {
+      posX = assigned.customX;
+      posY = assigned.customY;
+    }
+    
+    el.style.left   = posX + '%';
+    el.style.bottom = posY + '%';
+
     if (assigned) {
       el.classList.add('filled');
       // El slot lleno es arrastrable (para intercambiar posiciones)
@@ -116,6 +125,7 @@ function renderPitch(container, formationName, onSlotClick) {
     el.addEventListener('dragover',  function(e) { e.preventDefault(); });
 
     el.addEventListener('drop', function(e) {
+      e.stopPropagation(); // Evitar que el campo atrape este drop
       e.preventDefault();
       el.classList.remove('drag-over');
 
@@ -131,12 +141,31 @@ function renderPitch(container, formationName, onSlotClick) {
         var sourcePlayer = _slotAssignments[sourceSlotId];
         var targetPlayer = _slotAssignments[slot.id];
 
+        // Mantenemos las posiciones personalizadas si intercambiamos
+        var sCustomX = sourcePlayer.customX;
+        var sCustomY = sourcePlayer.customY;
+        
         if (targetPlayer) {
+          var tCustomX = targetPlayer.customX;
+          var tCustomY = targetPlayer.customY;
+          
+          targetPlayer.customX = sCustomX;
+          targetPlayer.customY = sCustomY;
           _slotAssignments[sourceSlotId] = targetPlayer;
+          
+          sourcePlayer.customX = tCustomX;
+          sourcePlayer.customY = tCustomY;
         } else {
+          // El slot original se queda vacío
+          delete sourcePlayer.customX;
+          delete sourcePlayer.customY;
           delete _slotAssignments[sourceSlotId];
         }
-        _slotAssignments[slot.id] = { id: playerId, name: playerName, number: playerNumber };
+        
+        _slotAssignments[slot.id] = { 
+          id: playerId, name: playerName, number: playerNumber,
+          customX: sourcePlayer.customX, customY: sourcePlayer.customY
+        };
       } else {
         // Viene del banquillo → asignar directamente
         _slotAssignments[slot.id] = { id: playerId, name: playerName, number: playerNumber };
@@ -146,6 +175,32 @@ function renderPitch(container, formationName, onSlotClick) {
     });
 
     pitch.appendChild(el);
+  });
+
+  // Drop sobre cualquier parte del césped (movimiento libre)
+  pitch.addEventListener('dragover', function(e) { e.preventDefault(); });
+  pitch.addEventListener('drop', function(e) {
+    e.preventDefault();
+    var sourceSlotId = e.dataTransfer.getData('sourceSlotId');
+    if (!sourceSlotId || !_slotAssignments[sourceSlotId]) return;
+
+    var rect = pitch.getBoundingClientRect();
+    
+    // Calculamos coordenada respecto a la esquina superior izquierda del campo
+    // Restamos 24px que es la mitad de la chapa (48x48)
+    var x = e.clientX - rect.left - 24;
+    var y = e.clientY - rect.top - 24;
+
+    var percentX = (x / rect.width) * 100;
+    var percentBottom = 100 - ((y + 48) / rect.height) * 100; // Ajustamos bottom
+
+    percentX = Math.max(0, Math.min(100, percentX));
+    percentBottom = Math.max(0, Math.min(100, percentBottom));
+
+    _slotAssignments[sourceSlotId].customX = percentX;
+    _slotAssignments[sourceSlotId].customY = percentBottom;
+
+    renderPitch(container, _pitchCurrentFormation, onSlotClick);
   });
 
   container.appendChild(pitch);
