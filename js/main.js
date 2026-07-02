@@ -166,13 +166,27 @@ function renderPlayerList() {
     li.innerHTML =
       '<span class="player-number-badge">' + (p.number || '-') + '</span>' +
       '<span class="player-name">' + p.name + '</span>' +
-      '<span class="player-pos-badge">' + (p.position ? p.position.substring(0, 3).toUpperCase() : '?') + '</span>';
+      '<span class="player-pos-badge">' + (p.position ? p.position.substring(0, 3).toUpperCase() : '?') + '</span>' +
+      '<button class="delete-player-btn" title="Borrar jugador"><i class="fa-solid fa-trash"></i></button>';
 
     // Arrastrar
     li.addEventListener('dragstart', function(e) {
       e.dataTransfer.setData('playerId',     p.id);
       e.dataTransfer.setData('playerName',   p.name);
       e.dataTransfer.setData('playerNumber', p.number || '');
+    });
+
+    // Clic en la papelera para borrar
+    var delBtn = li.querySelector('.delete-player-btn');
+    delBtn.addEventListener('click', async function(e) {
+      e.stopPropagation();
+      if (confirm('¿Seguro que quieres borrar a ' + p.name + '?')) {
+        await deletePlayer(p.id);
+        unassignPlayer(p.id);
+        currentPlayers = currentPlayers.filter(function(cp) { return cp.id !== p.id; });
+        renderPlayerList();
+        showToast(p.name + ' eliminado de la plantilla.');
+      }
     });
 
     // Clic → auto-asignar / quitar

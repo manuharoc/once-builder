@@ -16,32 +16,32 @@ HEADERS = {
 }
 
 # Diccionario de equipos (Los mismos 23 que tienes en players.js)
-# Usamos las URLs de BDFutbol de la temporada actual 24-25
+# Usamos las URLs de BDFutbol de la temporada actual 25-26
 TEAM_URLS = [
-    {"id": "madrid", "name": "Real Madrid", "url": "https://www.bdfutbol.com/es/t/t2024-252.html"},
-    {"id": "barca", "name": "FC Barcelona", "url": "https://www.bdfutbol.com/es/t/t2024-251.html"},
-    {"id": "atletico", "name": "Atlético de Madrid", "url": "https://www.bdfutbol.com/es/t/t2024-257.html"},
-    {"id": "villarreal", "name": "Villarreal", "url": "https://www.bdfutbol.com/es/t/t2024-2538.html"},
-    {"id": "betis", "name": "Real Betis", "url": "https://www.bdfutbol.com/es/t/t2024-2514.html"},
-    {"id": "celta", "name": "Celta de Vigo", "url": "https://www.bdfutbol.com/es/t/t2024-2511.html"},
-    {"id": "realsociedad", "name": "Real Sociedad", "url": "https://www.bdfutbol.com/es/t/t2024-2532.html"},
-    {"id": "getafe", "name": "Getafe", "url": "https://www.bdfutbol.com/es/t/t2024-2561.html"},
-    {"id": "athletic", "name": "Athletic Club", "url": "https://www.bdfutbol.com/es/t/t2024-258.html"},
-    {"id": "valencia", "name": "Valencia", "url": "https://www.bdfutbol.com/es/t/t2024-2536.html"},
-    {"id": "sevilla", "name": "Sevilla", "url": "https://www.bdfutbol.com/es/t/t2024-2533.html"},
-    {"id": "rayo", "name": "Rayo Vallecano", "url": "https://www.bdfutbol.com/es/t/t2024-2528.html"},
-    {"id": "osasuna", "name": "Osasuna", "url": "https://www.bdfutbol.com/es/t/t2024-2513.html"},
-    {"id": "espanyol", "name": "Espanyol", "url": "https://www.bdfutbol.com/es/t/t2024-2515.html"},
-    {"id": "alaves", "name": "Alavés", "url": "https://www.bdfutbol.com/es/t/t2024-253.html"},
-    {"id": "mallorca", "name": "Mallorca", "url": "https://www.bdfutbol.com/es/t/t2024-2524.html"},
-    {"id": "girona", "name": "Girona", "url": "https://www.bdfutbol.com/es/t/t2024-25153.html"},
-    {"id": "laspalmas", "name": "Las Palmas", "url": "https://www.bdfutbol.com/es/t/t2024-2531.html"},
-    {"id": "leganes", "name": "Leganés", "url": "https://www.bdfutbol.com/es/t/t2024-2557.html"},
-    {"id": "valladolid", "name": "Real Valladolid", "url": "https://www.bdfutbol.com/es/t/t2024-2537.html"},
+    {"id": "madrid", "name": "Real Madrid", "url": "https://www.bdfutbol.com/es/t/t2025-262.html"},
+    {"id": "barca", "name": "FC Barcelona", "url": "https://www.bdfutbol.com/es/t/t2025-261.html"},
+    {"id": "atletico", "name": "Atlético de Madrid", "url": "https://www.bdfutbol.com/es/t/t2025-267.html"},
+    {"id": "villarreal", "name": "Villarreal", "url": "https://www.bdfutbol.com/es/t/t2025-2638.html"},
+    {"id": "betis", "name": "Real Betis", "url": "https://www.bdfutbol.com/es/t/t2025-2614.html"},
+    {"id": "celta", "name": "Celta de Vigo", "url": "https://www.bdfutbol.com/es/t/t2025-2611.html"},
+    {"id": "realsociedad", "name": "Real Sociedad", "url": "https://www.bdfutbol.com/es/t/t2025-2632.html"},
+    {"id": "getafe", "name": "Getafe", "url": "https://www.bdfutbol.com/es/t/t2025-2661.html"},
+    {"id": "athletic", "name": "Athletic Club", "url": "https://www.bdfutbol.com/es/t/t2025-268.html"},
+    {"id": "valencia", "name": "Valencia", "url": "https://www.bdfutbol.com/es/t/t2025-2636.html"},
+    {"id": "sevilla", "name": "Sevilla", "url": "https://www.bdfutbol.com/es/t/t2025-2633.html"},
+    {"id": "rayo", "name": "Rayo Vallecano", "url": "https://www.bdfutbol.com/es/t/t2025-2628.html"},
+    {"id": "osasuna", "name": "Osasuna", "url": "https://www.bdfutbol.com/es/t/t2025-2613.html"},
+    {"id": "espanyol", "name": "Espanyol", "url": "https://www.bdfutbol.com/es/t/t2025-2615.html"},
+    {"id": "alaves", "name": "Alavés", "url": "https://www.bdfutbol.com/es/t/t2025-263.html"},
+    {"id": "mallorca", "name": "Mallorca", "url": "https://www.bdfutbol.com/es/t/t2025-2624.html"},
+    {"id": "girona", "name": "Girona", "url": "https://www.bdfutbol.com/es/t/t2025-26153.html"},
+    {"id": "laspalmas", "name": "Las Palmas", "url": "https://www.bdfutbol.com/es/t/t2025-2631.html"},
+    {"id": "leganes", "name": "Leganés", "url": "https://www.bdfutbol.com/es/t/t2025-2657.html"},
+    {"id": "valladolid", "name": "Real Valladolid", "url": "https://www.bdfutbol.com/es/t/t2025-2637.html"},
     # Equipos de segunda para rellenar (ajustado a sus IDs de BDFutbol)
-    {"id": "racing", "name": "Racing de Santander", "url": "https://www.bdfutbol.com/es/t/t2024-2527.html"},
-    {"id": "deportivo", "name": "Deportivo de La Coruña", "url": "https://www.bdfutbol.com/es/t/t2024-2512.html"},
-    {"id": "malaga", "name": "Málaga", "url": "https://www.bdfutbol.com/es/t/t2024-2523.html"}
+    {"id": "racing", "name": "Racing de Santander", "url": "https://www.bdfutbol.com/es/t/t2025-2627.html"},
+    {"id": "deportivo", "name": "Deportivo de La Coruña", "url": "https://www.bdfutbol.com/es/t/t2025-2612.html"},
+    {"id": "malaga", "name": "Málaga", "url": "https://www.bdfutbol.com/es/t/t2025-2623.html"}
 ]
 
 def parse_position(classes):
