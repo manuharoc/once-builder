@@ -174,6 +174,11 @@ function renderCompareTeam(side, stateObj) {
       renderCompareTeam(side, stateObj);
     });
     
+    // Clic simple abre el modal de sustitutos
+    el.addEventListener('click', function() {
+       openSubstituteModal(side, slot.id, stateObj);
+    });
+    
     // Doble clic manda al banquillo
     el.addEventListener('dblclick', function() {
        if (stateObj.lineup[slot.id]) {
@@ -303,4 +308,56 @@ if (backToHomeBtn) {
     compareLayout.classList.add('hidden');
     welcomeScreen.classList.remove('hidden');
   });
+}
+
+// ── Modal de Sustitutos ──────────────────────────────────────────────────────
+var subModal = document.getElementById('substitute-modal');
+var closeSubBtn = document.getElementById('close-substitute-btn');
+var subList = document.getElementById('substitute-list');
+
+if (closeSubBtn) {
+  closeSubBtn.addEventListener('click', function() {
+    subModal.classList.add('hidden');
+  });
+}
+
+function openSubstituteModal(side, slotId, stateObj) {
+  var cat = getSlotCategory(slotId);
+  var targetPos = cat === 'GK' ? 'Goalkeeper' : (cat === 'DEF' ? 'Defender' : (cat === 'MID' ? 'Midfielder' : 'Attacker'));
+  
+  var candidates = stateObj.bench.filter(p => p.position === targetPos);
+  if (candidates.length === 0) candidates = stateObj.bench; // Mostrar todos si no hay de la posición
+  
+  subList.innerHTML = '';
+  
+  candidates.forEach(function(player) {
+    var li = document.createElement('li');
+    li.style.cursor = 'pointer';
+    li.innerHTML = '<span class="player-number-badge">' + (player.number || '-') + '</span>' +
+                   '<span class="player-name">' + player.name + '</span>' +
+                   '<span class="player-pos-badge">' + (player.position ? player.position.substring(0, 3).toUpperCase() : '?') + '</span>';
+                   
+    li.addEventListener('click', function() {
+      var targetPlayerId = stateObj.lineup[slotId] ? stateObj.lineup[slotId].id : null;
+      var pToPitch = stateObj.bench.find(p => String(p.id) === String(player.id));
+      
+      // Quitar del banquillo
+      stateObj.bench = stateObj.bench.filter(p => String(p.id) !== String(player.id));
+      
+      // Añadir al banquillo el que estaba en el campo (si había)
+      if (targetPlayerId) {
+         stateObj.bench.push(stateObj.lineup[slotId]);
+      }
+      
+      // Poner en el campo
+      stateObj.lineup[slotId] = pToPitch;
+      
+      renderCompareTeam(side, stateObj);
+      subModal.classList.add('hidden');
+    });
+    
+    subList.appendChild(li);
+  });
+  
+  subModal.classList.remove('hidden');
 }
