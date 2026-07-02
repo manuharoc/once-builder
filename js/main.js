@@ -143,7 +143,7 @@ mainFormationSelect.addEventListener('change', function(e) {
 function renderPlayerList() {
   if (!currentTeamPlayers) return;
   var filterPos = document.querySelector('.pos-btn.active').dataset.pos;
-  var list = document.getElementById('playerList');
+  var list = document.getElementById('player-list');
   list.innerHTML = '';
   
   var filtered = currentTeamPlayers;
