@@ -31,9 +31,13 @@ function renderStaticPitch(container, formationName, lineup, jerseyConfig) {
   var availableMids = lineup.filter(p => p.position === 'Midfielder');
   var availableAtts = lineup.filter(p => p.position === 'Attacker');
 
+  // Mantener estado interno para los swaps
+  var slotData = {};
+
   slots.forEach(function(slot) {
     var el = document.createElement('div');
-    el.className = 'slot filled static-slot';
+    el.className = 'slot';
+    el.dataset.slotId = slot.id;
     el.style.left   = slot.x + '%';
     el.style.bottom = slot.y + '%';
 
@@ -44,14 +48,60 @@ function renderStaticPitch(container, formationName, lineup, jerseyConfig) {
     else if (cat === 'DEF' && availableDefs.length > 0) player = availableDefs.shift();
     else if (cat === 'MID' && availableMids.length > 0) player = availableMids.shift();
     else if (cat === 'ATT' && availableAtts.length > 0) player = availableAtts.shift();
-    else if (lineup.length > 0) player = lineup.shift(); // fallback a cualquiera
+    else if (lineup.length > 0) player = lineup.shift();
 
     if (player) {
+      el.classList.add('filled');
+      el.draggable = true;
       var chapaSVG = jerseySVG(Object.assign({}, jerseyConfig, { number: player.number || '' }));
       el.innerHTML = '<div class="slot-chapa">' + chapaSVG + '</div><span class="slot-name">' + player.name + '</span>';
+      slotData[slot.id] = player;
     } else {
       el.innerHTML = '<div class="slot-empty">' + slot.label + '</div>';
     }
+
+    // Lógica Drag & Drop aislada
+    el.addEventListener('dragstart', function(e) {
+      if (!el.classList.contains('filled')) return;
+      e.dataTransfer.setData('sourceSlotId', slot.id);
+      e.dataTransfer.setData('containerId', container.id);
+      el.classList.add('dragging');
+    });
+
+    el.addEventListener('dragend', function() { el.classList.remove('dragging'); });
+    el.addEventListener('dragenter', function(e) { e.preventDefault(); el.classList.add('drag-over'); });
+    el.addEventListener('dragleave', function(e) { e.preventDefault(); el.classList.remove('drag-over'); });
+    el.addEventListener('dragover',  function(e) { e.preventDefault(); });
+
+    el.addEventListener('drop', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      el.classList.remove('drag-over');
+
+      var sourceSlotId = e.dataTransfer.getData('sourceSlotId');
+      var sourceContainerId = e.dataTransfer.getData('containerId');
+      
+      // Solo permitir mover dentro del mismo campo
+      if (!sourceSlotId || sourceContainerId !== container.id) return;
+
+      var sourceEl = container.querySelector('[data-slot-id="' + sourceSlotId + '"]');
+      if (!sourceEl) return;
+
+      // Intercambiar HTML y clases
+      var tempHtml = el.innerHTML;
+      var tempFilled = el.classList.contains('filled');
+      var tempPlayer = slotData[slot.id];
+
+      el.innerHTML = sourceEl.innerHTML;
+      if (sourceEl.classList.contains('filled')) el.classList.add('filled'); else el.classList.remove('filled');
+      el.draggable = el.classList.contains('filled');
+      slotData[slot.id] = slotData[sourceSlotId];
+
+      sourceEl.innerHTML = tempHtml;
+      if (tempFilled) sourceEl.classList.add('filled'); else sourceEl.classList.remove('filled');
+      sourceEl.draggable = sourceEl.classList.contains('filled');
+      slotData[sourceSlotId] = tempPlayer;
+    });
 
     pitch.appendChild(el);
   });

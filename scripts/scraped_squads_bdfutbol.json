@@ -4688,5 +4688,683 @@
       "position": "Midfielder",
       "number": 38
     }
+  ],
+  "levante": [
+    {
+      "id": "levante_1",
+      "name": "Ryan",
+      "position": "Goalkeeper",
+      "number": 13
+    },
+    {
+      "id": "levante_2",
+      "name": "Toljan",
+      "position": "Defender",
+      "number": 22
+    },
+    {
+      "id": "levante_3",
+      "name": "Manu Sánchez",
+      "position": "Defender",
+      "number": 23
+    },
+    {
+      "id": "levante_4",
+      "name": "Dela",
+      "position": "Defender",
+      "number": 4
+    },
+    {
+      "id": "levante_5",
+      "name": "Moreno",
+      "position": "Defender",
+      "number": 2
+    },
+    {
+      "id": "levante_6",
+      "name": "Carlos Álvarez",
+      "position": "Midfielder",
+      "number": 24
+    },
+    {
+      "id": "levante_7",
+      "name": "Pablo Martínez",
+      "position": "Midfielder",
+      "number": 10
+    },
+    {
+      "id": "levante_8",
+      "name": "Olasagasti",
+      "position": "Midfielder",
+      "number": 8
+    },
+    {
+      "id": "levante_9",
+      "name": "Romero",
+      "position": "Attacker",
+      "number": 9
+    },
+    {
+      "id": "levante_10",
+      "name": "Tunde",
+      "position": "Attacker",
+      "number": 26
+    },
+    {
+      "id": "levante_11",
+      "name": "Etta Eyong",
+      "position": "Attacker",
+      "number": 21
+    },
+    {
+      "id": "levante_12",
+      "name": "Pablo",
+      "position": "Goalkeeper",
+      "number": 1
+    },
+    {
+      "id": "levante_13",
+      "name": "Arriaga",
+      "position": "Midfielder",
+      "number": 16
+    },
+    {
+      "id": "levante_14",
+      "name": "Espí",
+      "position": "Attacker",
+      "number": 19
+    },
+    {
+      "id": "levante_15",
+      "name": "Oriol Rey",
+      "position": "Midfielder",
+      "number": 20
+    },
+    {
+      "id": "levante_16",
+      "name": "Losada",
+      "position": "Midfielder",
+      "number": 18
+    },
+    {
+      "id": "levante_17",
+      "name": "Primo",
+      "position": "Goalkeeper",
+      "number": 32
+    },
+    {
+      "id": "levante_18",
+      "name": "Víctor García",
+      "position": "Midfielder",
+      "number": 17
+    },
+    {
+      "id": "levante_19",
+      "name": "Matturro",
+      "position": "Defender",
+      "number": 3
+    },
+    {
+      "id": "levante_20",
+      "name": "Brugué",
+      "position": "Midfielder",
+      "number": 7
+    },
+    {
+      "id": "levante_21",
+      "name": "Vencedor",
+      "position": "Midfielder",
+      "number": 12
+    },
+    {
+      "id": "levante_22",
+      "name": "Raghouber",
+      "position": "Midfielder",
+      "number": 14
+    },
+    {
+      "id": "levante_23",
+      "name": "Morales",
+      "position": "Attacker",
+      "number": 11
+    },
+    {
+      "id": "levante_24",
+      "name": "Elgezabal",
+      "position": "Defender",
+      "number": 5
+    },
+    {
+      "id": "levante_25",
+      "name": "Pampín",
+      "position": "Defender",
+      "number": 6
+    },
+    {
+      "id": "levante_26",
+      "name": "Paco Cortés",
+      "position": "Attacker",
+      "number": 27
+    },
+    {
+      "id": "levante_27",
+      "name": "Koyalipou",
+      "position": "Attacker",
+      "number": 15
+    },
+    {
+      "id": "levante_28",
+      "name": "Cabello",
+      "position": "Defender",
+      "number": 14
+    },
+    {
+      "id": "levante_29",
+      "name": "Abed",
+      "position": "Attacker",
+      "number": 55
+    },
+    {
+      "id": "levante_30",
+      "name": "Nacho Pérez",
+      "position": "Defender",
+      "number": 29
+    },
+    {
+      "id": "levante_31",
+      "name": "Lozano",
+      "position": "Midfielder",
+      "number": 21
+    },
+    {
+      "id": "levante_32",
+      "name": "Krug",
+      "position": "Defender",
+      "number": 28
+    },
+    {
+      "id": "levante_33",
+      "name": "Cayetano",
+      "position": "Goalkeeper",
+      "number": 34
+    },
+    {
+      "id": "levante_34",
+      "name": "Nakoha",
+      "position": "Defender",
+      "number": 35
+    },
+    {
+      "id": "levante_35",
+      "name": "Cervera",
+      "position": "Midfielder",
+      "number": 37
+    },
+    {
+      "id": "levante_36",
+      "name": "Joan Ruiz",
+      "position": "Midfielder",
+      "number": 33
+    },
+    {
+      "id": "levante_37",
+      "name": "Rosón",
+      "position": "Midfielder",
+      "number": 30
+    }
+  ],
+  "elche": [
+    {
+      "id": "elche_1",
+      "name": "Aznar",
+      "position": "Goalkeeper",
+      "number": 13
+    },
+    {
+      "id": "elche_2",
+      "name": "Iza",
+      "position": "Defender",
+      "number": 20
+    },
+    {
+      "id": "elche_3",
+      "name": "Climent",
+      "position": "Defender",
+      "number": 21
+    },
+    {
+      "id": "elche_4",
+      "name": "Recio",
+      "position": "Defender",
+      "number": 6
+    },
+    {
+      "id": "elche_5",
+      "name": "Kovačević",
+      "position": "Defender",
+      "number": 14
+    },
+    {
+      "id": "elche_6",
+      "name": "Ortuño",
+      "position": "Midfielder",
+      "number": 15
+    },
+    {
+      "id": "elche_7",
+      "name": "Diakité",
+      "position": "Midfielder",
+      "number": 5
+    },
+    {
+      "id": "elche_8",
+      "name": "Diarra",
+      "position": "Midfielder",
+      "number": 18
+    },
+    {
+      "id": "elche_9",
+      "name": "García Pascual",
+      "position": "Attacker",
+      "number": 23
+    },
+    {
+      "id": "elche_10",
+      "name": "Suso",
+      "position": "Attacker",
+      "number": 11
+    },
+    {
+      "id": "elche_11",
+      "name": "De la Rosa",
+      "position": "Attacker",
+      "number": 19
+    },
+    {
+      "id": "elche_12",
+      "name": "David Gil",
+      "position": "Goalkeeper",
+      "number": 1
+    },
+    {
+      "id": "elche_13",
+      "name": "Dawda",
+      "position": "Attacker",
+      "number": 17
+    },
+    {
+      "id": "elche_14",
+      "name": "Ocampo",
+      "position": "Midfielder",
+      "number": 10
+    },
+    {
+      "id": "elche_15",
+      "name": "Álex",
+      "position": "Midfielder",
+      "number": 8
+    },
+    {
+      "id": "elche_16",
+      "name": "Jorge Moreno",
+      "position": "Defender",
+      "number": 2
+    },
+    {
+      "id": "elche_17",
+      "name": "Pérez",
+      "position": "Goalkeeper",
+      "number": 26
+    },
+    {
+      "id": "elche_18",
+      "name": "Roger",
+      "position": "Midfielder",
+      "number": 9
+    },
+    {
+      "id": "elche_19",
+      "name": "Antoñito Cordero",
+      "position": "Attacker",
+      "number": 16
+    },
+    {
+      "id": "elche_20",
+      "name": "Tabatadze",
+      "position": "Attacker",
+      "number": 12
+    },
+    {
+      "id": "elche_21",
+      "name": "Pereira",
+      "position": "Defender",
+      "number": 33
+    },
+    {
+      "id": "elche_22",
+      "name": "Caicedo",
+      "position": "Defender",
+      "number": 29
+    },
+    {
+      "id": "elche_23",
+      "name": "Díaz",
+      "position": "Defender",
+      "number": 34
+    },
+    {
+      "id": "elche_24",
+      "name": "Joaquín",
+      "position": "Midfielder",
+      "number": 24
+    },
+    {
+      "id": "elche_25",
+      "name": "Pelayo",
+      "position": "Defender",
+      "number": 27
+    },
+    {
+      "id": "elche_26",
+      "name": "Ontiveros",
+      "position": "Midfielder",
+      "number": 22
+    },
+    {
+      "id": "elche_27",
+      "name": "Arribas",
+      "position": "Defender",
+      "number": 38
+    },
+    {
+      "id": "elche_28",
+      "name": "Aghama",
+      "position": "Attacker",
+      "number": 7
+    },
+    {
+      "id": "elche_29",
+      "name": "Dómina",
+      "position": "Attacker",
+      "number": 37
+    },
+    {
+      "id": "elche_30",
+      "name": "Lucas Pérez",
+      "position": "Attacker",
+      "number": 7
+    },
+    {
+      "id": "elche_31",
+      "name": "Kouamé",
+      "position": "Midfielder",
+      "number": 3
+    },
+    {
+      "id": "elche_32",
+      "name": "Rubio",
+      "position": "Goalkeeper",
+      "number": 30
+    },
+    {
+      "id": "elche_33",
+      "name": "Obeng",
+      "position": "Attacker",
+      "number": 35
+    },
+    {
+      "id": "elche_34",
+      "name": "Arana",
+      "position": "Attacker",
+      "number": 39
+    },
+    {
+      "id": "elche_35",
+      "name": "Ismael",
+      "position": "Attacker",
+      "number": 36
+    },
+    {
+      "id": "elche_36",
+      "name": "David",
+      "position": "Attacker",
+      "number": 30
+    },
+    {
+      "id": "elche_37",
+      "name": "Denia",
+      "position": "Attacker",
+      "number": 28
+    },
+    {
+      "id": "elche_38",
+      "name": "Beltrán",
+      "position": "Defender",
+      "number": 40
+    },
+    {
+      "id": "elche_39",
+      "name": "César Díaz",
+      "position": "Defender",
+      "number": 41
+    },
+    {
+      "id": "elche_40",
+      "name": "Aitor García",
+      "position": "Goalkeeper",
+      "number": 35
+    },
+    {
+      "id": "elche_41",
+      "name": "Fali",
+      "position": "Defender",
+      "number": 3
+    },
+    {
+      "id": "elche_42",
+      "name": "Noah",
+      "position": "Defender",
+      "number": 35
+    }
+  ],
+  "oviedo": [
+    {
+      "id": "oviedo_1",
+      "name": "Iván",
+      "position": "Goalkeeper",
+      "number": 13
+    },
+    {
+      "id": "oviedo_2",
+      "name": "Alain García",
+      "position": "Defender",
+      "number": 17
+    },
+    {
+      "id": "oviedo_3",
+      "name": "Fermín",
+      "position": "Defender",
+      "number": 22
+    },
+    {
+      "id": "oviedo_4",
+      "name": "De Frutos",
+      "position": "Defender",
+      "number": 5
+    },
+    {
+      "id": "oviedo_5",
+      "name": "Olivera",
+      "position": "Defender",
+      "number": 4
+    },
+    {
+      "id": "oviedo_6",
+      "name": "Moustapha",
+      "position": "Midfielder",
+      "number": 8
+    },
+    {
+      "id": "oviedo_7",
+      "name": "Cristian Delgado",
+      "position": "Midfielder",
+      "number": 21
+    },
+    {
+      "id": "oviedo_8",
+      "name": "Lucas",
+      "position": "Midfielder",
+      "number": 6
+    },
+    {
+      "id": "oviedo_9",
+      "name": "Juancho",
+      "position": "Attacker",
+      "number": 10
+    },
+    {
+      "id": "oviedo_10",
+      "name": "Jony",
+      "position": "Midfielder",
+      "number": 9
+    },
+    {
+      "id": "oviedo_11",
+      "name": "Álex Gil",
+      "position": "Attacker",
+      "number": 14
+    },
+    {
+      "id": "oviedo_12",
+      "name": "Joel Jiménez",
+      "position": "Goalkeeper",
+      "number": 13
+    },
+    {
+      "id": "oviedo_13",
+      "name": "Dani García",
+      "position": "Midfielder",
+      "number": 19
+    },
+    {
+      "id": "oviedo_14",
+      "name": "Héctor Peña",
+      "position": "Attacker",
+      "number": 11
+    },
+    {
+      "id": "oviedo_15",
+      "name": "Bonilla",
+      "position": "Defender",
+      "number": 3
+    },
+    {
+      "id": "oviedo_16",
+      "name": "Buyla",
+      "position": "Midfielder",
+      "number": 23
+    },
+    {
+      "id": "oviedo_17",
+      "name": "Abad",
+      "position": "Goalkeeper",
+      "number": 1
+    },
+    {
+      "id": "oviedo_18",
+      "name": "Carlos Gutiérrez",
+      "position": "Defender",
+      "number": 16
+    },
+    {
+      "id": "oviedo_19",
+      "name": "Matos",
+      "position": "Attacker",
+      "number": 7
+    },
+    {
+      "id": "oviedo_20",
+      "name": "Marcos",
+      "position": "Defender",
+      "number": 2
+    },
+    {
+      "id": "oviedo_21",
+      "name": "Danese",
+      "position": "Defender",
+      "number": 20
+    },
+    {
+      "id": "oviedo_22",
+      "name": "Álvarez",
+      "position": "Midfielder",
+      "number": 12
+    },
+    {
+      "id": "oviedo_23",
+      "name": "Berto",
+      "position": "Attacker",
+      "number": 18
+    },
+    {
+      "id": "oviedo_24",
+      "name": "Escardó",
+      "position": "Attacker",
+      "number": 24
+    },
+    {
+      "id": "oviedo_25",
+      "name": "San Vicente",
+      "position": "Defender",
+      "number": 15
+    },
+    {
+      "id": "oviedo_26",
+      "name": "Godson",
+      "position": "Attacker",
+      "number": 26
+    },
+    {
+      "id": "oviedo_27",
+      "name": "Peralta",
+      "position": "Midfielder",
+      "number": 20
+    },
+    {
+      "id": "oviedo_28",
+      "name": "Quiñonez",
+      "position": "Defender",
+      "number": 18
+    },
+    {
+      "id": "oviedo_29",
+      "name": "Miñana",
+      "position": "Attacker",
+      "number": 29
+    },
+    {
+      "id": "oviedo_30",
+      "name": "Neves",
+      "position": "Midfielder",
+      "number": 27
+    },
+    {
+      "id": "oviedo_31",
+      "name": "Oliynyk",
+      "position": "Goalkeeper",
+      "number": 30
+    },
+    {
+      "id": "oviedo_32",
+      "name": "Gexan",
+      "position": "Defender",
+      "number": 15
+    },
+    {
+      "id": "oviedo_33",
+      "name": "Daichi",
+      "position": "Attacker",
+      "number": 31
+    }
   ]
 }

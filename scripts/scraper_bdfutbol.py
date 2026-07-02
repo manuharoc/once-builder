@@ -41,7 +41,10 @@ TEAM_URLS = [
     # Equipos de segunda para rellenar (ajustado a sus IDs de BDFutbol)
     {"id": "racing", "name": "Racing de Santander", "url": "https://www.bdfutbol.com/es/t/t2025-2627.html"},
     {"id": "deportivo", "name": "Deportivo de La Coruña", "url": "https://www.bdfutbol.com/es/t/t2025-2612.html"},
-    {"id": "malaga", "name": "Málaga", "url": "https://www.bdfutbol.com/es/t/t2025-2623.html"}
+    {"id": "malaga", "name": "Málaga", "url": "https://www.bdfutbol.com/es/t/t2025-2623.html"},
+    {"id": "levante", "name": "Levante UD", "url": "https://www.bdfutbol.com/es/t/t2025-2620.html"},
+    {"id": "elche", "name": "Elche CF", "url": "https://www.bdfutbol.com/es/t/t2025-2610.html"},
+    {"id": "oviedo", "name": "Real Oviedo", "url": "https://www.bdfutbol.com/es/t/t2025-2626.html"}
 ]
 
 def parse_position(classes):

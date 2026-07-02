@@ -246,4 +246,4 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .compare-panel { flex: 1; display: flex; flex-direction: column; }
 .static-pitch-container { flex: 1; position: relative; min-height: 500px; display: flex; align-items: stretch; justify-content: stretch; }
 .pitch.static { flex: 1; min-height: 100%; }
-.static-slot { pointer-events: none; }
+

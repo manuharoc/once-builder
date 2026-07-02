@@ -23,7 +23,9 @@ team_id_map = {
     "espanyol": "15",
     "getafe": "16",
     "alaves": "17",
-    # 18: Levante en el original, pero no lo he scrapeado (ni está en LaLiga EA Sports este año).
+    "levante": "18",
+    "elche": "19",
+    "oviedo": "20",
     "laspalmas": "22",
     "leganes": "45",  # Revisaremos en players.js
     "valladolid": "46", # Revisaremos en players.js
