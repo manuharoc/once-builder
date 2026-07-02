@@ -243,3 +243,9 @@ saveLineupBtn.addEventListener('click', function() {
   console.log('Alineación exportada:', lineup);
   showToast('Alineación guardada (ver Consola).');
 });
+
+// Botón Atrás en Builder
+document.getElementById('main-back-btn').addEventListener('click', function() {
+  document.getElementById('main-layout').classList.add('hidden');
+  document.getElementById('welcome-screen').classList.remove('hidden');
+});
