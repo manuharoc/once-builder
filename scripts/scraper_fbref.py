@@ -25,10 +25,26 @@ HEADERS = {
 # Añade aquí las URLs de los equipos que quieras actualizar.
 # Busca el equipo en FBRef y usa la URL de la página de estadísticas del equipo.
 TEAM_URLS = [
-    {"id": 1, "name": "Real Madrid", "url": "https://fbref.com/en/squads/53a2f082/Real-Madrid-Stats"},
-    {"id": 2, "name": "FC Barcelona", "url": "https://fbref.com/en/squads/206d90db/Barcelona-Stats"},
-    {"id": 3, "name": "Atlético de Madrid", "url": "https://fbref.com/en/squads/cb1ea903/Atletico-Madrid-Stats"}
-    # Añadir el resto de equipos...
+    {"id": 1,  "name": "Real Madrid",         "url": "https://fbref.com/en/squads/53a2f082/Real-Madrid-Stats"},
+    {"id": 2,  "name": "FC Barcelona",        "url": "https://fbref.com/en/squads/206d90db/Barcelona-Stats"},
+    {"id": 3,  "name": "Atlético de Madrid",  "url": "https://fbref.com/en/squads/db3b9613/Atletico-Madrid-Stats"},
+    {"id": 4,  "name": "Villarreal",          "url": "https://fbref.com/en/squads/2a8183b3/Villarreal-Stats"},
+    {"id": 5,  "name": "Real Betis",          "url": "https://fbref.com/en/squads/fc536746/Real-Betis-Stats"},
+    {"id": 6,  "name": "Celta de Vigo",       "url": "https://fbref.com/en/squads/f25da7fb/Celta-Vigo-Stats"},
+    {"id": 7,  "name": "Real Sociedad",       "url": "https://fbref.com/en/squads/e31d1cd9/Real-Sociedad-Stats"},
+    {"id": 8,  "name": "Getafe",              "url": "https://fbref.com/en/squads/7848bd64/Getafe-Stats"},
+    {"id": 9,  "name": "Athletic Club",       "url": "https://fbref.com/en/squads/2b390eca/Athletic-Club-Stats"},
+    {"id": 10, "name": "Valencia",            "url": "https://fbref.com/en/squads/dcc91a7b/Valencia-Stats"},
+    {"id": 11, "name": "Sevilla",             "url": "https://fbref.com/en/squads/ad2be733/Sevilla-Stats"},
+    {"id": 12, "name": "Rayo Vallecano",      "url": "https://fbref.com/en/squads/98e8af82/Rayo-Vallecano-Stats"},
+    {"id": 13, "name": "Osasuna",             "url": "https://fbref.com/en/squads/03c57e2b/Osasuna-Stats"},
+    {"id": 14, "name": "Espanyol",            "url": "https://fbref.com/en/squads/a8661628/Espanyol-Stats"},
+    {"id": 15, "name": "Alavés",              "url": "https://fbref.com/en/squads/8d6fd021/Alaves-Stats"},
+    {"id": 16, "name": "Levante",             "url": "https://fbref.com/en/squads/9800b6a1/Levante-Stats"},
+    {"id": 17, "name": "Elche",               "url": "https://fbref.com/en/squads/6c8b07df/Elche-Stats"},
+    {"id": 18, "name": "Racing de Santander", "url": "https://fbref.com/en/squads/dee3bbc8/Racing-Santander-Stats"},
+    {"id": 19, "name": "Deportivo de La Coruña", "url": "https://fbref.com/en/squads/2a60ed82/Deportivo-La-Coruna-Stats"},
+    {"id": 20, "name": "Málaga",              "url": "https://fbref.com/en/squads/1c896955/Malaga-Stats"}
 ]
 
 def parse_position(fbref_pos):
