@@ -53,131 +53,1974 @@ var MOCK_TEAMS = [
 var MOCK_SQUADS = {
   // ── Real Madrid ────────────────────────────────────────────────────────
   1: [
-    { id: 10001, name: 'Thibaut Courtois',      position: 'Goalkeeper', number: 1  },
-    { id: 10002, name: 'Andriy Lunin',           position: 'Goalkeeper', number: 13 },
-    { id: 10003, name: 'Dani Carvajal',          position: 'Defender',   number: 2  },
-    { id: 10004, name: 'Eder Militao',           position: 'Defender',   number: 3  },
-    { id: 10005, name: 'David Alaba',            position: 'Defender',   number: 4  },
-    { id: 10006, name: 'Antonio Rudiger',         position: 'Defender',   number: 22 },
-    { id: 10007, name: 'Nacho Fernandez',        position: 'Defender',   number: 6  },
-    { id: 10008, name: 'Ferland Mendy',          position: 'Defender',   number: 23 },
-    { id: 10009, name: 'Lucas Vazquez',          position: 'Defender',   number: 17 },
-    { id: 10010, name: 'Luka Modric',            position: 'Midfielder', number: 10 },
-    { id: 10011, name: 'Toni Kroos',             position: 'Midfielder', number: 8  },
-    { id: 10012, name: 'Federico Valverde',      position: 'Midfielder', number: 15 },
-    { id: 10013, name: 'Aurelien Tchouameni',    position: 'Midfielder', number: 18 },
-    { id: 10014, name: 'Eduardo Camavinga',      position: 'Midfielder', number: 12 },
-    { id: 10015, name: 'Jude Bellingham',        position: 'Midfielder', number: 5  },
-    { id: 10016, name: 'Dani Ceballos',          position: 'Midfielder', number: 19 },
-    { id: 10017, name: 'Vinicius Junior',        position: 'Attacker',   number: 7  },
-    { id: 10018, name: 'Rodrygo',                position: 'Attacker',   number: 11 },
-    { id: 10019, name: 'Joselu',                 position: 'Attacker',   number: 14 },
-    { id: 10020, name: 'Brahim Diaz',            position: 'Attacker',   number: 21 }
-  ],
+    
+        {
+            "id": "madrid_1",
+            "name": "Courtois",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "madrid_2",
+            "name": "Lucas Vázquez",
+            "position": "Defender",
+            "number": 17
+        },
+        {
+            "id": "madrid_3",
+            "name": "Fran García",
+            "position": "Defender",
+            "number": 20
+        },
+        {
+            "id": "madrid_4",
+            "name": "Tchouaméni",
+            "position": "Defender",
+            "number": 14
+        },
+        {
+            "id": "madrid_5",
+            "name": "Rüdiger",
+            "position": "Defender",
+            "number": 22
+        },
+        {
+            "id": "madrid_6",
+            "name": "Valverde",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "madrid_7",
+            "name": "Bellingham",
+            "position": "Midfielder",
+            "number": 5
+        },
+        {
+            "id": "madrid_8",
+            "name": "Modrić",
+            "position": "Midfielder",
+            "number": 10
+        },
+        {
+            "id": "madrid_9",
+            "name": "Mbappé",
+            "position": "Attacker",
+            "number": 9
+        },
+        {
+            "id": "madrid_10",
+            "name": "Vinícius",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "madrid_11",
+            "name": "Rodrygo",
+            "position": "Attacker",
+            "number": 11
+        },
+        {
+            "id": "madrid_12",
+            "name": "Lunin",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "madrid_13",
+            "name": "Brahim Díaz",
+            "position": "Attacker",
+            "number": 21
+        },
+        {
+            "id": "madrid_14",
+            "name": "Güler",
+            "position": "Midfielder",
+            "number": 15
+        },
+        {
+            "id": "madrid_15",
+            "name": "Asencio",
+            "position": "Defender",
+            "number": 35
+        },
+        {
+            "id": "madrid_16",
+            "name": "Dani Ceballos",
+            "position": "Midfielder",
+            "number": 19
+        },
+        {
+            "id": "madrid_17",
+            "name": "Fran González",
+            "position": "Goalkeeper",
+            "number": 26
+        },
+        {
+            "id": "madrid_18",
+            "name": "Camavinga",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "madrid_19",
+            "name": "Mendy",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "madrid_20",
+            "name": "Endrick",
+            "position": "Attacker",
+            "number": 16
+        },
+        {
+            "id": "madrid_21",
+            "name": "Militão",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "madrid_22",
+            "name": "Carvajal",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "madrid_23",
+            "name": "Alaba",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "madrid_24",
+            "name": "Vallejo",
+            "position": "Defender",
+            "number": 18
+        },
+        {
+            "id": "madrid_25",
+            "name": "Jacobo",
+            "position": "Defender",
+            "number": 31
+        },
+        {
+            "id": "madrid_26",
+            "name": "Mestre",
+            "position": "Goalkeeper",
+            "number": 34
+        },
+        {
+            "id": "madrid_27",
+            "name": "Gonzalo",
+            "position": "Attacker",
+            "number": 30
+        },
+        {
+            "id": "madrid_28",
+            "name": "Lorenzo",
+            "position": "Defender",
+            "number": 39
+        },
+        {
+            "id": "madrid_29",
+            "name": "Chema",
+            "position": "Midfielder",
+            "number": 36
+        },
+        {
+            "id": "madrid_30",
+            "name": "Víctor Muñoz",
+            "position": "Attacker",
+            "number": 44
+        },
+        {
+            "id": "madrid_31",
+            "name": "Yusi",
+            "position": "Defender",
+            "number": 29
+        },
+        {
+            "id": "madrid_32",
+            "name": "Yáñez",
+            "position": "Attacker",
+            "number": 42
+        },
+        {
+            "id": "madrid_33",
+            "name": "Aguado",
+            "position": "Defender",
+            "number": 43
+        },
+        {
+            "id": "madrid_34",
+            "name": "Jiménez",
+            "position": "Defender",
+            "number": 38
+        },
+        {
+            "id": "madrid_35",
+            "name": "Rivas",
+            "position": "Defender",
+            "number": 48
+        },
+        {
+            "id": "madrid_36",
+            "name": "Valdepeñas",
+            "position": "Defender",
+            "number": 45
+        },
+        {
+            "id": "madrid_37",
+            "name": "Alexander-Arnold",
+            "position": "Defender",
+            "number": 12
+        },
+        {
+            "id": "madrid_38",
+            "name": "Mario Martín",
+            "position": "Midfielder",
+            "number": 50
+        },
+        {
+            "id": "madrid_39",
+            "name": "Huijsen",
+            "position": "Defender",
+            "number": 24
+        },
+        {
+            "id": "madrid_40",
+            "name": "De Llanos",
+            "position": "Midfielder",
+            "number": 40
+        },
+        {
+            "id": "madrid_41",
+            "name": "Fortuny",
+            "position": "Midfielder",
+            "number": 47
+        },
+        {
+            "id": "madrid_42",
+            "name": "Fortea",
+            "position": "Defender",
+            "number": 41
+        }
+        ],
   // ── FC Barcelona ────────────────────────────────────────────────────────
   2: [
-    { id: 20001, name: 'Marc-André ter Stegen',  position: 'Goalkeeper', number: 1  },
-    { id: 20002, name: 'Iñaki Peña',             position: 'Goalkeeper', number: 13 },
-    { id: 20003, name: 'Jules Kounde',            position: 'Defender',   number: 23 },
-    { id: 20004, name: 'Ronald Araujo',           position: 'Defender',   number: 4  },
-    { id: 20005, name: 'Andreas Christensen',    position: 'Defender',   number: 15 },
-    { id: 20006, name: 'Alejandro Balde',        position: 'Defender',   number: 3  },
-    { id: 20007, name: 'Íñigo Martínez',         position: 'Defender',   number: 5  },
-    { id: 20008, name: 'Pedri',                  position: 'Midfielder', number: 8  },
-    { id: 20009, name: 'Frenkie de Jong',        position: 'Midfielder', number: 21 },
-    { id: 20010, name: 'Ilkay Gündogan',         position: 'Midfielder', number: 22 },
-    { id: 20011, name: 'Gavi',                   position: 'Midfielder', number: 6  },
-    { id: 20012, name: 'Fermín López',           position: 'Midfielder', number: 16 },
-    { id: 20013, name: 'Lamine Yamal',           position: 'Attacker',   number: 27 },
-    { id: 20014, name: 'Raphinha',               position: 'Attacker',   number: 11 },
-    { id: 20015, name: 'Robert Lewandowski',     position: 'Attacker',   number: 9  },
-    { id: 20016, name: 'Ansu Fati',              position: 'Attacker',   number: 10 },
-    { id: 20017, name: 'Ferran Torres',          position: 'Attacker',   number: 7  }
-  ],
+    
+        {
+            "id": "barca_1",
+            "name": "Iñaki Peña",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "barca_2",
+            "name": "Koundé",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "barca_3",
+            "name": "Balde",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "barca_4",
+            "name": "Cubarsí",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "barca_5",
+            "name": "Iñigo Martínez",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "barca_6",
+            "name": "Pedri",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "barca_7",
+            "name": "Casadó",
+            "position": "Midfielder",
+            "number": 17
+        },
+        {
+            "id": "barca_8",
+            "name": "Eric Garcia",
+            "position": "Midfielder",
+            "number": 24
+        },
+        {
+            "id": "barca_9",
+            "name": "Raphinha",
+            "position": "Attacker",
+            "number": 11
+        },
+        {
+            "id": "barca_10",
+            "name": "Lewandowski",
+            "position": "Midfielder",
+            "number": 9
+        },
+        {
+            "id": "barca_11",
+            "name": "Lamine Yamal",
+            "position": "Attacker",
+            "number": 19
+        },
+        {
+            "id": "barca_12",
+            "name": "Szczęsny",
+            "position": "Goalkeeper",
+            "number": 25
+        },
+        {
+            "id": "barca_13",
+            "name": "Gerard Martín",
+            "position": "Defender",
+            "number": 35
+        },
+        {
+            "id": "barca_14",
+            "name": "Fermín",
+            "position": "Midfielder",
+            "number": 16
+        },
+        {
+            "id": "barca_15",
+            "name": "Gavi",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "barca_16",
+            "name": "Ferran Torres",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "barca_17",
+            "name": "Ter Stegen",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "barca_18",
+            "name": "Dani Olmo",
+            "position": "Midfielder",
+            "number": 20
+        },
+        {
+            "id": "barca_19",
+            "name": "De Jong",
+            "position": "Midfielder",
+            "number": 21
+        },
+        {
+            "id": "barca_20",
+            "name": "Pau Víctor",
+            "position": "Attacker",
+            "number": 18
+        },
+        {
+            "id": "barca_21",
+            "name": "Fort",
+            "position": "Defender",
+            "number": 32
+        },
+        {
+            "id": "barca_22",
+            "name": "Araújo",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "barca_23",
+            "name": "Pablo Torre",
+            "position": "Midfielder",
+            "number": 14
+        },
+        {
+            "id": "barca_24",
+            "name": "Ansu Fati",
+            "position": "Attacker",
+            "number": 10
+        },
+        {
+            "id": "barca_25",
+            "name": "Christensen",
+            "position": "Defender",
+            "number": 15
+        },
+        {
+            "id": "barca_26",
+            "name": "Domínguez",
+            "position": "Defender",
+            "number": 36
+        },
+        {
+            "id": "barca_27",
+            "name": "Bernal",
+            "position": "Midfielder",
+            "number": 28
+        },
+        {
+            "id": "barca_28",
+            "name": "Kochen",
+            "position": "Goalkeeper",
+            "number": 31
+        },
+        {
+            "id": "barca_29",
+            "name": "Astralaga",
+            "position": "Goalkeeper",
+            "number": 26
+        },
+        {
+            "id": "barca_30",
+            "name": "Dani Rodríguez",
+            "position": "Attacker",
+            "number": 46
+        },
+        {
+            "id": "barca_31",
+            "name": "Guillermo",
+            "position": "Midfielder",
+            "number": 41
+        },
+        {
+            "id": "barca_32",
+            "name": "Cuenca",
+            "position": "Defender",
+            "number": 39
+        },
+        {
+            "id": "barca_33",
+            "name": "Yaakobishvili",
+            "position": "Goalkeeper",
+            "number": 40
+        },
+        {
+            "id": "barca_34",
+            "name": "Toni Fernández",
+            "position": "Attacker",
+            "number": 42
+        },
+        {
+            "id": "barca_35",
+            "name": "Valle",
+            "position": "Defender",
+            "number": 29
+        },
+        {
+            "id": "barca_36",
+            "name": "Darvich",
+            "position": "Midfielder",
+            "number": 34
+        },
+        {
+            "id": "barca_37",
+            "name": "Cortés",
+            "position": "Defender",
+            "number": 43
+        },
+        {
+            "id": "barca_38",
+            "name": "Olmedo",
+            "position": "Defender",
+            "number": 38
+        },
+        {
+            "id": "barca_39",
+            "name": "Farré",
+            "position": "Defender",
+            "number": 44
+        }
+        ],
   // ── Atlético de Madrid ─────────────────────────────────────────────────
   3: [
-    { id: 30001, name: 'Jan Oblak',              position: 'Goalkeeper', number: 13 },
-    { id: 30002, name: 'José Giménez',           position: 'Defender',   number: 2  },
-    { id: 30003, name: 'Stefan Savić',           position: 'Defender',   number: 15 },
-    { id: 30004, name: 'Reinildo',               position: 'Defender',   number: 23 },
-    { id: 30005, name: 'Marcos Llorente',        position: 'Midfielder', number: 14 },
-    { id: 30006, name: 'Koke',                   position: 'Midfielder', number: 6  },
-    { id: 30007, name: 'Rodrigo De Paul',        position: 'Midfielder', number: 5  },
-    { id: 30008, name: 'Axel Witsel',            position: 'Midfielder', number: 20 },
-    { id: 30009, name: 'Pablo Barrios',          position: 'Midfielder', number: 29 },
-    { id: 30010, name: 'Antoine Griezmann',      position: 'Attacker',   number: 7  },
-    { id: 30011, name: 'Álvaro Morata',          position: 'Attacker',   number: 9  },
-    { id: 30012, name: 'Memphis Depay',          position: 'Attacker',   number: 17 },
-    { id: 30013, name: 'Samuel Lino',            position: 'Attacker',   number: 10 }
-  ],
+    
+        {
+            "id": "atletico_1",
+            "name": "Oblak",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "atletico_2",
+            "name": "Marcos Llorente",
+            "position": "Defender",
+            "number": 14
+        },
+        {
+            "id": "atletico_3",
+            "name": "Galán",
+            "position": "Defender",
+            "number": 21
+        },
+        {
+            "id": "atletico_4",
+            "name": "Le Normand",
+            "position": "Defender",
+            "number": 24
+        },
+        {
+            "id": "atletico_5",
+            "name": "Lenglet",
+            "position": "Defender",
+            "number": 15
+        },
+        {
+            "id": "atletico_6",
+            "name": "Barrios",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "atletico_7",
+            "name": "Simeone",
+            "position": "Midfielder",
+            "number": 22
+        },
+        {
+            "id": "atletico_8",
+            "name": "De Paul",
+            "position": "Midfielder",
+            "number": 5
+        },
+        {
+            "id": "atletico_9",
+            "name": "Lino",
+            "position": "Midfielder",
+            "number": 12
+        },
+        {
+            "id": "atletico_10",
+            "name": "Julián Alvarez",
+            "position": "Attacker",
+            "number": 19
+        },
+        {
+            "id": "atletico_11",
+            "name": "Griezmann",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "atletico_12",
+            "name": "Musso",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "atletico_13",
+            "name": "Koke",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "atletico_14",
+            "name": "Gallagher",
+            "position": "Midfielder",
+            "number": 4
+        },
+        {
+            "id": "atletico_15",
+            "name": "Sørloth",
+            "position": "Midfielder",
+            "number": 9
+        },
+        {
+            "id": "atletico_16",
+            "name": "Giménez",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "atletico_17",
+            "name": "Gomís",
+            "position": "Goalkeeper",
+            "number": 31
+        },
+        {
+            "id": "atletico_18",
+            "name": "Molina",
+            "position": "Defender",
+            "number": 16
+        },
+        {
+            "id": "atletico_19",
+            "name": "Correa",
+            "position": "Attacker",
+            "number": 10
+        },
+        {
+            "id": "atletico_20",
+            "name": "Reinildo",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "atletico_21",
+            "name": "Witsel",
+            "position": "Defender",
+            "number": 20
+        },
+        {
+            "id": "atletico_22",
+            "name": "Azpilicueta",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "atletico_23",
+            "name": "Riquelme",
+            "position": "Midfielder",
+            "number": 17
+        },
+        {
+            "id": "atletico_24",
+            "name": "Lemar",
+            "position": "Midfielder",
+            "number": 11
+        },
+        {
+            "id": "atletico_25",
+            "name": "Kostis",
+            "position": "Defender",
+            "number": 27
+        },
+        {
+            "id": "atletico_26",
+            "name": "Niño",
+            "position": "Attacker",
+            "number": 32
+        },
+        {
+            "id": "atletico_27",
+            "name": "Serrano",
+            "position": "Midfielder",
+            "number": 29
+        },
+        {
+            "id": "atletico_28",
+            "name": "Belaid",
+            "position": "Attacker",
+            "number": 40
+        },
+        {
+            "id": "atletico_29",
+            "name": "Iturbe",
+            "position": "Goalkeeper",
+            "number": 33
+        },
+        {
+            "id": "atletico_30",
+            "name": "Gismera",
+            "position": "Midfielder",
+            "number": 28
+        },
+        {
+            "id": "atletico_31",
+            "name": "Vermeeren",
+            "position": "Midfielder",
+            "number": 18
+        },
+        {
+            "id": "atletico_32",
+            "name": "Spina",
+            "position": "Defender",
+            "number": 43
+        },
+        {
+            "id": "atletico_33",
+            "name": "Moldovan",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "atletico_34",
+            "name": "Janneh",
+            "position": "Attacker",
+            "number": 47
+        },
+        {
+            "id": "atletico_35",
+            "name": "Carlos Martín",
+            "position": "Attacker",
+            "number": 18
+        }
+        ],
   // ── Sevilla FC ─────────────────────────────────────────────────────────
   4: [
-    { id: 40001, name: 'Orjan Nyland',           position: 'Goalkeeper', number: 13 },
-    { id: 40002, name: 'Jesús Navas',            position: 'Defender',   number: 2  },
-    { id: 40003, name: 'Tanguy Nianzou',         position: 'Defender',   number: 23 },
-    { id: 40004, name: 'Loïc Badé',              position: 'Defender',   number: 4  },
-    { id: 40005, name: 'Marcos Acuña',           position: 'Defender',   number: 19 },
-    { id: 40006, name: 'Fernando',               position: 'Midfielder', number: 5  },
-    { id: 40007, name: 'Joan Jordán',            position: 'Midfielder', number: 14 },
-    { id: 40008, name: 'Nemanja Gudelj',         position: 'Midfielder', number: 25 },
-    { id: 40009, name: 'Suso',                   position: 'Attacker',   number: 8  },
-    { id: 40010, name: 'Youssef En-Nesyri',      position: 'Attacker',   number: 14 },
-    { id: 40011, name: 'Lucas Ocampos',          position: 'Attacker',   number: 5  }
-  ],
+    
+        {
+            "id": "sevilla_1",
+            "name": "Nyland",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "sevilla_2",
+            "name": "Carmona",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "sevilla_3",
+            "name": "Pedrosa",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "sevilla_4",
+            "name": "Badé",
+            "position": "Defender",
+            "number": 22
+        },
+        {
+            "id": "sevilla_5",
+            "name": "Kike Salas",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "sevilla_6",
+            "name": "Gudelj",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "sevilla_7",
+            "name": "Agoumé",
+            "position": "Midfielder",
+            "number": 18
+        },
+        {
+            "id": "sevilla_8",
+            "name": "Sow",
+            "position": "Midfielder",
+            "number": 20
+        },
+        {
+            "id": "sevilla_9",
+            "name": "Juanlu",
+            "position": "Midfielder",
+            "number": 26
+        },
+        {
+            "id": "sevilla_10",
+            "name": "Lukebakio",
+            "position": "Attacker",
+            "number": 11
+        },
+        {
+            "id": "sevilla_11",
+            "name": "Isaac",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "sevilla_12",
+            "name": "Ferllo",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "sevilla_13",
+            "name": "Peque",
+            "position": "Midfielder",
+            "number": 14
+        },
+        {
+            "id": "sevilla_14",
+            "name": "Saúl",
+            "position": "Midfielder",
+            "number": 17
+        },
+        {
+            "id": "sevilla_15",
+            "name": "Lokonga",
+            "position": "Midfielder",
+            "number": 12
+        },
+        {
+            "id": "sevilla_16",
+            "name": "Ejuke",
+            "position": "Attacker",
+            "number": 21
+        },
+        {
+            "id": "sevilla_17",
+            "name": "Flores",
+            "position": "Goalkeeper",
+            "number": 31
+        },
+        {
+            "id": "sevilla_18",
+            "name": "Suso",
+            "position": "Attacker",
+            "number": 10
+        },
+        {
+            "id": "sevilla_19",
+            "name": "Marcão",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "sevilla_20",
+            "name": "Idumbo",
+            "position": "Attacker",
+            "number": 27
+        },
+        {
+            "id": "sevilla_21",
+            "name": "Vargas",
+            "position": "Attacker",
+            "number": 5
+        },
+        {
+            "id": "sevilla_22",
+            "name": "Jesús Navas",
+            "position": "Defender",
+            "number": 16
+        },
+        {
+            "id": "sevilla_23",
+            "name": "Iheanacho",
+            "position": "Attacker",
+            "number": 9
+        },
+        {
+            "id": "sevilla_24",
+            "name": "Nianzou",
+            "position": "Defender",
+            "number": 24
+        },
+        {
+            "id": "sevilla_25",
+            "name": "García Pascual",
+            "position": "Attacker",
+            "number": 42
+        },
+        {
+            "id": "sevilla_26",
+            "name": "Manu Bueno",
+            "position": "Midfielder",
+            "number": 28
+        },
+        {
+            "id": "sevilla_27",
+            "name": "Barco",
+            "position": "Midfielder",
+            "number": 19
+        },
+        {
+            "id": "sevilla_28",
+            "name": "Ramón",
+            "position": "Defender",
+            "number": 35
+        },
+        {
+            "id": "sevilla_29",
+            "name": "Montiel",
+            "position": "Defender",
+            "number": 15
+        },
+        {
+            "id": "sevilla_30",
+            "name": "Akor Adams",
+            "position": "Midfielder",
+            "number": 15
+        },
+        {
+            "id": "sevilla_31",
+            "name": "Ocampos",
+            "position": "Attacker",
+            "number": 5
+        },
+        {
+            "id": "sevilla_32",
+            "name": "Antonetti",
+            "position": "Attacker",
+            "number": 44
+        },
+        {
+            "id": "sevilla_33",
+            "name": "Pedro Ortiz",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "sevilla_34",
+            "name": "Hormigo",
+            "position": "Defender",
+            "number": 38
+        },
+        {
+            "id": "sevilla_35",
+            "name": "Matías",
+            "position": "Goalkeeper",
+            "number": 33
+        },
+        {
+            "id": "sevilla_36",
+            "name": "Mejía",
+            "position": "Attacker",
+            "number": 34
+        },
+        {
+            "id": "sevilla_37",
+            "name": "Israel",
+            "position": "Attacker",
+            "number": 41
+        },
+        {
+            "id": "sevilla_38",
+            "name": "Benavides",
+            "position": "Defender",
+            "number": 29
+        },
+        {
+            "id": "sevilla_39",
+            "name": "Collado",
+            "position": "Midfielder",
+            "number": 30
+        },
+        {
+            "id": "sevilla_40",
+            "name": "Oso",
+            "position": "Defender",
+            "number": 36
+        },
+        {
+            "id": "sevilla_41",
+            "name": "Lulo",
+            "position": "Midfielder",
+            "number": 45
+        },
+        {
+            "id": "sevilla_42",
+            "name": "Rivera",
+            "position": "Midfielder",
+            "number": 37
+        },
+        {
+            "id": "sevilla_43",
+            "name": "Castrín",
+            "position": "Defender",
+            "number": 40
+        },
+        {
+            "id": "sevilla_44",
+            "name": "Rafa",
+            "position": "Goalkeeper",
+            "number": 43
+        }
+        ],
   // ── Real Betis ─────────────────────────────────────────────────────────
   5: [
-    { id: 50001, name: 'Rui Silva',              position: 'Goalkeeper', number: 13 },
-    { id: 50002, name: 'Héctor Bellerín',        position: 'Defender',   number: 2  },
-    { id: 50003, name: 'Germán Pezzella',        position: 'Defender',   number: 14 },
-    { id: 50004, name: 'Marc Bartra',            position: 'Defender',   number: 5  },
-    { id: 50005, name: 'Alex Moreno',            position: 'Defender',   number: 3  },
-    { id: 50006, name: 'Sergio Canales',         position: 'Midfielder', number: 10 },
-    { id: 50007, name: 'Guido Rodríguez',        position: 'Midfielder', number: 6  },
-    { id: 50008, name: 'Nabil Fekir',            position: 'Midfielder', number: 8  },
-    { id: 50009, name: 'Isco',                   position: 'Midfielder', number: 22 },
-    { id: 50010, name: 'Ayoze Pérez',            position: 'Attacker',   number: 17 },
-    { id: 50011, name: 'Borja Iglesias',         position: 'Attacker',   number: 9  }
-  ],
+    
+        {
+            "id": "betis_1",
+            "name": "Joan Garcia",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "betis_2",
+            "name": "El Hilali",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "betis_3",
+            "name": "Romero",
+            "position": "Defender",
+            "number": 22
+        },
+        {
+            "id": "betis_4",
+            "name": "Kumbulla",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "betis_5",
+            "name": "Cabrera",
+            "position": "Defender",
+            "number": 6
+        },
+        {
+            "id": "betis_6",
+            "name": "Král",
+            "position": "Midfielder",
+            "number": 20
+        },
+        {
+            "id": "betis_7",
+            "name": "Pol Lozano",
+            "position": "Midfielder",
+            "number": 10
+        },
+        {
+            "id": "betis_8",
+            "name": "Urko González",
+            "position": "Midfielder",
+            "number": 19
+        },
+        {
+            "id": "betis_9",
+            "name": "Puado",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "betis_10",
+            "name": "Jofre",
+            "position": "Attacker",
+            "number": 17
+        },
+        {
+            "id": "betis_11",
+            "name": "Roberto",
+            "position": "Midfielder",
+            "number": 2
+        },
+        {
+            "id": "betis_12",
+            "name": "Fortuño",
+            "position": "Goalkeeper",
+            "number": 33
+        },
+        {
+            "id": "betis_13",
+            "name": "Tejero",
+            "position": "Midfielder",
+            "number": 12
+        },
+        {
+            "id": "betis_14",
+            "name": "Roca",
+            "position": "Attacker",
+            "number": 31
+        },
+        {
+            "id": "betis_15",
+            "name": "Véliz",
+            "position": "Attacker",
+            "number": 9
+        },
+        {
+            "id": "betis_16",
+            "name": "Edu Expósito",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "betis_17",
+            "name": "Pacheco",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "betis_18",
+            "name": "Oliván",
+            "position": "Defender",
+            "number": 14
+        },
+        {
+            "id": "betis_19",
+            "name": "Cheddira",
+            "position": "Attacker",
+            "number": 16
+        },
+        {
+            "id": "betis_20",
+            "name": "Calero",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "betis_21",
+            "name": "Pere Milla",
+            "position": "Attacker",
+            "number": 11
+        },
+        {
+            "id": "betis_22",
+            "name": "Aguado",
+            "position": "Midfielder",
+            "number": 18
+        },
+        {
+            "id": "betis_23",
+            "name": "Sergi Gómez",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "betis_24",
+            "name": "Cardona",
+            "position": "Attacker",
+            "number": 24
+        },
+        {
+            "id": "betis_25",
+            "name": "Gragera",
+            "position": "Midfielder",
+            "number": 15
+        },
+        {
+            "id": "betis_26",
+            "name": "Bauzà",
+            "position": "Midfielder",
+            "number": 35
+        },
+        {
+            "id": "betis_27",
+            "name": "Smith",
+            "position": "Midfielder",
+            "number": 40
+        },
+        {
+            "id": "betis_28",
+            "name": "Ünüvar",
+            "position": "Attacker",
+            "number": 37
+        },
+        {
+            "id": "betis_29",
+            "name": "Hinojo",
+            "position": "Defender",
+            "number": 42
+        },
+        {
+            "id": "betis_30",
+            "name": "Salvi",
+            "position": "Attacker",
+            "number": 19
+        },
+        {
+            "id": "betis_31",
+            "name": "Pablo Ramón",
+            "position": "Defender",
+            "number": 24
+        },
+        {
+            "id": "betis_32",
+            "name": "Tristán",
+            "position": "Goalkeeper",
+            "number": 38
+        },
+        {
+            "id": "betis_33",
+            "name": "Almansa",
+            "position": "Attacker",
+            "number": 39
+        },
+        {
+            "id": "betis_34",
+            "name": "José Ángel",
+            "position": "Defender",
+            "number": 41
+        },
+        {
+            "id": "betis_35",
+            "name": "Català",
+            "position": "Defender",
+            "number": 27
+        },
+        {
+            "id": "betis_36",
+            "name": "Sadik",
+            "position": "Midfielder",
+            "number": 32
+        },
+        {
+            "id": "betis_37",
+            "name": "Serred",
+            "position": "Goalkeeper",
+            "number": 34
+        }
+        ],
   // ── Athletic Club ───────────────────────────────────────────────────────
   6: [
-    { id: 60001, name: 'Unai Simón',             position: 'Goalkeeper', number: 1  },
-    { id: 60002, name: 'Dani Vivian',            position: 'Defender',   number: 5  },
-    { id: 60003, name: 'Yeray Álvarez',          position: 'Defender',   number: 3  },
-    { id: 60004, name: 'Oihan Sancet',           position: 'Midfielder', number: 24 },
-    { id: 60005, name: 'Mikel Vesga',            position: 'Midfielder', number: 14 },
-    { id: 60006, name: 'Iker Muniain',           position: 'Midfielder', number: 10 },
-    { id: 60007, name: 'Iñaki Williams',         position: 'Attacker',   number: 9  },
-    { id: 60008, name: 'Nico Williams',          position: 'Attacker',   number: 11 },
-    { id: 60009, name: 'Gorka Guruzeta',         position: 'Attacker',   number: 19 },
-    { id: 60010, name: 'Álex Berenguer',         position: 'Attacker',   number: 21 }
-  ],
+    
+        {
+            "id": "athletic_1",
+            "name": "Adrián",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "athletic_2",
+            "name": "Sabaly",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "athletic_3",
+            "name": "Perraud",
+            "position": "Defender",
+            "number": 15
+        },
+        {
+            "id": "athletic_4",
+            "name": "Diego Llorente",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "athletic_5",
+            "name": "Natan",
+            "position": "Defender",
+            "number": 6
+        },
+        {
+            "id": "athletic_6",
+            "name": "Bartra",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "athletic_7",
+            "name": "Cardoso",
+            "position": "Midfielder",
+            "number": 4
+        },
+        {
+            "id": "athletic_8",
+            "name": "Altimira",
+            "position": "Midfielder",
+            "number": 16
+        },
+        {
+            "id": "athletic_9",
+            "name": "Fornals",
+            "position": "Midfielder",
+            "number": 18
+        },
+        {
+            "id": "athletic_10",
+            "name": "Abde",
+            "position": "Attacker",
+            "number": 10
+        },
+        {
+            "id": "athletic_11",
+            "name": "Jesús Rodríguez",
+            "position": "Attacker",
+            "number": 36
+        },
+        {
+            "id": "athletic_12",
+            "name": "Rui Silva",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "athletic_13",
+            "name": "Ruibal",
+            "position": "Defender",
+            "number": 24
+        },
+        {
+            "id": "athletic_14",
+            "name": "Lo Celso",
+            "position": "Midfielder",
+            "number": 20
+        },
+        {
+            "id": "athletic_15",
+            "name": "Isco",
+            "position": "Midfielder",
+            "number": 22
+        },
+        {
+            "id": "athletic_16",
+            "name": "Ricardo Rodríguez",
+            "position": "Defender",
+            "number": 12
+        },
+        {
+            "id": "athletic_17",
+            "name": "Fran Vieites",
+            "position": "Goalkeeper",
+            "number": 25
+        },
+        {
+            "id": "athletic_18",
+            "name": "Vitor Roque",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "athletic_19",
+            "name": "Bakambu",
+            "position": "Attacker",
+            "number": 11
+        },
+        {
+            "id": "athletic_20",
+            "name": "Antony",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "athletic_21",
+            "name": "Cucho Hernández",
+            "position": "Attacker",
+            "number": 19
+        },
+        {
+            "id": "athletic_22",
+            "name": "Chimy Ávila",
+            "position": "Attacker",
+            "number": 9
+        },
+        {
+            "id": "athletic_23",
+            "name": "Marc Roca",
+            "position": "Midfielder",
+            "number": 21
+        },
+        {
+            "id": "athletic_24",
+            "name": "William Carvalho",
+            "position": "Midfielder",
+            "number": 14
+        },
+        {
+            "id": "athletic_25",
+            "name": "Bellerín",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "athletic_26",
+            "name": "Losada",
+            "position": "Midfielder",
+            "number": 19
+        },
+        {
+            "id": "athletic_27",
+            "name": "Juanmi",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "athletic_28",
+            "name": "Diao",
+            "position": "Attacker",
+            "number": 38
+        },
+        {
+            "id": "athletic_29",
+            "name": "Mateo",
+            "position": "Midfielder",
+            "number": 46
+        },
+        {
+            "id": "athletic_30",
+            "name": "Ortiz",
+            "position": "Defender",
+            "number": 40
+        },
+        {
+            "id": "athletic_31",
+            "name": "Mendy",
+            "position": "Defender",
+            "number": 32
+        },
+        {
+            "id": "athletic_32",
+            "name": "Guirao",
+            "position": "Midfielder",
+            "number": 34
+        },
+        {
+            "id": "athletic_33",
+            "name": "Rodri",
+            "position": "Attacker",
+            "number": 17
+        },
+        {
+            "id": "athletic_34",
+            "name": "Fekir",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "athletic_35",
+            "name": "Pablo García",
+            "position": "Attacker",
+            "number": 52
+        },
+        {
+            "id": "athletic_36",
+            "name": "Arribas",
+            "position": "Defender",
+            "number": 57
+        },
+        {
+            "id": "athletic_37",
+            "name": "Guilherme",
+            "position": "Goalkeeper",
+            "number": 31
+        },
+        {
+            "id": "athletic_38",
+            "name": "Manu",
+            "position": "Goalkeeper",
+            "number": 41
+        },
+        {
+            "id": "athletic_39",
+            "name": "Germán",
+            "position": "Goalkeeper",
+            "number": 30
+        },
+        {
+            "id": "athletic_40",
+            "name": "Alcázar",
+            "position": "Defender",
+            "number": 43
+        },
+        {
+            "id": "athletic_41",
+            "name": "Marcos",
+            "position": "Attacker",
+            "number": 44
+        },
+        {
+            "id": "athletic_42",
+            "name": "Pleguezuelo",
+            "position": "Defender",
+            "number": 33
+        },
+        {
+            "id": "athletic_43",
+            "name": "Kohon",
+            "position": "Defender",
+            "number": 45
+        },
+        {
+            "id": "athletic_44",
+            "name": "Busto",
+            "position": "Defender",
+            "number": 42
+        },
+        {
+            "id": "athletic_45",
+            "name": "Reina",
+            "position": "Midfielder",
+            "number": 47
+        },
+        {
+            "id": "athletic_46",
+            "name": "Dani Pérez",
+            "position": "Midfielder",
+            "number": 37
+        }
+        ],
   // ── Villarreal CF ───────────────────────────────────────────────────────
   7: [
-    { id: 70001, name: 'Pepe Reina',             position: 'Goalkeeper', number: 25 },
-    { id: 70002, name: 'Juan Foyth',             position: 'Defender',   number: 17 },
-    { id: 70003, name: 'Pau Torres',             position: 'Defender',   number: 14 },
-    { id: 70004, name: 'Pervis Estupiñán',       position: 'Defender',   number: 15 },
-    { id: 70005, name: 'Dani Parejo',            position: 'Midfielder', number: 4  },
-    { id: 70006, name: 'Étienne Capoue',         position: 'Midfielder', number: 13 },
-    { id: 70007, name: 'Gerard Moreno',          position: 'Attacker',   number: 7  },
-    { id: 70008, name: 'Yeremi Pino',            position: 'Attacker',   number: 19 },
-    { id: 70009, name: 'Álex Baena',             position: 'Attacker',   number: 10 },
-    { id: 70010, name: 'José Luis Morales',      position: 'Attacker',   number: 11 }
-  ],
+    
+        {
+            "id": "villarreal_1",
+            "name": "Diego Conde",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "villarreal_2",
+            "name": "Kiko Femenía",
+            "position": "Defender",
+            "number": 17
+        },
+        {
+            "id": "villarreal_3",
+            "name": "Cardona",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "villarreal_4",
+            "name": "Logan Costa",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "villarreal_5",
+            "name": "Comesaña",
+            "position": "Midfielder",
+            "number": 14
+        },
+        {
+            "id": "villarreal_6",
+            "name": "Álex Baena",
+            "position": "Midfielder",
+            "number": 16
+        },
+        {
+            "id": "villarreal_7",
+            "name": "Parejo",
+            "position": "Midfielder",
+            "number": 10
+        },
+        {
+            "id": "villarreal_8",
+            "name": "Gueye",
+            "position": "Midfielder",
+            "number": 18
+        },
+        {
+            "id": "villarreal_9",
+            "name": "Yeremy Pino",
+            "position": "Midfielder",
+            "number": 21
+        },
+        {
+            "id": "villarreal_10",
+            "name": "Barry",
+            "position": "Midfielder",
+            "number": 15
+        },
+        {
+            "id": "villarreal_11",
+            "name": "Ayoze Pérez",
+            "position": "Attacker",
+            "number": 22
+        },
+        {
+            "id": "villarreal_12",
+            "name": "Luiz Júnior",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "villarreal_13",
+            "name": "Pépé",
+            "position": "Attacker",
+            "number": 19
+        },
+        {
+            "id": "villarreal_14",
+            "name": "Foyth",
+            "position": "Defender",
+            "number": 8
+        },
+        {
+            "id": "villarreal_15",
+            "name": "Kambwala",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "villarreal_16",
+            "name": "Albiol",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "villarreal_17",
+            "name": "Rubén Gómez",
+            "position": "Goalkeeper",
+            "number": 55
+        },
+        {
+            "id": "villarreal_18",
+            "name": "Denis Suárez",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "villarreal_19",
+            "name": "Pau Navarro",
+            "position": "Defender",
+            "number": 26
+        },
+        {
+            "id": "villarreal_20",
+            "name": "Bailly",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "villarreal_21",
+            "name": "Gerard Moreno",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "villarreal_22",
+            "name": "Akhomach",
+            "position": "Midfielder",
+            "number": 11
+        },
+        {
+            "id": "villarreal_23",
+            "name": "Buchanan",
+            "position": "Midfielder",
+            "number": 9
+        },
+        {
+            "id": "villarreal_24",
+            "name": "Pedraza",
+            "position": "Defender",
+            "number": 24
+        },
+        {
+            "id": "villarreal_25",
+            "name": "Terrats",
+            "position": "Midfielder",
+            "number": 20
+        },
+        {
+            "id": "villarreal_26",
+            "name": "Bernat",
+            "position": "Defender",
+            "number": 12
+        },
+        {
+            "id": "villarreal_27",
+            "name": "Cabanes",
+            "position": "Attacker",
+            "number": 33
+        },
+        {
+            "id": "villarreal_28",
+            "name": "Danjuma",
+            "position": "Attacker",
+            "number": 9
+        },
+        {
+            "id": "villarreal_29",
+            "name": "Etta Eyong",
+            "position": "Attacker",
+            "number": 36
+        },
+        {
+            "id": "villarreal_30",
+            "name": "Solà",
+            "position": "Defender",
+            "number": 27
+        },
+        {
+            "id": "villarreal_31",
+            "name": "Ojeda",
+            "position": "Midfielder",
+            "number": 38
+        },
+        {
+            "id": "villarreal_32",
+            "name": "Requena",
+            "position": "Midfielder",
+            "number": 30
+        },
+        {
+            "id": "villarreal_33",
+            "name": "Espigares",
+            "position": "Defender",
+            "number": 28
+        },
+        {
+            "id": "villarreal_34",
+            "name": "Diatta",
+            "position": "Midfielder",
+            "number": 32
+        },
+        {
+            "id": "villarreal_35",
+            "name": "Iker Álvarez",
+            "position": "Goalkeeper",
+            "number": 31
+        },
+        {
+            "id": "villarreal_36",
+            "name": "Valou",
+            "position": "Defender",
+            "number": 37
+        }
+        ],
   // ── Valencia CF ─────────────────────────────────────────────────────────
   8: [
-    { id: 80001, name: 'Giorgi Mamardashvili',   position: 'Goalkeeper', number: 1  },
-    { id: 80002, name: 'José Luis Gayà',         position: 'Defender',   number: 14 },
-    { id: 80003, name: 'Thierry Correia',        position: 'Defender',   number: 11 },
-    { id: 80004, name: 'Mouctar Diakhaby',       position: 'Defender',   number: 24 },
-    { id: 80005, name: 'Gabriel Paulista',       position: 'Defender',   number: 5  },
-    { id: 80006, name: 'André Almeida',          position: 'Midfielder', number: 6  },
-    { id: 80007, name: 'Carlos Soler',           position: 'Midfielder', number: 26 },
-    { id: 80008, name: 'Yunus Musah',            position: 'Midfielder', number: 16 },
-    { id: 80009, name: 'Hugo Duro',              position: 'Attacker',   number: 9  },
-    { id: 80010, name: 'Samuel Castillejo',      position: 'Attacker',   number: 17 },
-    { id: 80011, name: 'Justin Kluivert',        position: 'Attacker',   number: 7  }
-  ],
+    
+        {
+            "id": "valencia_1",
+            "name": "Mamardashvili",
+            "position": "Goalkeeper",
+            "number": 25
+        },
+        {
+            "id": "valencia_2",
+            "name": "Foulquier",
+            "position": "Defender",
+            "number": 20
+        },
+        {
+            "id": "valencia_3",
+            "name": "Gayà",
+            "position": "Defender",
+            "number": 14
+        },
+        {
+            "id": "valencia_4",
+            "name": "Mosquera",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "valencia_5",
+            "name": "Tárrega",
+            "position": "Defender",
+            "number": 15
+        },
+        {
+            "id": "valencia_6",
+            "name": "Javi Guerra",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "valencia_7",
+            "name": "Barrenechea",
+            "position": "Midfielder",
+            "number": 5
+        },
+        {
+            "id": "valencia_8",
+            "name": "André Almeida",
+            "position": "Midfielder",
+            "number": 10
+        },
+        {
+            "id": "valencia_9",
+            "name": "Diego López",
+            "position": "Attacker",
+            "number": 16
+        },
+        {
+            "id": "valencia_10",
+            "name": "Rioja",
+            "position": "Attacker",
+            "number": 22
+        },
+        {
+            "id": "valencia_11",
+            "name": "Duro",
+            "position": "Attacker",
+            "number": 9
+        },
+        {
+            "id": "valencia_12",
+            "name": "Dimitrievski",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "valencia_13",
+            "name": "Pepelu",
+            "position": "Midfielder",
+            "number": 18
+        },
+        {
+            "id": "valencia_14",
+            "name": "Jesús Vázquez",
+            "position": "Defender",
+            "number": 21
+        },
+        {
+            "id": "valencia_15",
+            "name": "Fran Pérez",
+            "position": "Midfielder",
+            "number": 23
+        },
+        {
+            "id": "valencia_16",
+            "name": "Yarek",
+            "position": "Defender",
+            "number": 24
+        },
+        {
+            "id": "valencia_17",
+            "name": "Doménech",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "valencia_18",
+            "name": "Rafa Mir",
+            "position": "Attacker",
+            "number": 11
+        },
+        {
+            "id": "valencia_19",
+            "name": "Sadiq",
+            "position": "Midfielder",
+            "number": 12
+        },
+        {
+            "id": "valencia_20",
+            "name": "Canós",
+            "position": "Midfielder",
+            "number": 7
+        },
+        {
+            "id": "valencia_21",
+            "name": "Guillamón",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "valencia_22",
+            "name": "Diakhaby",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "valencia_23",
+            "name": "Dani Gómez",
+            "position": "Midfielder",
+            "number": 17
+        },
+        {
+            "id": "valencia_24",
+            "name": "Thierry Correia",
+            "position": "Defender",
+            "number": 12
+        },
+        {
+            "id": "valencia_25",
+            "name": "Iván Jaime",
+            "position": "Midfielder",
+            "number": 17
+        },
+        {
+            "id": "valencia_26",
+            "name": "Valera",
+            "position": "Attacker",
+            "number": 30
+        },
+        {
+            "id": "valencia_27",
+            "name": "Aarons",
+            "position": "Defender",
+            "number": 19
+        },
+        {
+            "id": "valencia_28",
+            "name": "Tejón",
+            "position": "Midfielder",
+            "number": 32
+        },
+        {
+            "id": "valencia_29",
+            "name": "Caufriez",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "valencia_30",
+            "name": "Córdoba",
+            "position": "Defender",
+            "number": 38
+        },
+        {
+            "id": "valencia_31",
+            "name": "Abajas",
+            "position": "Defender",
+            "number": 39
+        },
+        {
+            "id": "valencia_32",
+            "name": "Iranzo",
+            "position": "Defender",
+            "number": 31
+        },
+        {
+            "id": "valencia_33",
+            "name": "Marí",
+            "position": "Midfielder",
+            "number": 19
+        },
+        {
+            "id": "valencia_34",
+            "name": "Otorbi",
+            "position": "Attacker",
+            "number": 27
+        },
+        {
+            "id": "valencia_35",
+            "name": "Warren Madrigal",
+            "position": "Attacker",
+            "number": 42
+        },
+        {
+            "id": "valencia_36",
+            "name": "Raúl Jiménez",
+            "position": "Goalkeeper",
+            "number": 34
+        },
+        {
+            "id": "valencia_37",
+            "name": "Alemañ",
+            "position": "Midfielder",
+            "number": 46
+        },
+        {
+            "id": "valencia_38",
+            "name": "Bellari",
+            "position": "Attacker",
+            "number": 40
+        },
+        {
+            "id": "valencia_39",
+            "name": "Cenk",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "valencia_40",
+            "name": "Fadal",
+            "position": "Midfielder",
+            "number": 29
+        },
+        {
+            "id": "valencia_41",
+            "name": "Abril",
+            "position": "Goalkeeper",
+            "number": 35
+        },
+        {
+            "id": "valencia_42",
+            "name": "Núñez",
+            "position": "Midfielder",
+            "number": 47
+        },
+        {
+            "id": "valencia_43",
+            "name": "Santana",
+            "position": "Defender",
+            "number": 44
+        },
+        {
+            "id": "valencia_44",
+            "name": "Pablo López",
+            "position": "Attacker",
+            "number": 45
+        }
+        ],
   // ── Real Sociedad ───────────────────────────────────────────────────────
   9: [
     { id: 90001, name: 'Álex Remiiro',           position: 'Goalkeeper', number: 25 },
@@ -194,73 +2037,1134 @@ var MOCK_SQUADS = {
   ],
   // ── Osasuna ─────────────────────────────────────────────────────────────
   10: [
-    { id: 10101, name: 'Sergio Herrera',         position: 'Goalkeeper', number: 25 },
-    { id: 10102, name: 'Nacho Vidal',            position: 'Defender',   number: 16 },
-    { id: 10103, name: 'David García',           position: 'Defender',   number: 2  },
-    { id: 10104, name: 'Juan Cruz',              position: 'Defender',   number: 3  },
-    { id: 10105, name: 'Lucas Torro',            position: 'Midfielder', number: 5  },
-    { id: 10106, name: 'Jon Moncayola',          position: 'Midfielder', number: 10 },
-    { id: 10107, name: 'Darko Brasanac',         position: 'Midfielder', number: 21 },
-    { id: 10108, name: 'Roberto Torres',         position: 'Midfielder', number: 8  },
-    { id: 10109, name: 'Chimy Ávila',            position: 'Attacker',   number: 9  },
-    { id: 10110, name: 'Ante Budimir',           position: 'Attacker',   number: 14 },
-    { id: 10111, name: 'Rubén García',           position: 'Attacker',   number: 7  }
-  ],
+    
+        {
+            "id": "osasuna_1",
+            "name": "Helton",
+            "position": "Goalkeeper",
+            "number": 25
+        },
+        {
+            "id": "osasuna_2",
+            "name": "Ximo",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "osasuna_3",
+            "name": "Obrador",
+            "position": "Defender",
+            "number": 33
+        },
+        {
+            "id": "osasuna_4",
+            "name": "Pablo Vázquez",
+            "position": "Defender",
+            "number": 15
+        },
+        {
+            "id": "osasuna_5",
+            "name": "Martínez",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "osasuna_6",
+            "name": "Soriano",
+            "position": "Midfielder",
+            "number": 21
+        },
+        {
+            "id": "osasuna_7",
+            "name": "Villares",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "osasuna_8",
+            "name": "Yeremay",
+            "position": "Midfielder",
+            "number": 10
+        },
+        {
+            "id": "osasuna_9",
+            "name": "Mella",
+            "position": "Midfielder",
+            "number": 17
+        },
+        {
+            "id": "osasuna_10",
+            "name": "José Ángel",
+            "position": "Midfielder",
+            "number": 20
+        },
+        {
+            "id": "osasuna_11",
+            "name": "Barbero",
+            "position": "Midfielder",
+            "number": 9
+        },
+        {
+            "id": "osasuna_12",
+            "name": "Germán",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "osasuna_13",
+            "name": "Petxarroman",
+            "position": "Defender",
+            "number": 6
+        },
+        {
+            "id": "osasuna_14",
+            "name": "Mfulu",
+            "position": "Midfielder",
+            "number": 12
+        },
+        {
+            "id": "osasuna_15",
+            "name": "Lucas Pérez",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "osasuna_16",
+            "name": "Barcia",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "osasuna_17",
+            "name": "Puerto",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "osasuna_18",
+            "name": "Cristian Herrera",
+            "position": "Attacker",
+            "number": 14
+        },
+        {
+            "id": "osasuna_19",
+            "name": "Bouldini",
+            "position": "Midfielder",
+            "number": 24
+        },
+        {
+            "id": "osasuna_20",
+            "name": "Eddahchouri",
+            "position": "Attacker",
+            "number": 3
+        },
+        {
+            "id": "osasuna_21",
+            "name": "Jaime",
+            "position": "Defender",
+            "number": 19
+        },
+        {
+            "id": "osasuna_22",
+            "name": "Diego Gómez",
+            "position": "Midfielder",
+            "number": 7
+        },
+        {
+            "id": "osasuna_23",
+            "name": "Escudero",
+            "position": "Defender",
+            "number": 18
+        },
+        {
+            "id": "osasuna_24",
+            "name": "Hugo Rama",
+            "position": "Midfielder",
+            "number": 22
+        },
+        {
+            "id": "osasuna_25",
+            "name": "Gauto",
+            "position": "Attacker",
+            "number": 16
+        },
+        {
+            "id": "osasuna_26",
+            "name": "Patiño",
+            "position": "Midfielder",
+            "number": 28
+        },
+        {
+            "id": "osasuna_27",
+            "name": "Tošić",
+            "position": "Defender",
+            "number": 11
+        },
+        {
+            "id": "osasuna_28",
+            "name": "Genreau",
+            "position": "Midfielder",
+            "number": 2
+        },
+        {
+            "id": "osasuna_29",
+            "name": "Davo",
+            "position": "Attacker",
+            "number": 11
+        },
+        {
+            "id": "osasuna_30",
+            "name": "Kevin Sánchez",
+            "position": "Attacker",
+            "number": 32
+        },
+        {
+            "id": "osasuna_31",
+            "name": "Guerrero",
+            "position": "Attacker",
+            "number": 30
+        },
+        {
+            "id": "osasuna_32",
+            "name": "Alfaro",
+            "position": "Midfielder",
+            "number": 37
+        },
+        {
+            "id": "osasuna_33",
+            "name": "Chacón",
+            "position": "Attacker",
+            "number": 24
+        },
+        {
+            "id": "osasuna_34",
+            "name": "Mardones",
+            "position": "Attacker",
+            "number": 38
+        },
+        {
+            "id": "osasuna_35",
+            "name": "Alberto Sánchez",
+            "position": "Goalkeeper",
+            "number": 26
+        },
+        {
+            "id": "osasuna_36",
+            "name": "Samu Fernández",
+            "position": "Defender",
+            "number": 29
+        },
+        {
+            "id": "osasuna_37",
+            "name": "Pablo García",
+            "position": "Defender",
+            "number": 31
+        },
+        {
+            "id": "osasuna_38",
+            "name": "Rubén",
+            "position": "Defender",
+            "number": 27
+        },
+        {
+            "id": "osasuna_39",
+            "name": "Aarón",
+            "position": "Defender",
+            "number": 35
+        }
+        ],
   // ── Girona FC ───────────────────────────────────────────────────────────
   11: [
-    { id: 11001, name: 'Paulo Gazzaniga',        position: 'Goalkeeper', number: 25 },
-    { id: 11002, name: 'Yan Couto',              position: 'Defender',   number: 2  },
-    { id: 11003, name: 'Daley Blind',            position: 'Defender',   number: 5  },
-    { id: 11004, name: 'Eric García',            position: 'Defender',   number: 4  },
-    { id: 11005, name: 'Arnau Martínez',         position: 'Defender',   number: 20 },
-    { id: 11006, name: 'Aleix García',           position: 'Midfielder', number: 8  },
-    { id: 11007, name: 'Oriol Romeu',            position: 'Midfielder', number: 6  },
-    { id: 11008, name: 'Ivan Martín',            position: 'Midfielder', number: 14 },
-    { id: 11009, name: 'Sávio',                  position: 'Attacker',   number: 11 },
-    { id: 11010, name: 'Artem Dovbyk',           position: 'Attacker',   number: 9  },
-    { id: 11011, name: 'Viktor Tsygankov',       position: 'Attacker',   number: 7  },
-    { id: 11012, name: 'Taty Castellanos',       position: 'Attacker',   number: 10 }
-  ],
+    
+        {
+            "id": "girona_1",
+            "name": "Alonso",
+            "position": "Goalkeeper",
+            "number": 25
+        },
+        {
+            "id": "girona_2",
+            "name": "Jaiteh",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "girona_3",
+            "name": "Otero",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "girona_4",
+            "name": "Pezzolesi",
+            "position": "Defender",
+            "number": 31
+        },
+        {
+            "id": "girona_5",
+            "name": "Adri Pérez",
+            "position": "Defender",
+            "number": 14
+        },
+        {
+            "id": "girona_6",
+            "name": "Castro",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "girona_7",
+            "name": "Arcos",
+            "position": "Midfielder",
+            "number": 22
+        },
+        {
+            "id": "girona_8",
+            "name": "Alassán",
+            "position": "Midfielder",
+            "number": 11
+        },
+        {
+            "id": "girona_9",
+            "name": "Félix Alonso",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "girona_10",
+            "name": "Dani Fernández",
+            "position": "Midfielder",
+            "number": 29
+        },
+        {
+            "id": "girona_11",
+            "name": "Salifo",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "girona_12",
+            "name": "Moha Ramos",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "girona_13",
+            "name": "Cacho",
+            "position": "Midfielder",
+            "number": 17
+        },
+        {
+            "id": "girona_14",
+            "name": "Zubelzu",
+            "position": "Defender",
+            "number": 15
+        },
+        {
+            "id": "girona_15",
+            "name": "Jorge",
+            "position": "Attacker",
+            "number": 21
+        },
+        {
+            "id": "girona_16",
+            "name": "Ethyan",
+            "position": "Midfielder",
+            "number": 9
+        },
+        {
+            "id": "girona_17",
+            "name": "Cascajo",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "girona_18",
+            "name": "Dylan",
+            "position": "Midfielder",
+            "number": 10
+        },
+        {
+            "id": "girona_19",
+            "name": "César",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "girona_20",
+            "name": "Sabina",
+            "position": "Attacker",
+            "number": 23
+        },
+        {
+            "id": "girona_21",
+            "name": "Toledo",
+            "position": "Attacker",
+            "number": 16
+        },
+        {
+            "id": "girona_22",
+            "name": "Bassa",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "girona_23",
+            "name": "Palmero",
+            "position": "Defender",
+            "number": 20
+        },
+        {
+            "id": "girona_24",
+            "name": "Joel Pérez",
+            "position": "Midfielder",
+            "number": 32
+        },
+        {
+            "id": "girona_25",
+            "name": "Faya",
+            "position": "Midfielder",
+            "number": 18
+        },
+        {
+            "id": "girona_26",
+            "name": "Jesús Belza",
+            "position": "Defender",
+            "number": 21
+        },
+        {
+            "id": "girona_27",
+            "name": "Giovani García",
+            "position": "Defender",
+            "number": 19
+        },
+        {
+            "id": "girona_28",
+            "name": "Gouveia",
+            "position": "Defender",
+            "number": 28
+        },
+        {
+            "id": "girona_29",
+            "name": "Martín",
+            "position": "Midfielder",
+            "number": 41
+        },
+        {
+            "id": "girona_30",
+            "name": "Christian",
+            "position": "Attacker",
+            "number": 40
+        },
+        {
+            "id": "girona_31",
+            "name": "Vuyst",
+            "position": "Goalkeeper",
+            "number": 35
+        },
+        {
+            "id": "girona_32",
+            "name": "Dawda",
+            "position": "Attacker",
+            "number": 20
+        },
+        {
+            "id": "girona_33",
+            "name": "Domínguez",
+            "position": "Attacker",
+            "number": 27
+        },
+        {
+            "id": "girona_34",
+            "name": "Montero",
+            "position": "Attacker",
+            "number": 33
+        },
+        {
+            "id": "girona_35",
+            "name": "Mena",
+            "position": "Defender",
+            "number": 43
+        },
+        {
+            "id": "girona_36",
+            "name": "Hugo Hernández",
+            "position": "Attacker",
+            "number": 39
+        },
+        {
+            "id": "girona_37",
+            "name": "Páez",
+            "position": "Attacker",
+            "number": 42
+        },
+        {
+            "id": "girona_38",
+            "name": "Badara",
+            "position": "Attacker",
+            "number": 12
+        },
+        {
+            "id": "girona_39",
+            "name": "Dani Pérez",
+            "position": "Attacker",
+            "number": 36
+        },
+        {
+            "id": "girona_40",
+            "name": "Marcos García",
+            "position": "Defender",
+            "number": 34
+        },
+        {
+            "id": "girona_41",
+            "name": "Ramírez",
+            "position": "Midfielder",
+            "number": 30
+        }
+        ],
   // ── RC Celta de Vigo ───────────────────────────────────────────────────
   12: [
-    { id: 12001, name: 'Vicente Guaita',         position: 'Goalkeeper', number: 1  },
-    { id: 12002, name: 'Hugo Mallo',             position: 'Defender',   number: 2  },
-    { id: 12003, name: 'Joseph Aidoo',           position: 'Defender',   number: 3  },
-    { id: 12004, name: 'Unai Núñez',             position: 'Defender',   number: 4  },
-    { id: 12005, name: 'Renato Tapia',           position: 'Midfielder', number: 5  },
-    { id: 12006, name: 'Fran Beltrán',           position: 'Midfielder', number: 16 },
-    { id: 12007, name: 'Franco Cervi',           position: 'Midfielder', number: 11 },
-    { id: 12008, name: 'Gabri Veiga',            position: 'Midfielder', number: 26 },
-    { id: 12009, name: 'Iago Aspas',             position: 'Attacker',   number: 10 },
-    { id: 12010, name: 'Jorgen Strand Larsen',   position: 'Attacker',   number: 9  },
-    { id: 12011, name: 'Williot Swedberg',       position: 'Attacker',   number: 7  }
-  ],
+    
+        {
+            "id": "celta_1",
+            "name": "Guaita",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "celta_2",
+            "name": "Mingueza",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "celta_3",
+            "name": "Carreira",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "celta_4",
+            "name": "Marcos Alonso",
+            "position": "Defender",
+            "number": 20
+        },
+        {
+            "id": "celta_5",
+            "name": "Javi Rodríguez",
+            "position": "Defender",
+            "number": 32
+        },
+        {
+            "id": "celta_6",
+            "name": "Starfelt",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "celta_7",
+            "name": "Fran Beltrán",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "celta_8",
+            "name": "Ilaix Moriba",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "celta_9",
+            "name": "Swedberg",
+            "position": "Midfielder",
+            "number": 19
+        },
+        {
+            "id": "celta_10",
+            "name": "Borja Iglesias",
+            "position": "Midfielder",
+            "number": 7
+        },
+        {
+            "id": "celta_11",
+            "name": "Iago Aspas",
+            "position": "Attacker",
+            "number": 10
+        },
+        {
+            "id": "celta_12",
+            "name": "Iván Villar",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "celta_13",
+            "name": "Durán",
+            "position": "Attacker",
+            "number": 18
+        },
+        {
+            "id": "celta_14",
+            "name": "Hugo Álvarez",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "celta_15",
+            "name": "Alfon",
+            "position": "Attacker",
+            "number": 12
+        },
+        {
+            "id": "celta_16",
+            "name": "Sotelo",
+            "position": "Midfielder",
+            "number": 4
+        },
+        {
+            "id": "celta_17",
+            "name": "Vidal",
+            "position": "Goalkeeper",
+            "number": 26
+        },
+        {
+            "id": "celta_18",
+            "name": "Domínguez",
+            "position": "Defender",
+            "number": 24
+        },
+        {
+            "id": "celta_19",
+            "name": "Damián",
+            "position": "Midfielder",
+            "number": 25
+        },
+        {
+            "id": "celta_20",
+            "name": "Douvikas",
+            "position": "Midfielder",
+            "number": 9
+        },
+        {
+            "id": "celta_21",
+            "name": "Fer López",
+            "position": "Attacker",
+            "number": 28
+        },
+        {
+            "id": "celta_22",
+            "name": "Bamba",
+            "position": "Midfielder",
+            "number": 17
+        },
+        {
+            "id": "celta_23",
+            "name": "Jailson",
+            "position": "Defender",
+            "number": 16
+        },
+        {
+            "id": "celta_24",
+            "name": "Ristić",
+            "position": "Defender",
+            "number": 21
+        },
+        {
+            "id": "celta_25",
+            "name": "Manquillo",
+            "position": "Defender",
+            "number": 22
+        },
+        {
+            "id": "celta_26",
+            "name": "Losada",
+            "position": "Midfielder",
+            "number": 14
+        },
+        {
+            "id": "celta_27",
+            "name": "Lago",
+            "position": "Defender",
+            "number": 29
+        },
+        {
+            "id": "celta_28",
+            "name": "Cervi",
+            "position": "Defender",
+            "number": 11
+        },
+        {
+            "id": "celta_29",
+            "name": "Aidoo",
+            "position": "Defender",
+            "number": 15
+        },
+        {
+            "id": "celta_30",
+            "name": "Allende",
+            "position": "Attacker",
+            "number": 23
+        },
+        {
+            "id": "celta_31",
+            "name": "El Abdellaoui",
+            "position": "Attacker",
+            "number": 39
+        },
+        {
+            "id": "celta_32",
+            "name": "De la Torre",
+            "position": "Midfielder",
+            "number": 14
+        },
+        {
+            "id": "celta_33",
+            "name": "César Fernández",
+            "position": "Goalkeeper",
+            "number": 27
+        },
+        {
+            "id": "celta_34",
+            "name": "Miguel Román",
+            "position": "Midfielder",
+            "number": 34
+        },
+        {
+            "id": "celta_35",
+            "name": "Tincho",
+            "position": "Defender",
+            "number": 36
+        },
+        {
+            "id": "celta_36",
+            "name": "Coke",
+            "position": "Goalkeeper",
+            "number": 35
+        }
+        ],
   // ── RCD Mallorca ────────────────────────────────────────────────────────
   13: [
-    { id: 13001, name: 'Predrag Rajković',       position: 'Goalkeeper', number: 25 },
-    { id: 13002, name: 'Pablo Maffeo',           position: 'Defender',   number: 2  },
-    { id: 13003, name: 'Antonio Raíllo',         position: 'Defender',   number: 5  },
-    { id: 13004, name: 'Jaume Costa',            position: 'Defender',   number: 3  },
-    { id: 13005, name: 'Dani Rodríguez',         position: 'Midfielder', number: 17 },
-    { id: 13006, name: 'Iddrisu Baba',           position: 'Midfielder', number: 6  },
-    { id: 13007, name: 'José Copete',            position: 'Midfielder', number: 22 },
-    { id: 13008, name: 'Abdón Prats',            position: 'Attacker',   number: 10 },
-    { id: 13009, name: 'Muriqi',                 position: 'Attacker',   number: 9  },
-    { id: 13010, name: 'Larin',                  position: 'Attacker',   number: 7  }
-  ],
+    
+        {
+            "id": "mallorca_1",
+            "name": "Greif",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "mallorca_2",
+            "name": "Maffeo",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "mallorca_3",
+            "name": "Mojica",
+            "position": "Defender",
+            "number": 22
+        },
+        {
+            "id": "mallorca_4",
+            "name": "Raillo",
+            "position": "Defender",
+            "number": 21
+        },
+        {
+            "id": "mallorca_5",
+            "name": "Valjent",
+            "position": "Defender",
+            "number": 24
+        },
+        {
+            "id": "mallorca_6",
+            "name": "Darder",
+            "position": "Midfielder",
+            "number": 10
+        },
+        {
+            "id": "mallorca_7",
+            "name": "Samú Costa",
+            "position": "Midfielder",
+            "number": 12
+        },
+        {
+            "id": "mallorca_8",
+            "name": "Mascarell",
+            "position": "Midfielder",
+            "number": 5
+        },
+        {
+            "id": "mallorca_9",
+            "name": "Dani Rodríguez",
+            "position": "Attacker",
+            "number": 14
+        },
+        {
+            "id": "mallorca_10",
+            "name": "Muriqi",
+            "position": "Midfielder",
+            "number": 7
+        },
+        {
+            "id": "mallorca_11",
+            "name": "Larin",
+            "position": "Attacker",
+            "number": 17
+        },
+        {
+            "id": "mallorca_12",
+            "name": "Leo Román",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "mallorca_13",
+            "name": "Antonio Sánchez",
+            "position": "Midfielder",
+            "number": 18
+        },
+        {
+            "id": "mallorca_14",
+            "name": "Copete",
+            "position": "Defender",
+            "number": 6
+        },
+        {
+            "id": "mallorca_15",
+            "name": "Morlanes",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "mallorca_16",
+            "name": "Robert Navarro",
+            "position": "Attacker",
+            "number": 27
+        },
+        {
+            "id": "mallorca_17",
+            "name": "Cuéllar",
+            "position": "Goalkeeper",
+            "number": 25
+        },
+        {
+            "id": "mallorca_18",
+            "name": "Asano",
+            "position": "Attacker",
+            "number": 11
+        },
+        {
+            "id": "mallorca_19",
+            "name": "Abdón Prats",
+            "position": "Midfielder",
+            "number": 9
+        },
+        {
+            "id": "mallorca_20",
+            "name": "Morey",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "mallorca_21",
+            "name": "Lato",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "mallorca_22",
+            "name": "Valery",
+            "position": "Attacker",
+            "number": 16
+        },
+        {
+            "id": "mallorca_23",
+            "name": "Domenech",
+            "position": "Attacker",
+            "number": 30
+        },
+        {
+            "id": "mallorca_24",
+            "name": "Chiquinho",
+            "position": "Attacker",
+            "number": 20
+        },
+        {
+            "id": "mallorca_25",
+            "name": "David López",
+            "position": "Defender",
+            "number": 32
+        },
+        {
+            "id": "mallorca_26",
+            "name": "Salas",
+            "position": "Midfielder",
+            "number": 28
+        },
+        {
+            "id": "mallorca_27",
+            "name": "Luna",
+            "position": "Attacker",
+            "number": 33
+        },
+        {
+            "id": "mallorca_28",
+            "name": "Van der Heyden",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "mallorca_29",
+            "name": "Llabrés",
+            "position": "Attacker",
+            "number": 19
+        },
+        {
+            "id": "mallorca_30",
+            "name": "Pere Joan",
+            "position": "Goalkeeper",
+            "number": 31
+        },
+        {
+            "id": "mallorca_31",
+            "name": "Wade",
+            "position": "Defender",
+            "number": 39
+        }
+        ],
   // ── Rayo Vallecano ──────────────────────────────────────────────────────
   14: [
-    { id: 14001, name: 'Stole Dimitrievski',     position: 'Goalkeeper', number: 25 },
-    { id: 14002, name: 'Iván Balliu',            position: 'Defender',   number: 2  },
-    { id: 14003, name: 'Esteban Saveljich',      position: 'Defender',   number: 4  },
-    { id: 14004, name: 'Fran García',            position: 'Defender',   number: 3  },
-    { id: 14005, name: 'Óscar Trejo',            position: 'Midfielder', number: 10 },
-    { id: 14006, name: 'Álvaro García',          position: 'Midfielder', number: 17 },
-    { id: 14007, name: 'Pathé Ciss',             position: 'Midfielder', number: 6  },
-    { id: 14008, name: 'Radamel Falcao',         position: 'Attacker',   number: 9  },
-    { id: 14009, name: 'Randy Nteka',            position: 'Attacker',   number: 7  },
-    { id: 14010, name: 'Sergio Camello',         position: 'Attacker',   number: 11 }
-  ],
+    
+        {
+            "id": "rayo_1",
+            "name": "Aarón",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "rayo_2",
+            "name": "Luengo",
+            "position": "Defender",
+            "number": 15
+        },
+        {
+            "id": "rayo_3",
+            "name": "Rahim",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "rayo_4",
+            "name": "Dani Calvo",
+            "position": "Defender",
+            "number": 12
+        },
+        {
+            "id": "rayo_5",
+            "name": "David Costas",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "rayo_6",
+            "name": "Colombatto",
+            "position": "Midfielder",
+            "number": 11
+        },
+        {
+            "id": "rayo_7",
+            "name": "Sibo",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "rayo_8",
+            "name": "Cazorla",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "rayo_9",
+            "name": "Alemão",
+            "position": "Midfielder",
+            "number": 9
+        },
+        {
+            "id": "rayo_10",
+            "name": "Chaira",
+            "position": "Attacker",
+            "number": 16
+        },
+        {
+            "id": "rayo_11",
+            "name": "Hassan",
+            "position": "Attacker",
+            "number": 23
+        },
+        {
+            "id": "rayo_12",
+            "name": "Braat",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "rayo_13",
+            "name": "Sebas Moyano",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "rayo_14",
+            "name": "Pomares",
+            "position": "Defender",
+            "number": 21
+        },
+        {
+            "id": "rayo_15",
+            "name": "Seoane",
+            "position": "Midfielder",
+            "number": 20
+        },
+        {
+            "id": "rayo_16",
+            "name": "Nacho Vidal",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "rayo_17",
+            "name": "Narváez",
+            "position": "Goalkeeper",
+            "number": 26
+        },
+        {
+            "id": "rayo_18",
+            "name": "Portillo",
+            "position": "Midfielder",
+            "number": 10
+        },
+        {
+            "id": "rayo_19",
+            "name": "Paraschiv",
+            "position": "Midfielder",
+            "number": 14
+        },
+        {
+            "id": "rayo_20",
+            "name": "Paulino",
+            "position": "Attacker",
+            "number": 18
+        },
+        {
+            "id": "rayo_21",
+            "name": "Álex Cardero",
+            "position": "Midfielder",
+            "number": 27
+        },
+        {
+            "id": "rayo_22",
+            "name": "Lucas",
+            "position": "Defender",
+            "number": 24
+        },
+        {
+            "id": "rayo_23",
+            "name": "Viñas",
+            "position": "Attacker",
+            "number": 19
+        },
+        {
+            "id": "rayo_24",
+            "name": "De la Hoz",
+            "position": "Midfielder",
+            "number": 17
+        },
+        {
+            "id": "rayo_25",
+            "name": "Del Moral",
+            "position": "Midfielder",
+            "number": 5
+        },
+        {
+            "id": "rayo_26",
+            "name": "Lemos",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "rayo_27",
+            "name": "Jaime Vázquez",
+            "position": "Defender",
+            "number": 29
+        },
+        {
+            "id": "rayo_28",
+            "name": "Dotor",
+            "position": "Midfielder",
+            "number": 22
+        },
+        {
+            "id": "rayo_29",
+            "name": "Masca",
+            "position": "Attacker",
+            "number": 17
+        },
+        {
+            "id": "rayo_30",
+            "name": "Eze",
+            "position": "Defender",
+            "number": 31
+        },
+        {
+            "id": "rayo_31",
+            "name": "Falah",
+            "position": "Defender",
+            "number": 35
+        },
+        {
+            "id": "rayo_32",
+            "name": "Marco Esteban",
+            "position": "Defender",
+            "number": 30
+        },
+        {
+            "id": "rayo_33",
+            "name": "Miguélez",
+            "position": "Attacker",
+            "number": 28
+        },
+        {
+            "id": "rayo_34",
+            "name": "Borja Sánchez",
+            "position": "Attacker",
+            "number": 10
+        },
+        {
+            "id": "rayo_35",
+            "name": "Valdera",
+            "position": "Midfielder",
+            "number": 33
+        },
+        {
+            "id": "rayo_36",
+            "name": "Lamine",
+            "position": "Defender",
+            "number": 36
+        },
+        {
+            "id": "rayo_37",
+            "name": "Lopes",
+            "position": "Defender",
+            "number": 32
+        },
+        {
+            "id": "rayo_38",
+            "name": "Tejón",
+            "position": "Midfielder",
+            "number": 34
+        }
+        ],
   // ── RCD Espanyol ────────────────────────────────────────────────────────
   15: [
     { id: 15001, name: 'Joan García',            position: 'Goalkeeper', number: 1  },
@@ -274,28 +3178,450 @@ var MOCK_SQUADS = {
   ],
   // ── Getafe CF ───────────────────────────────────────────────────────────
   16: [
-    { id: 16001, name: 'David Soria',            position: 'Goalkeeper', number: 1  },
-    { id: 16002, name: 'Damián Suárez',          position: 'Defender',   number: 2  },
-    { id: 16003, name: 'Djené Dakonam',          position: 'Defender',   number: 3  },
-    { id: 16004, name: 'Erick Cabaco',           position: 'Defender',   number: 5  },
-    { id: 16005, name: 'Mauro Arambarri',        position: 'Midfielder', number: 14 },
-    { id: 16006, name: 'Nemanja Maksimović',     position: 'Midfielder', number: 8  },
-    { id: 16007, name: 'Carles Aleñá',           position: 'Midfielder', number: 6  },
-    { id: 16008, name: 'Borja Mayoral',          position: 'Attacker',   number: 9  },
-    { id: 16009, name: 'Mata',                   position: 'Attacker',   number: 10 },
-    { id: 16010, name: 'Enes Ünal',              position: 'Attacker',   number: 7  }
-  ],
+    
+        {
+            "id": "getafe_1",
+            "name": "Fran González",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "getafe_2",
+            "name": "Jiménez",
+            "position": "Defender",
+            "number": 22
+        },
+        {
+            "id": "getafe_3",
+            "name": "Yusi",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "getafe_4",
+            "name": "Rivas",
+            "position": "Defender",
+            "number": 29
+        },
+        {
+            "id": "getafe_5",
+            "name": "Ribes",
+            "position": "Defender",
+            "number": 15
+        },
+        {
+            "id": "getafe_6",
+            "name": "Edgar",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "getafe_7",
+            "name": "Chema",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "getafe_8",
+            "name": "Fortuny",
+            "position": "Midfielder",
+            "number": 27
+        },
+        {
+            "id": "getafe_9",
+            "name": "Manuel Ángel",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "getafe_10",
+            "name": "Gonzalo",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "getafe_11",
+            "name": "Víctor Muñoz",
+            "position": "Attacker",
+            "number": 9
+        },
+        {
+            "id": "getafe_12",
+            "name": "De Luis",
+            "position": "Goalkeeper",
+            "number": 25
+        },
+        {
+            "id": "getafe_13",
+            "name": "Loren",
+            "position": "Midfielder",
+            "number": 19
+        },
+        {
+            "id": "getafe_14",
+            "name": "Antonio David",
+            "position": "Midfielder",
+            "number": 16
+        },
+        {
+            "id": "getafe_15",
+            "name": "Lorenzo",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "getafe_16",
+            "name": "Jacobo",
+            "position": "Defender",
+            "number": 14
+        },
+        {
+            "id": "getafe_17",
+            "name": "Piñeiro",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "getafe_18",
+            "name": "David Ruiz",
+            "position": "Defender",
+            "number": 17
+        },
+        {
+            "id": "getafe_19",
+            "name": "De Llanos",
+            "position": "Midfielder",
+            "number": 26
+        },
+        {
+            "id": "getafe_20",
+            "name": "Alonso",
+            "position": "Midfielder",
+            "number": 11
+        },
+        {
+            "id": "getafe_21",
+            "name": "Campos",
+            "position": "Midfielder",
+            "number": 20
+        },
+        {
+            "id": "getafe_22",
+            "name": "Asencio",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "getafe_23",
+            "name": "Valdepeñas",
+            "position": "Defender",
+            "number": 37
+        },
+        {
+            "id": "getafe_24",
+            "name": "Yáñez",
+            "position": "Attacker",
+            "number": 36
+        },
+        {
+            "id": "getafe_25",
+            "name": "Cuenca",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "getafe_26",
+            "name": "Perea",
+            "position": "Defender",
+            "number": 33
+        },
+        {
+            "id": "getafe_27",
+            "name": "Diocou",
+            "position": "Attacker",
+            "number": 40
+        },
+        {
+            "id": "getafe_28",
+            "name": "De León",
+            "position": "Attacker",
+            "number": 21
+        },
+        {
+            "id": "getafe_29",
+            "name": "Palacios",
+            "position": "Midfielder",
+            "number": 10
+        },
+        {
+            "id": "getafe_30",
+            "name": "Aguado",
+            "position": "Defender",
+            "number": 38
+        },
+        {
+            "id": "getafe_31",
+            "name": "Carvajal",
+            "position": "Attacker",
+            "number": 32
+        },
+        {
+            "id": "getafe_32",
+            "name": "Bruno",
+            "position": "Midfielder",
+            "number": 39
+        },
+        {
+            "id": "getafe_33",
+            "name": "Serrano",
+            "position": "Defender",
+            "number": 41
+        },
+        {
+            "id": "getafe_34",
+            "name": "Súnico",
+            "position": "Goalkeeper",
+            "number": 31
+        },
+        {
+            "id": "getafe_35",
+            "name": "Carlos",
+            "position": "Midfielder",
+            "number": 30
+        },
+        {
+            "id": "getafe_36",
+            "name": "Pablo Ramón",
+            "position": "Defender",
+            "number": 24
+        }
+        ],
   // ── Deportivo Alavés ────────────────────────────────────────────────────
   17: [
-    { id: 17001, name: 'Antonio Sivera',         position: 'Goalkeeper', number: 1  },
-    { id: 17002, name: 'Nahuel Tenaglia',        position: 'Defender',   number: 2  },
-    { id: 17003, name: 'Víctor Laguardia',       position: 'Defender',   number: 3  },
-    { id: 17004, name: 'Jon Guridi',             position: 'Midfielder', number: 6  },
-    { id: 17005, name: 'Luis Rioja',             position: 'Midfielder', number: 7  },
-    { id: 17006, name: 'Toni Moya',              position: 'Midfielder', number: 8  },
-    { id: 17007, name: 'Kike García',            position: 'Attacker',   number: 9  },
-    { id: 17008, name: 'Carlos Vicente',         position: 'Attacker',   number: 11 }
-  ],
+    
+        {
+            "id": "alaves_1",
+            "name": "Sivera",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "alaves_2",
+            "name": "Tenaglia",
+            "position": "Defender",
+            "number": 14
+        },
+        {
+            "id": "alaves_3",
+            "name": "Manu Sánchez",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "alaves_4",
+            "name": "Abqar",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "alaves_5",
+            "name": "Diarra",
+            "position": "Defender",
+            "number": 22
+        },
+        {
+            "id": "alaves_6",
+            "name": "Blanco",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "alaves_7",
+            "name": "Guridi",
+            "position": "Midfielder",
+            "number": 18
+        },
+        {
+            "id": "alaves_8",
+            "name": "Guevara",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "alaves_9",
+            "name": "Carlos Vicente",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "alaves_10",
+            "name": "Kike García",
+            "position": "Attacker",
+            "number": 17
+        },
+        {
+            "id": "alaves_11",
+            "name": "Carlos Martín",
+            "position": "Attacker",
+            "number": 15
+        },
+        {
+            "id": "alaves_12",
+            "name": "Owono",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "alaves_13",
+            "name": "Mouriño",
+            "position": "Defender",
+            "number": 12
+        },
+        {
+            "id": "alaves_14",
+            "name": "Jordán",
+            "position": "Midfielder",
+            "number": 24
+        },
+        {
+            "id": "alaves_15",
+            "name": "Toni Martínez",
+            "position": "Midfielder",
+            "number": 11
+        },
+        {
+            "id": "alaves_16",
+            "name": "Conechny",
+            "position": "Attacker",
+            "number": 10
+        },
+        {
+            "id": "alaves_17",
+            "name": "Adrián Rodríguez",
+            "position": "Goalkeeper",
+            "number": 31
+        },
+        {
+            "id": "alaves_18",
+            "name": "Aleñá",
+            "position": "Midfielder",
+            "number": 21
+        },
+        {
+            "id": "alaves_19",
+            "name": "Protesoni",
+            "position": "Midfielder",
+            "number": 23
+        },
+        {
+            "id": "alaves_20",
+            "name": "Stoichkov",
+            "position": "Attacker",
+            "number": 19
+        },
+        {
+            "id": "alaves_21",
+            "name": "Villalibre",
+            "position": "Midfielder",
+            "number": 9
+        },
+        {
+            "id": "alaves_22",
+            "name": "Sedlar",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "alaves_23",
+            "name": "Pica",
+            "position": "Defender",
+            "number": 36
+        },
+        {
+            "id": "alaves_24",
+            "name": "Garcés",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "alaves_25",
+            "name": "Abde Rebbach",
+            "position": "Attacker",
+            "number": 21
+        },
+        {
+            "id": "alaves_26",
+            "name": "Novoa",
+            "position": "Attacker",
+            "number": 16
+        },
+        {
+            "id": "alaves_27",
+            "name": "Luka Romero",
+            "position": "Attacker",
+            "number": 20
+        },
+        {
+            "id": "alaves_28",
+            "name": "Cabanes",
+            "position": "Attacker",
+            "number": 19
+        },
+        {
+            "id": "alaves_29",
+            "name": "Rioja",
+            "position": "Attacker",
+            "number": 11
+        },
+        {
+            "id": "alaves_30",
+            "name": "Swiderski",
+            "position": "Goalkeeper",
+            "number": 41
+        },
+        {
+            "id": "alaves_31",
+            "name": "Doumbia",
+            "position": "Midfielder",
+            "number": 32
+        },
+        {
+            "id": "alaves_32",
+            "name": "Jay",
+            "position": "Defender",
+            "number": 35
+        },
+        {
+            "id": "alaves_33",
+            "name": "Panichelli",
+            "position": "Midfielder",
+            "number": 29
+        },
+        {
+            "id": "alaves_34",
+            "name": "Ortiz",
+            "position": "Defender",
+            "number": 34
+        },
+        {
+            "id": "alaves_35",
+            "name": "Lartitegi",
+            "position": "Attacker",
+            "number": 37
+        },
+        {
+            "id": "alaves_36",
+            "name": "Pinillos",
+            "position": "Midfielder",
+            "number": 28
+        },
+        {
+            "id": "alaves_37",
+            "name": "Muñoz",
+            "position": "Defender",
+            "number": 27
+        }
+        ],
   // ── Levante UD ──────────────────────────────────────────────────────────
   18: [
     { id: 18001, name: 'Dani Cárdenas',          position: 'Goalkeeper', number: 1  },
@@ -332,30 +3658,218 @@ var MOCK_SQUADS = {
   // ─── ASCENDIDOS DE SEGUNDA 2024-25 ────────────────────────────────────
   // Racing de Santander (Campeón de la fase regular, ascenso directo)
   51: [
-    { id: 51001, name: 'Jokin Ezkieta',          position: 'Goalkeeper', number: 1  },
-    { id: 51002, name: 'Lars Simon Eriksson',    position: 'Goalkeeper', number: 13 },
-    { id: 51003, name: 'Plamen Andreev',         position: 'Goalkeeper', number: 25 },
-    { id: 51004, name: 'Mantilla',               position: 'Defender',   number: 2  },
-    { id: 51005, name: 'Mario García',           position: 'Defender',   number: 5  },
-    { id: 51006, name: 'Manu Hernando',          position: 'Defender',   number: 4  },
-    { id: 51007, name: 'Javi Castro',            position: 'Defender',   number: 6  },
-    { id: 51008, name: 'Facu González',          position: 'Defender',   number: 3  },
-    { id: 51009, name: 'Pablo Ramón',            position: 'Defender',   number: 23 },
-    { id: 51010, name: 'Salinas',                position: 'Defender',   number: 22 },
-    { id: 51011, name: 'Íñigo',                  position: 'Midfielder', number: 8  },
-    { id: 51012, name: 'Aritz Aldasoro',         position: 'Midfielder', number: 16 },
-    { id: 51013, name: 'Iñigo Vicente',          position: 'Midfielder', number: 10 },
-    { id: 51014, name: 'Maguette',               position: 'Midfielder', number: 14 },
-    { id: 51015, name: 'Sangalli',               position: 'Midfielder', number: 7  },
-    { id: 51016, name: 'Canales',                position: 'Midfielder', number: 17 },
-    { id: 51017, name: 'G. Puerta',              position: 'Midfielder', number: 21 },
-    { id: 51018, name: 'Damián',                 position: 'Midfielder', number: 18 },
-    { id: 51019, name: 'Guliashvili',            position: 'Attacker',   number: 9  },
-    { id: 51020, name: 'Andrés Martín',          position: 'Attacker',   number: 11 },
-    { id: 51021, name: 'Villalibre',             position: 'Attacker',   number: 19 },
-    { id: 51022, name: 'Suleiman',               position: 'Attacker',   number: 20 },
-    { id: 51023, name: 'Manex Lozano',           position: 'Attacker',   number: 24 }
-  ],
+    
+        {
+            "id": "racing_1",
+            "name": "Herrera",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "racing_2",
+            "name": "Areso",
+            "position": "Defender",
+            "number": 12
+        },
+        {
+            "id": "racing_3",
+            "name": "Bretones",
+            "position": "Defender",
+            "number": 23
+        },
+        {
+            "id": "racing_4",
+            "name": "Catena",
+            "position": "Defender",
+            "number": 24
+        },
+        {
+            "id": "racing_5",
+            "name": "Boyomo",
+            "position": "Defender",
+            "number": 22
+        },
+        {
+            "id": "racing_6",
+            "name": "Aimar",
+            "position": "Midfielder",
+            "number": 10
+        },
+        {
+            "id": "racing_7",
+            "name": "Torró",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "racing_8",
+            "name": "Moncayola",
+            "position": "Midfielder",
+            "number": 7
+        },
+        {
+            "id": "racing_9",
+            "name": "Budimir",
+            "position": "Midfielder",
+            "number": 17
+        },
+        {
+            "id": "racing_10",
+            "name": "Rubén García",
+            "position": "Attacker",
+            "number": 14
+        },
+        {
+            "id": "racing_11",
+            "name": "Zaragoza",
+            "position": "Attacker",
+            "number": 19
+        },
+        {
+            "id": "racing_12",
+            "name": "Aitor Fernández",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "racing_13",
+            "name": "Juan Cruz",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "racing_14",
+            "name": "Ibáñez",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "racing_15",
+            "name": "Raúl",
+            "position": "Midfielder",
+            "number": 9
+        },
+        {
+            "id": "racing_16",
+            "name": "Herrando",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "racing_17",
+            "name": "Valencia",
+            "position": "Goalkeeper",
+            "number": 31
+        },
+        {
+            "id": "racing_18",
+            "name": "Rubén Peña",
+            "position": "Attacker",
+            "number": 15
+        },
+        {
+            "id": "racing_19",
+            "name": "Moi Gómez",
+            "position": "Midfielder",
+            "number": 16
+        },
+        {
+            "id": "racing_20",
+            "name": "Iker Muñoz",
+            "position": "Midfielder",
+            "number": 18
+        },
+        {
+            "id": "racing_21",
+            "name": "Kike Barja",
+            "position": "Attacker",
+            "number": 11
+        },
+        {
+            "id": "racing_22",
+            "name": "Arnaiz",
+            "position": "Attacker",
+            "number": 20
+        },
+        {
+            "id": "racing_23",
+            "name": "Unai García",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "racing_24",
+            "name": "Nacho Vidal",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "racing_25",
+            "name": "Benito",
+            "position": "Defender",
+            "number": 27
+        },
+        {
+            "id": "racing_26",
+            "name": "Javi Martínez",
+            "position": "Midfielder",
+            "number": 21
+        },
+        {
+            "id": "racing_27",
+            "name": "Stamatakis",
+            "position": "Goalkeeper",
+            "number": 32
+        },
+        {
+            "id": "racing_28",
+            "name": "Osambela",
+            "position": "Midfielder",
+            "number": 29
+        },
+        {
+            "id": "racing_29",
+            "name": "Sixtus",
+            "position": "Midfielder",
+            "number": 36
+        },
+        {
+            "id": "racing_30",
+            "name": "Arguibide",
+            "position": "Attacker",
+            "number": 41
+        },
+        {
+            "id": "racing_31",
+            "name": "Lumbreras",
+            "position": "Attacker",
+            "number": 33
+        },
+        {
+            "id": "racing_32",
+            "name": "Sierra",
+            "position": "Defender",
+            "number": 34
+        },
+        {
+            "id": "racing_33",
+            "name": "Jon García",
+            "position": "Midfielder",
+            "number": 37
+        },
+        {
+            "id": "racing_34",
+            "name": "Rafa",
+            "position": "Goalkeeper",
+            "number": 42
+        },
+        {
+            "id": "racing_35",
+            "name": "Espejo",
+            "position": "Defender",
+            "number": 30
+        }
+        ],
   // RC Deportivo de La Coruña (2.º clasificado, ascenso directo)
   52: [
     { id: 52001, name: 'Germán Parreño',         position: 'Goalkeeper', number: 1  },
@@ -376,31 +3890,218 @@ var MOCK_SQUADS = {
   ],
   // Málaga CF (Playoff de ascenso, 3.ª plaza)
   53: [
-    { id: 53001, name: 'Alfonso Herrero',        position: 'Goalkeeper', number: 1  },
-    { id: 53002, name: 'Carlos López',           position: 'Goalkeeper', number: 13 },
-    { id: 53003, name: 'Jokin Gabilondo',        position: 'Defender',   number: 2  },
-    { id: 53004, name: 'Carlos Puga',            position: 'Defender',   number: 3  },
-    { id: 53005, name: 'Einar Galilea',          position: 'Defender',   number: 4  },
-    { id: 53006, name: 'Víctor García',          position: 'Defender',   number: 14 },
-    { id: 53007, name: 'Diego Murillo',          position: 'Defender',   number: 16 },
-    { id: 53008, name: 'Javi Montero',           position: 'Defender',   number: 20 },
-    { id: 53009, name: 'Darko Brašanac',         position: 'Midfielder', number: 5  },
-    { id: 53010, name: 'Ramón Enríquez',         position: 'Midfielder', number: 6  },
-    { id: 53011, name: 'Juanpe Jiménez',         position: 'Midfielder', number: 8  },
-    { id: 53012, name: 'Carlos Dotor',           position: 'Midfielder', number: 12 },
-    { id: 53013, name: 'Moussa Diarra',          position: 'Midfielder', number: 15 },
-    { id: 53014, name: 'Eneko Jauregi',          position: 'Midfielder', number: 17 },
-    { id: 53015, name: 'Dani Sánchez',           position: 'Midfielder', number: 18 },
-    { id: 53016, name: 'Adrián Niño',            position: 'Midfielder', number: 21 },
-    { id: 53017, name: 'Dani Lorenzo',           position: 'Midfielder', number: 22 },
-    { id: 53018, name: 'Aarón Ochoa',            position: 'Midfielder', number: 35 },
-    { id: 53019, name: 'Haitam Abaida',          position: 'Attacker',   number: 7  },
-    { id: 53020, name: 'Chupe',                  position: 'Attacker',   number: 9  },
-    { id: 53021, name: 'David Larrubia',         position: 'Attacker',   number: 10 },
-    { id: 53022, name: 'Joaquín Muñoz',          position: 'Attacker',   number: 11 },
-    { id: 53023, name: 'Luismi Sánchez',         position: 'Attacker',   number: 19 },
-    { id: 53024, name: 'Julen Lobete',           position: 'Attacker',   number: 24 }
-  ],
+    
+        {
+            "id": "malaga_1",
+            "name": "Herrero",
+            "position": "Goalkeeper",
+            "number": 1
+        },
+        {
+            "id": "malaga_2",
+            "name": "Puga",
+            "position": "Defender",
+            "number": 3
+        },
+        {
+            "id": "malaga_3",
+            "name": "Nélson Monte",
+            "position": "Defender",
+            "number": 20
+        },
+        {
+            "id": "malaga_4",
+            "name": "Pastor",
+            "position": "Defender",
+            "number": 5
+        },
+        {
+            "id": "malaga_5",
+            "name": "Einar",
+            "position": "Defender",
+            "number": 4
+        },
+        {
+            "id": "malaga_6",
+            "name": "Manu Molina",
+            "position": "Midfielder",
+            "number": 12
+        },
+        {
+            "id": "malaga_7",
+            "name": "Luismi",
+            "position": "Midfielder",
+            "number": 19
+        },
+        {
+            "id": "malaga_8",
+            "name": "Larrubia",
+            "position": "Attacker",
+            "number": 10
+        },
+        {
+            "id": "malaga_9",
+            "name": "Lobete",
+            "position": "Attacker",
+            "number": 24
+        },
+        {
+            "id": "malaga_10",
+            "name": "Antoñito Cordero",
+            "position": "Attacker",
+            "number": 26
+        },
+        {
+            "id": "malaga_11",
+            "name": "Dioni",
+            "position": "Midfielder",
+            "number": 17
+        },
+        {
+            "id": "malaga_12",
+            "name": "Carlos López",
+            "position": "Goalkeeper",
+            "number": 13
+        },
+        {
+            "id": "malaga_13",
+            "name": "Dani Sánchez",
+            "position": "Defender",
+            "number": 18
+        },
+        {
+            "id": "malaga_14",
+            "name": "Kevin",
+            "position": "Midfielder",
+            "number": 11
+        },
+        {
+            "id": "malaga_15",
+            "name": "Víctor",
+            "position": "Defender",
+            "number": 14
+        },
+        {
+            "id": "malaga_16",
+            "name": "Izan Merino",
+            "position": "Midfielder",
+            "number": 29
+        },
+        {
+            "id": "malaga_17",
+            "name": "Andrés",
+            "position": "Goalkeeper",
+            "number": 30
+        },
+        {
+            "id": "malaga_18",
+            "name": "Gabilondo",
+            "position": "Defender",
+            "number": 2
+        },
+        {
+            "id": "malaga_19",
+            "name": "Baturina",
+            "position": "Midfielder",
+            "number": 9
+        },
+        {
+            "id": "malaga_20",
+            "name": "Ochoa",
+            "position": "Midfielder",
+            "number": 35
+        },
+        {
+            "id": "malaga_21",
+            "name": "Rahmani",
+            "position": "Midfielder",
+            "number": 21
+        },
+        {
+            "id": "malaga_22",
+            "name": "Chupe",
+            "position": "Midfielder",
+            "number": 27
+        },
+        {
+            "id": "malaga_23",
+            "name": "Juanpe",
+            "position": "Midfielder",
+            "number": 8
+        },
+        {
+            "id": "malaga_24",
+            "name": "Murillo",
+            "position": "Defender",
+            "number": 16
+        },
+        {
+            "id": "malaga_25",
+            "name": "Dani Lorenzo",
+            "position": "Midfielder",
+            "number": 22
+        },
+        {
+            "id": "malaga_26",
+            "name": "Sangalli",
+            "position": "Midfielder",
+            "number": 23
+        },
+        {
+            "id": "malaga_27",
+            "name": "Ramón",
+            "position": "Midfielder",
+            "number": 6
+        },
+        {
+            "id": "malaga_28",
+            "name": "Castel",
+            "position": "Midfielder",
+            "number": 25
+        },
+        {
+            "id": "malaga_29",
+            "name": "Rafa",
+            "position": "Midfielder",
+            "number": 37
+        },
+        {
+            "id": "malaga_30",
+            "name": "Haitam",
+            "position": "Attacker",
+            "number": 7
+        },
+        {
+            "id": "malaga_31",
+            "name": "Moussa",
+            "position": "Defender",
+            "number": 15
+        },
+        {
+            "id": "malaga_32",
+            "name": "Rafita",
+            "position": "Defender",
+            "number": 32
+        },
+        {
+            "id": "malaga_33",
+            "name": "Arriaza",
+            "position": "Defender",
+            "number": 38
+        },
+        {
+            "id": "malaga_34",
+            "name": "Alexis",
+            "position": "Attacker",
+            "number": 33
+        },
+        {
+            "id": "malaga_35",
+            "name": "Recio",
+            "position": "Defender",
+            "number": 36
+        }
+        ],
   // ─── Otras ligas ────────────────────────────────────────────────────────
   101: [
     { id: 101001, name: 'Ederson',               position: 'Goalkeeper', number: 31 },
