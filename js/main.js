@@ -141,22 +141,59 @@ mainFormationSelect.addEventListener('change', function(e) {
 
 // ── Render plantilla ─────────────────────────────────────────────────────
 function renderPlayerList() {
-  playerListEl.innerHTML = '';
-  currentPlayers.forEach(function(p) {
+  if (!currentTeamPlayers) return;
+  var filterPos = document.querySelector('.pos-btn.active').dataset.pos;
+  var list = document.getElementById('playerList');
+  list.innerHTML = '';
+  
+  var filtered = currentTeamPlayers;
+  if (filterPos !== 'ALL') {
+    filtered = currentTeamPlayers.filter(function(p) { return p.position === filterPos; });
+  }
+
+  filtered.forEach(function(p) {
     var li = document.createElement('li');
-    li.innerHTML =
-      '<span class="player-number-badge">' + (p.number || '-') + '</span>' +
-      '<span class="player-name">' + p.name + '</span>' +
-      '<span class="player-pos-badge">' + (p.position ? p.position.substring(0,3) : '?') + '</span>';
+    li.className = 'player-item';
     li.draggable = true;
+    
+    // Si ya está asignado al once, marcamos visualmente
+    if (isPlayerAssigned(p.id)) {
+      li.classList.add('in-pitch');
+    }
+
+    li.innerHTML = '<span class="player-num">' + (p.number || '-') + '</span>' +
+                   '<span class="player-name">' + p.name + '</span>' +
+                   '<span class="player-pos">' + (p.position ? p.position.substring(0,3).toUpperCase() : '') + '</span>';
+
+    // Manejador Drag & Drop original
     li.addEventListener('dragstart', function(e) {
-      e.dataTransfer.setData('playerId',     p.id);
-      e.dataTransfer.setData('playerName',   p.name);
+      e.dataTransfer.setData('playerId', p.id);
+      e.dataTransfer.setData('playerName', p.name);
       e.dataTransfer.setData('playerNumber', p.number || '');
     });
-    playerListEl.appendChild(li);
+    
+    // Nuevo: Auto-asignación al hacer clic
+    li.addEventListener('click', function() {
+      var res = autoAssignPlayer(p);
+      if (res === "already_assigned") {
+        unassignPlayer(p.id);
+      } else if (res === true) {
+        // RenderPlayerList se re-llamará por el evento pitchChanged
+      } else {
+        showToast('No hay hueco libre para ' + (p.position || 'esta posición') + '. Usa arrastrar y soltar.', true);
+      }
+    });
+
+    list.appendChild(li);
   });
 }
+
+// Escuchar cambios en el once para actualizar la vista de la lista (opacidad en-pitch)
+document.addEventListener('pitchChanged', function() {
+  if (currentTeamPlayers) {
+    renderPlayerList();
+  }
+});
 
 // ── Añadir jugador manual ────────────────────────────────────────────────
 manualPlayerForm.addEventListener('submit', async function(e) {

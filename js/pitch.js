@@ -28,6 +28,61 @@ function updateJerseyConfig(config) {
   }
 }
 
+function isPlayerAssigned(playerId) {
+  var keys = Object.keys(_slotAssignments);
+  for (var i = 0; i < keys.length; i++) {
+    if (String(_slotAssignments[keys[i]].id) === String(playerId)) return true;
+  }
+  return false;
+}
+
+function autoAssignPlayer(player) {
+  if (isPlayerAssigned(player.id)) {
+     return "already_assigned";
+  }
+
+  var newSlots = FORMATIONS[_pitchCurrentFormation];
+  if (!newSlots) return false;
+
+  var targetCat = null;
+  if (player.position === 'Goalkeeper') targetCat = 'GK';
+  else if (player.position === 'Defender') targetCat = 'DEF';
+  else if (player.position === 'Midfielder') targetCat = 'MID';
+  else if (player.position === 'Attacker') targetCat = 'ATT';
+
+  if (!targetCat) return false;
+
+  var targetSlot = null;
+  for (var i = 0; i < newSlots.length; i++) {
+    var s = newSlots[i];
+    if (getSlotCategory(s.id) === targetCat && !_slotAssignments[s.id]) {
+      targetSlot = s;
+      break;
+    }
+  }
+
+  if (targetSlot) {
+    _slotAssignments[targetSlot.id] = { id: player.id, name: player.name, number: player.number };
+    if (_pitchContainerRef) {
+      renderPitch(_pitchContainerRef, _pitchCurrentFormation, _onSlotClickRef);
+    }
+    return true;
+  }
+  return false;
+}
+
+function unassignPlayer(playerId) {
+  var keys = Object.keys(_slotAssignments);
+  for (var i = 0; i < keys.length; i++) {
+    if (String(_slotAssignments[keys[i]].id) === String(playerId)) {
+       delete _slotAssignments[keys[i]];
+       if (_pitchContainerRef) renderPitch(_pitchContainerRef, _pitchCurrentFormation, _onSlotClickRef);
+       return true;
+    }
+  }
+  return false;
+}
+
 function renderPitch(container, formationName, onSlotClick) {
   _pitchContainerRef = container;
   _onSlotClickRef = onSlotClick;
@@ -204,6 +259,9 @@ function renderPitch(container, formationName, onSlotClick) {
   });
 
   container.appendChild(pitch);
+  
+  // Notificar al resto de la app que el once ha cambiado
+  document.dispatchEvent(new Event('pitchChanged'));
 }
 
 function clearFormation() { _slotAssignments = {}; }

@@ -71,6 +71,7 @@ header {
 }
 .welcome-card h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; }
 .welcome-card p  { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem; }
+
 .huge-btn {
   font-size: 1.3rem;
   padding: 1.1rem 2.5rem;
@@ -171,9 +172,9 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 #player-list { list-style: none; max-height: 400px; overflow-y: auto; padding-right: 0.5rem; }
 #player-list::-webkit-scrollbar { width: 6px; }
 #player-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-#player-list li { padding: 0.7rem 1rem; margin-bottom: 0.5rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px; cursor: grab; font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; transition: all 0.2s ease; }
+#player-list li { padding: 0.7rem 1rem; margin-bottom: 0.5rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; transition: all 0.2s ease; }
 #player-list li:hover { transform: translateY(-2px); border-color: var(--primary); }
-#player-list li:active { cursor: grabbing; }
+#player-list li.in-pitch { opacity: 0.5; background: #f8fafc; border-style: dashed; }
 .player-number-badge { background: var(--text-main); color: white; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 0.75rem; font-weight: 800; margin-right: 0.8rem; }
 .player-pos-badge { margin-left: auto; font-size: 0.7rem; background: #f1f5f9; padding: 0.2rem 0.5rem; border-radius: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
 
