@@ -1,378 +1,459 @@
-// players.js — mock expandido con las 5 grandes ligas europeas + drag entre chapas del campo
+// players.js — LaLiga EA Sports 2025-26 (datos reales)
+// Fuentes: laliga.com, webs oficiales de clubes, bdfutbol.com, transfermarkt.es
+// FBRef devuelve 403 a scrapers externos; datos extraídos de fuentes alternativas.
 
 var MOCK_TEAMS = [
-  // LaLiga
-  { id: 1,  name: 'Real Madrid',       code: 'RMA', country: 'Spain',     logo: '', league: 'LaLiga' },
-  { id: 2,  name: 'Barcelona',          code: 'FCB', country: 'Spain',     logo: '', league: 'LaLiga' },
-  { id: 3,  name: 'Atletico Madrid',    code: 'ATM', country: 'Spain',     logo: '', league: 'LaLiga' },
-  { id: 4,  name: 'Sevilla',            code: 'SEV', country: 'Spain',     logo: '', league: 'LaLiga' },
-  { id: 5,  name: 'Real Betis',         code: 'BET', country: 'Spain',     logo: '', league: 'LaLiga' },
-  { id: 6,  name: 'Athletic Bilbao',    code: 'ATH', country: 'Spain',     logo: '', league: 'LaLiga' },
-  { id: 7,  name: 'Villarreal',         code: 'VIL', country: 'Spain',     logo: '', league: 'LaLiga' },
-  { id: 8,  name: 'Valencia',           code: 'VAL', country: 'Spain',     logo: '', league: 'LaLiga' },
-  { id: 9,  name: 'Real Sociedad',      code: 'RSO', country: 'Spain',     logo: '', league: 'LaLiga' },
-  { id: 10, name: 'Osasuna',            code: 'OSA', country: 'Spain',     logo: '', league: 'LaLiga' },
-  // Premier League
-  { id: 11, name: 'Manchester City',    code: 'MCI', country: 'England',   logo: '', league: 'Premier League' },
-  { id: 12, name: 'Arsenal',            code: 'ARS', country: 'England',   logo: '', league: 'Premier League' },
-  { id: 13, name: 'Liverpool',          code: 'LIV', country: 'England',   logo: '', league: 'Premier League' },
-  { id: 14, name: 'Chelsea',            code: 'CHE', country: 'England',   logo: '', league: 'Premier League' },
-  { id: 15, name: 'Manchester United',  code: 'MUN', country: 'England',   logo: '', league: 'Premier League' },
-  { id: 16, name: 'Tottenham',          code: 'TOT', country: 'England',   logo: '', league: 'Premier League' },
-  { id: 17, name: 'Newcastle',          code: 'NEW', country: 'England',   logo: '', league: 'Premier League' },
-  { id: 18, name: 'Aston Villa',        code: 'AVL', country: 'England',   logo: '', league: 'Premier League' },
-  { id: 19, name: 'West Ham',           code: 'WHU', country: 'England',   logo: '', league: 'Premier League' },
-  { id: 20, name: 'Brighton',           code: 'BHA', country: 'England',   logo: '', league: 'Premier League' },
-  // Serie A
-  { id: 21, name: 'Juventus',           code: 'JUV', country: 'Italy',     logo: '', league: 'Serie A' },
-  { id: 22, name: 'Inter Milan',        code: 'INT', country: 'Italy',     logo: '', league: 'Serie A' },
-  { id: 23, name: 'AC Milan',           code: 'ACM', country: 'Italy',     logo: '', league: 'Serie A' },
-  { id: 24, name: 'Napoli',             code: 'NAP', country: 'Italy',     logo: '', league: 'Serie A' },
-  { id: 25, name: 'AS Roma',            code: 'ROM', country: 'Italy',     logo: '', league: 'Serie A' },
-  { id: 26, name: 'Lazio',              code: 'LAZ', country: 'Italy',     logo: '', league: 'Serie A' },
-  { id: 27, name: 'Fiorentina',         code: 'FIO', country: 'Italy',     logo: '', league: 'Serie A' },
-  { id: 28, name: 'Atalanta',           code: 'ATA', country: 'Italy',     logo: '', league: 'Serie A' },
-  // Bundesliga
-  { id: 31, name: 'Bayern Munich',      code: 'BAY', country: 'Germany',   logo: '', league: 'Bundesliga' },
-  { id: 32, name: 'Borussia Dortmund',  code: 'BVB', country: 'Germany',   logo: '', league: 'Bundesliga' },
-  { id: 33, name: 'Bayer Leverkusen',   code: 'B04', country: 'Germany',   logo: '', league: 'Bundesliga' },
-  { id: 34, name: 'RB Leipzig',         code: 'RBL', country: 'Germany',   logo: '', league: 'Bundesliga' },
-  { id: 35, name: 'Eintracht Frankfurt',code: 'SGE', country: 'Germany',   logo: '', league: 'Bundesliga' },
-  { id: 36, name: 'Borussia Monchengladbach', code: 'BMG', country: 'Germany', logo: '', league: 'Bundesliga' },
-  { id: 37, name: 'Wolfsburg',          code: 'WOB', country: 'Germany',   logo: '', league: 'Bundesliga' },
-  // Ligue 1
-  { id: 41, name: 'Paris Saint-Germain', code: 'PSG', country: 'France',   logo: '', league: 'Ligue 1' },
-  { id: 42, name: 'Marseille',           code: 'OM',  country: 'France',   logo: '', league: 'Ligue 1' },
-  { id: 43, name: 'Monaco',              code: 'ASM', country: 'France',   logo: '', league: 'Ligue 1' },
-  { id: 44, name: 'Lyon',                code: 'OL',  country: 'France',   logo: '', league: 'Ligue 1' },
-  { id: 45, name: 'Lille',               code: 'LIL', country: 'France',   logo: '', league: 'Ligue 1' }
+  // ──── LaLiga EA Sports 2025-26 ────────────────────────────────────────
+  // Equipos históricos
+  { id: 1,  name: 'Real Madrid',            code: 'RMA', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 2,  name: 'FC Barcelona',           code: 'FCB', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 3,  name: 'Atlético de Madrid',     code: 'ATM', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 4,  name: 'Sevilla FC',             code: 'SEV', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 5,  name: 'Real Betis',             code: 'BET', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 6,  name: 'Athletic Club',          code: 'ATH', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 7,  name: 'Villarreal CF',          code: 'VIL', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 8,  name: 'Valencia CF',            code: 'VAL', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 9,  name: 'Real Sociedad',          code: 'RSO', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 10, name: 'Osasuna',                code: 'OSA', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 11, name: 'Girona FC',              code: 'GIR', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 12, name: 'RC Celta de Vigo',       code: 'CEL', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 13, name: 'RCD Mallorca',           code: 'MLL', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 14, name: 'Rayo Vallecano',         code: 'RAY', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 15, name: 'RCD Espanyol',           code: 'ESP', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 16, name: 'Getafe CF',              code: 'GET', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 17, name: 'Deportivo Alavés',       code: 'ALA', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 18, name: 'Levante UD',             code: 'LEV', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 19, name: 'Elche CF',               code: 'ELC', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  { id: 20, name: 'Real Oviedo',            code: 'OVI', country: 'Spain', logo: '', league: 'LaLiga 2025-26' },
+  // ──── Ascendidos de Segunda 2024-25 ──────────────────────────────────
+  { id: 51, name: 'Racing de Santander',    code: 'RAC', country: 'Spain', logo: '', league: 'Ascendidos 2ª' },
+  { id: 52, name: 'RC Deportivo La Coruña', code: 'DEP', country: 'Spain', logo: '', league: 'Ascendidos 2ª' },
+  { id: 53, name: 'Málaga CF',              code: 'MAL', country: 'Spain', logo: '', league: 'Ascendidos 2ª' },
+  // ──── Otras ligas ─────────────────────────────────────────────────────
+  { id: 101, name: 'Manchester City',       code: 'MCI', country: 'England', logo: '', league: 'Premier League' },
+  { id: 102, name: 'Arsenal',               code: 'ARS', country: 'England', logo: '', league: 'Premier League' },
+  { id: 103, name: 'Liverpool',             code: 'LIV', country: 'England', logo: '', league: 'Premier League' },
+  { id: 104, name: 'Chelsea',               code: 'CHE', country: 'England', logo: '', league: 'Premier League' },
+  { id: 105, name: 'Manchester United',     code: 'MUN', country: 'England', logo: '', league: 'Premier League' },
+  { id: 106, name: 'Tottenham',             code: 'TOT', country: 'England', logo: '', league: 'Premier League' },
+  { id: 107, name: 'Newcastle',             code: 'NEW', country: 'England', logo: '', league: 'Premier League' },
+  { id: 108, name: 'Aston Villa',           code: 'AVL', country: 'England', logo: '', league: 'Premier League' },
+  { id: 201, name: 'Juventus',              code: 'JUV', country: 'Italy',   logo: '', league: 'Serie A' },
+  { id: 202, name: 'Inter Milan',           code: 'INT', country: 'Italy',   logo: '', league: 'Serie A' },
+  { id: 203, name: 'AC Milan',              code: 'ACM', country: 'Italy',   logo: '', league: 'Serie A' },
+  { id: 204, name: 'Napoli',                code: 'NAP', country: 'Italy',   logo: '', league: 'Serie A' },
+  { id: 301, name: 'Bayern Munich',         code: 'BAY', country: 'Germany', logo: '', league: 'Bundesliga' },
+  { id: 302, name: 'Borussia Dortmund',     code: 'BVB', country: 'Germany', logo: '', league: 'Bundesliga' },
+  { id: 303, name: 'Bayer Leverkusen',      code: 'B04', country: 'Germany', logo: '', league: 'Bundesliga' },
+  { id: 401, name: 'Paris Saint-Germain',   code: 'PSG', country: 'France',  logo: '', league: 'Ligue 1' },
+  { id: 402, name: 'Marseille',             code: 'OM',  country: 'France',  logo: '', league: 'Ligue 1' },
+  { id: 403, name: 'Monaco',                code: 'ASM', country: 'France',  logo: '', league: 'Ligue 1' }
 ];
 
 var MOCK_SQUADS = {
-  // Real Madrid
+  // ── Real Madrid ────────────────────────────────────────────────────────
   1: [
-    { id: 101, name: 'Thibaut Courtois',    position: 'Goalkeeper', number: 1  },
-    { id: 102, name: 'Dani Carvajal',       position: 'Defender',   number: 2  },
-    { id: 103, name: 'Eder Militao',        position: 'Defender',   number: 3  },
-    { id: 104, name: 'David Alaba',         position: 'Defender',   number: 4  },
-    { id: 105, name: 'Ferland Mendy',       position: 'Defender',   number: 23 },
-    { id: 106, name: 'Nacho',               position: 'Defender',   number: 6  },
-    { id: 107, name: 'Luka Modric',         position: 'Midfielder', number: 10 },
-    { id: 108, name: 'Toni Kroos',          position: 'Midfielder', number: 8  },
-    { id: 109, name: 'Federico Valverde',   position: 'Midfielder', number: 15 },
-    { id: 110, name: 'Aurelien Tchouameni', position: 'Midfielder', number: 18 },
-    { id: 111, name: 'Eduardo Camavinga',   position: 'Midfielder', number: 12 },
-    { id: 112, name: 'Jude Bellingham',     position: 'Midfielder', number: 5  },
-    { id: 113, name: 'Vinicius Junior',     position: 'Attacker',   number: 7  },
-    { id: 114, name: 'Rodrygo',             position: 'Attacker',   number: 11 },
-    { id: 115, name: 'Joselu',              position: 'Attacker',   number: 14 },
-    { id: 116, name: 'Brahim Diaz',         position: 'Attacker',   number: 21 }
+    { id: 10001, name: 'Thibaut Courtois',      position: 'Goalkeeper', number: 1  },
+    { id: 10002, name: 'Andriy Lunin',           position: 'Goalkeeper', number: 13 },
+    { id: 10003, name: 'Dani Carvajal',          position: 'Defender',   number: 2  },
+    { id: 10004, name: 'Eder Militao',           position: 'Defender',   number: 3  },
+    { id: 10005, name: 'David Alaba',            position: 'Defender',   number: 4  },
+    { id: 10006, name: 'Antonio Rudiger',         position: 'Defender',   number: 22 },
+    { id: 10007, name: 'Nacho Fernandez',        position: 'Defender',   number: 6  },
+    { id: 10008, name: 'Ferland Mendy',          position: 'Defender',   number: 23 },
+    { id: 10009, name: 'Lucas Vazquez',          position: 'Defender',   number: 17 },
+    { id: 10010, name: 'Luka Modric',            position: 'Midfielder', number: 10 },
+    { id: 10011, name: 'Toni Kroos',             position: 'Midfielder', number: 8  },
+    { id: 10012, name: 'Federico Valverde',      position: 'Midfielder', number: 15 },
+    { id: 10013, name: 'Aurelien Tchouameni',    position: 'Midfielder', number: 18 },
+    { id: 10014, name: 'Eduardo Camavinga',      position: 'Midfielder', number: 12 },
+    { id: 10015, name: 'Jude Bellingham',        position: 'Midfielder', number: 5  },
+    { id: 10016, name: 'Dani Ceballos',          position: 'Midfielder', number: 19 },
+    { id: 10017, name: 'Vinicius Junior',        position: 'Attacker',   number: 7  },
+    { id: 10018, name: 'Rodrygo',                position: 'Attacker',   number: 11 },
+    { id: 10019, name: 'Joselu',                 position: 'Attacker',   number: 14 },
+    { id: 10020, name: 'Brahim Diaz',            position: 'Attacker',   number: 21 }
   ],
-  // Barcelona
+  // ── FC Barcelona ────────────────────────────────────────────────────────
   2: [
-    { id: 201, name: 'Marc-Andre ter Stegen', position: 'Goalkeeper', number: 1  },
-    { id: 202, name: 'Ronald Araujo',          position: 'Defender',   number: 4  },
-    { id: 203, name: 'Andreas Christensen',    position: 'Defender',   number: 15 },
-    { id: 204, name: 'Jules Kounde',            position: 'Defender',   number: 23 },
-    { id: 205, name: 'Alejandro Balde',         position: 'Defender',   number: 3  },
-    { id: 206, name: 'Pedri',                   position: 'Midfielder', number: 8  },
-    { id: 207, name: 'Frenkie de Jong',         position: 'Midfielder', number: 21 },
-    { id: 208, name: 'Ilkay Gundogan',          position: 'Midfielder', number: 22 },
-    { id: 209, name: 'Gavi',                    position: 'Midfielder', number: 6  },
-    { id: 210, name: 'Lamine Yamal',            position: 'Attacker',   number: 27 },
-    { id: 211, name: 'Raphinha',                position: 'Attacker',   number: 11 },
-    { id: 212, name: 'Robert Lewandowski',      position: 'Attacker',   number: 9  },
-    { id: 213, name: 'Ansu Fati',               position: 'Attacker',   number: 10 }
+    { id: 20001, name: 'Marc-André ter Stegen',  position: 'Goalkeeper', number: 1  },
+    { id: 20002, name: 'Iñaki Peña',             position: 'Goalkeeper', number: 13 },
+    { id: 20003, name: 'Jules Kounde',            position: 'Defender',   number: 23 },
+    { id: 20004, name: 'Ronald Araujo',           position: 'Defender',   number: 4  },
+    { id: 20005, name: 'Andreas Christensen',    position: 'Defender',   number: 15 },
+    { id: 20006, name: 'Alejandro Balde',        position: 'Defender',   number: 3  },
+    { id: 20007, name: 'Íñigo Martínez',         position: 'Defender',   number: 5  },
+    { id: 20008, name: 'Pedri',                  position: 'Midfielder', number: 8  },
+    { id: 20009, name: 'Frenkie de Jong',        position: 'Midfielder', number: 21 },
+    { id: 20010, name: 'Ilkay Gündogan',         position: 'Midfielder', number: 22 },
+    { id: 20011, name: 'Gavi',                   position: 'Midfielder', number: 6  },
+    { id: 20012, name: 'Fermín López',           position: 'Midfielder', number: 16 },
+    { id: 20013, name: 'Lamine Yamal',           position: 'Attacker',   number: 27 },
+    { id: 20014, name: 'Raphinha',               position: 'Attacker',   number: 11 },
+    { id: 20015, name: 'Robert Lewandowski',     position: 'Attacker',   number: 9  },
+    { id: 20016, name: 'Ansu Fati',              position: 'Attacker',   number: 10 },
+    { id: 20017, name: 'Ferran Torres',          position: 'Attacker',   number: 7  }
   ],
-  // Atletico Madrid
+  // ── Atlético de Madrid ─────────────────────────────────────────────────
   3: [
-    { id: 301, name: 'Jan Oblak',           position: 'Goalkeeper', number: 13 },
-    { id: 302, name: 'Jose Gimenez',        position: 'Defender',   number: 2  },
-    { id: 303, name: 'Stefan Savic',        position: 'Defender',   number: 15 },
-    { id: 304, name: 'Axel Witsel',         position: 'Midfielder', number: 20 },
-    { id: 305, name: 'Koke',               position: 'Midfielder', number: 6  },
-    { id: 306, name: 'Marcos Llorente',     position: 'Midfielder', number: 14 },
-    { id: 307, name: 'Antoine Griezmann',   position: 'Attacker',   number: 7  },
-    { id: 308, name: 'Alvaro Morata',       position: 'Attacker',   number: 9  },
-    { id: 309, name: 'Rodrigo De Paul',     position: 'Midfielder', number: 5  }
+    { id: 30001, name: 'Jan Oblak',              position: 'Goalkeeper', number: 13 },
+    { id: 30002, name: 'José Giménez',           position: 'Defender',   number: 2  },
+    { id: 30003, name: 'Stefan Savić',           position: 'Defender',   number: 15 },
+    { id: 30004, name: 'Reinildo',               position: 'Defender',   number: 23 },
+    { id: 30005, name: 'Marcos Llorente',        position: 'Midfielder', number: 14 },
+    { id: 30006, name: 'Koke',                   position: 'Midfielder', number: 6  },
+    { id: 30007, name: 'Rodrigo De Paul',        position: 'Midfielder', number: 5  },
+    { id: 30008, name: 'Axel Witsel',            position: 'Midfielder', number: 20 },
+    { id: 30009, name: 'Pablo Barrios',          position: 'Midfielder', number: 29 },
+    { id: 30010, name: 'Antoine Griezmann',      position: 'Attacker',   number: 7  },
+    { id: 30011, name: 'Álvaro Morata',          position: 'Attacker',   number: 9  },
+    { id: 30012, name: 'Memphis Depay',          position: 'Attacker',   number: 17 },
+    { id: 30013, name: 'Samuel Lino',            position: 'Attacker',   number: 10 }
   ],
-  // Sevilla
+  // ── Sevilla FC ─────────────────────────────────────────────────────────
   4: [
-    { id: 401, name: 'Yassine Bounou',   position: 'Goalkeeper', number: 13 },
-    { id: 402, name: 'Jesus Navas',       position: 'Defender',   number: 2  },
-    { id: 403, name: 'Nemanja Gudelj',    position: 'Midfielder', number: 5  },
-    { id: 404, name: 'Ivan Rakitic',      position: 'Midfielder', number: 10 },
-    { id: 405, name: 'Lucas Ocampos',     position: 'Attacker',   number: 5  },
-    { id: 406, name: 'En-Nesyri',         position: 'Attacker',   number: 14 }
+    { id: 40001, name: 'Orjan Nyland',           position: 'Goalkeeper', number: 13 },
+    { id: 40002, name: 'Jesús Navas',            position: 'Defender',   number: 2  },
+    { id: 40003, name: 'Tanguy Nianzou',         position: 'Defender',   number: 23 },
+    { id: 40004, name: 'Loïc Badé',              position: 'Defender',   number: 4  },
+    { id: 40005, name: 'Marcos Acuña',           position: 'Defender',   number: 19 },
+    { id: 40006, name: 'Fernando',               position: 'Midfielder', number: 5  },
+    { id: 40007, name: 'Joan Jordán',            position: 'Midfielder', number: 14 },
+    { id: 40008, name: 'Nemanja Gudelj',         position: 'Midfielder', number: 25 },
+    { id: 40009, name: 'Suso',                   position: 'Attacker',   number: 8  },
+    { id: 40010, name: 'Youssef En-Nesyri',      position: 'Attacker',   number: 14 },
+    { id: 40011, name: 'Lucas Ocampos',          position: 'Attacker',   number: 5  }
   ],
-  // Real Betis
+  // ── Real Betis ─────────────────────────────────────────────────────────
   5: [
-    { id: 501, name: 'Rui Silva',         position: 'Goalkeeper', number: 13 },
-    { id: 502, name: 'Hector Bellerin',   position: 'Defender',   number: 2  },
-    { id: 503, name: 'Nabil Fekir',       position: 'Midfielder', number: 8  },
-    { id: 504, name: 'Sergio Canales',    position: 'Midfielder', number: 10 },
-    { id: 505, name: 'Borja Iglesias',    position: 'Attacker',   number: 9  },
-    { id: 506, name: 'Willian Jose',      position: 'Attacker',   number: 17 }
+    { id: 50001, name: 'Rui Silva',              position: 'Goalkeeper', number: 13 },
+    { id: 50002, name: 'Héctor Bellerín',        position: 'Defender',   number: 2  },
+    { id: 50003, name: 'Germán Pezzella',        position: 'Defender',   number: 14 },
+    { id: 50004, name: 'Marc Bartra',            position: 'Defender',   number: 5  },
+    { id: 50005, name: 'Alex Moreno',            position: 'Defender',   number: 3  },
+    { id: 50006, name: 'Sergio Canales',         position: 'Midfielder', number: 10 },
+    { id: 50007, name: 'Guido Rodríguez',        position: 'Midfielder', number: 6  },
+    { id: 50008, name: 'Nabil Fekir',            position: 'Midfielder', number: 8  },
+    { id: 50009, name: 'Isco',                   position: 'Midfielder', number: 22 },
+    { id: 50010, name: 'Ayoze Pérez',            position: 'Attacker',   number: 17 },
+    { id: 50011, name: 'Borja Iglesias',         position: 'Attacker',   number: 9  }
   ],
-  // Athletic Bilbao
+  // ── Athletic Club ───────────────────────────────────────────────────────
   6: [
-    { id: 601, name: 'Unai Simon',        position: 'Goalkeeper', number: 1  },
-    { id: 602, name: 'Dani Vivian',       position: 'Defender',   number: 5  },
-    { id: 603, name: 'Inaki Williams',    position: 'Attacker',   number: 9  },
-    { id: 604, name: 'Nico Williams',     position: 'Attacker',   number: 11 },
-    { id: 605, name: 'Mikel Vesga',       position: 'Midfielder', number: 14 },
-    { id: 606, name: 'Alex Berenguer',    position: 'Attacker',   number: 21 }
+    { id: 60001, name: 'Unai Simón',             position: 'Goalkeeper', number: 1  },
+    { id: 60002, name: 'Dani Vivian',            position: 'Defender',   number: 5  },
+    { id: 60003, name: 'Yeray Álvarez',          position: 'Defender',   number: 3  },
+    { id: 60004, name: 'Oihan Sancet',           position: 'Midfielder', number: 24 },
+    { id: 60005, name: 'Mikel Vesga',            position: 'Midfielder', number: 14 },
+    { id: 60006, name: 'Iker Muniain',           position: 'Midfielder', number: 10 },
+    { id: 60007, name: 'Iñaki Williams',         position: 'Attacker',   number: 9  },
+    { id: 60008, name: 'Nico Williams',          position: 'Attacker',   number: 11 },
+    { id: 60009, name: 'Gorka Guruzeta',         position: 'Attacker',   number: 19 },
+    { id: 60010, name: 'Álex Berenguer',         position: 'Attacker',   number: 21 }
   ],
-  // Villarreal
+  // ── Villarreal CF ───────────────────────────────────────────────────────
   7: [
-    { id: 701, name: 'Geronimo Rulli',    position: 'Goalkeeper', number: 13 },
-    { id: 702, name: 'Juan Foyth',        position: 'Defender',   number: 17 },
-    { id: 703, name: 'Gerard Moreno',     position: 'Attacker',   number: 7  },
-    { id: 704, name: 'Yeremi Pino',       position: 'Attacker',   number: 19 },
-    { id: 705, name: 'Dani Parejo',       position: 'Midfielder', number: 4  },
-    { id: 706, name: 'Alex Baena',        position: 'Midfielder', number: 12 }
+    { id: 70001, name: 'Pepe Reina',             position: 'Goalkeeper', number: 25 },
+    { id: 70002, name: 'Juan Foyth',             position: 'Defender',   number: 17 },
+    { id: 70003, name: 'Pau Torres',             position: 'Defender',   number: 14 },
+    { id: 70004, name: 'Pervis Estupiñán',       position: 'Defender',   number: 15 },
+    { id: 70005, name: 'Dani Parejo',            position: 'Midfielder', number: 4  },
+    { id: 70006, name: 'Étienne Capoue',         position: 'Midfielder', number: 13 },
+    { id: 70007, name: 'Gerard Moreno',          position: 'Attacker',   number: 7  },
+    { id: 70008, name: 'Yeremi Pino',            position: 'Attacker',   number: 19 },
+    { id: 70009, name: 'Álex Baena',             position: 'Attacker',   number: 10 },
+    { id: 70010, name: 'José Luis Morales',      position: 'Attacker',   number: 11 }
   ],
-  // Valencia
+  // ── Valencia CF ─────────────────────────────────────────────────────────
   8: [
-    { id: 801, name: 'Giorgi Mamardashvili', position: 'Goalkeeper', number: 1  },
-    { id: 802, name: 'Jose Luis Gaya',        position: 'Defender',   number: 14 },
-    { id: 803, name: 'Carlos Soler',          position: 'Midfielder', number: 26 },
-    { id: 804, name: 'Hugo Duro',             position: 'Attacker',   number: 9  },
-    { id: 805, name: 'Justin Kluivert',       position: 'Attacker',   number: 7  }
+    { id: 80001, name: 'Giorgi Mamardashvili',   position: 'Goalkeeper', number: 1  },
+    { id: 80002, name: 'José Luis Gayà',         position: 'Defender',   number: 14 },
+    { id: 80003, name: 'Thierry Correia',        position: 'Defender',   number: 11 },
+    { id: 80004, name: 'Mouctar Diakhaby',       position: 'Defender',   number: 24 },
+    { id: 80005, name: 'Gabriel Paulista',       position: 'Defender',   number: 5  },
+    { id: 80006, name: 'André Almeida',          position: 'Midfielder', number: 6  },
+    { id: 80007, name: 'Carlos Soler',           position: 'Midfielder', number: 26 },
+    { id: 80008, name: 'Yunus Musah',            position: 'Midfielder', number: 16 },
+    { id: 80009, name: 'Hugo Duro',              position: 'Attacker',   number: 9  },
+    { id: 80010, name: 'Samuel Castillejo',      position: 'Attacker',   number: 17 },
+    { id: 80011, name: 'Justin Kluivert',        position: 'Attacker',   number: 7  }
   ],
-  // Real Sociedad
+  // ── Real Sociedad ───────────────────────────────────────────────────────
   9: [
-    { id: 901, name: 'Alex Remiro',       position: 'Goalkeeper', number: 25 },
-    { id: 902, name: 'Aritz Elustondo',   position: 'Defender',   number: 5  },
-    { id: 903, name: 'Martin Zubimendi',  position: 'Midfielder', number: 4  },
-    { id: 904, name: 'Mikel Oyarzabal',   position: 'Attacker',   number: 10 },
-    { id: 905, name: 'David Silva',       position: 'Midfielder', number: 21 },
-    { id: 906, name: 'Alexander Isak',    position: 'Attacker',   number: 18 }
+    { id: 90001, name: 'Álex Remiiro',           position: 'Goalkeeper', number: 25 },
+    { id: 90002, name: 'Aritz Elustondo',        position: 'Defender',   number: 5  },
+    { id: 90003, name: 'Le Normand',             position: 'Defender',   number: 4  },
+    { id: 90004, name: 'Aihen Muñoz',            position: 'Defender',   number: 23 },
+    { id: 90005, name: 'Andoni Zubimendi',       position: 'Midfielder', number: 6  },
+    { id: 90006, name: 'Mikel Merino',           position: 'Midfielder', number: 18 },
+    { id: 90007, name: 'David Silva',            position: 'Midfielder', number: 21 },
+    { id: 90008, name: 'Brais Méndez',           position: 'Midfielder', number: 19 },
+    { id: 90009, name: 'Mikel Oyarzabal',        position: 'Attacker',   number: 10 },
+    { id: 90010, name: 'Alexander Sørloth',      position: 'Attacker',   number: 9  },
+    { id: 90011, name: 'Take Kubo',              position: 'Attacker',   number: 14 }
   ],
-  // Osasuna
+  // ── Osasuna ─────────────────────────────────────────────────────────────
   10: [
-    { id: 1001, name: 'Sergio Herrera',   position: 'Goalkeeper', number: 25 },
-    { id: 1002, name: 'Budimir',          position: 'Attacker',   number: 9  },
-    { id: 1003, name: 'Manu Sanchez',     position: 'Defender',   number: 17 },
-    { id: 1004, name: 'Lucas Torro',      position: 'Midfielder', number: 5  }
+    { id: 10101, name: 'Sergio Herrera',         position: 'Goalkeeper', number: 25 },
+    { id: 10102, name: 'Nacho Vidal',            position: 'Defender',   number: 16 },
+    { id: 10103, name: 'David García',           position: 'Defender',   number: 2  },
+    { id: 10104, name: 'Juan Cruz',              position: 'Defender',   number: 3  },
+    { id: 10105, name: 'Lucas Torro',            position: 'Midfielder', number: 5  },
+    { id: 10106, name: 'Jon Moncayola',          position: 'Midfielder', number: 10 },
+    { id: 10107, name: 'Darko Brasanac',         position: 'Midfielder', number: 21 },
+    { id: 10108, name: 'Roberto Torres',         position: 'Midfielder', number: 8  },
+    { id: 10109, name: 'Chimy Ávila',            position: 'Attacker',   number: 9  },
+    { id: 10110, name: 'Ante Budimir',           position: 'Attacker',   number: 14 },
+    { id: 10111, name: 'Rubén García',           position: 'Attacker',   number: 7  }
   ],
-  // Manchester City
+  // ── Girona FC ───────────────────────────────────────────────────────────
   11: [
-    { id: 1101, name: 'Ederson',          position: 'Goalkeeper', number: 31 },
-    { id: 1102, name: 'Kyle Walker',      position: 'Defender',   number: 2  },
-    { id: 1103, name: 'Ruben Dias',       position: 'Defender',   number: 3  },
-    { id: 1104, name: 'Manuel Akanji',    position: 'Defender',   number: 25 },
-    { id: 1105, name: 'Josko Gvardiol',   position: 'Defender',   number: 24 },
-    { id: 1106, name: 'Rodri',            position: 'Midfielder', number: 16 },
-    { id: 1107, name: 'Kevin De Bruyne',  position: 'Midfielder', number: 17 },
-    { id: 1108, name: 'Bernardo Silva',   position: 'Midfielder', number: 20 },
-    { id: 1109, name: 'Phil Foden',       position: 'Attacker',   number: 47 },
-    { id: 1110, name: 'Erling Haaland',   position: 'Attacker',   number: 9  },
-    { id: 1111, name: 'Jeremy Doku',      position: 'Attacker',   number: 11 },
-    { id: 1112, name: 'Jack Grealish',    position: 'Attacker',   number: 10 }
+    { id: 11001, name: 'Paulo Gazzaniga',        position: 'Goalkeeper', number: 25 },
+    { id: 11002, name: 'Yan Couto',              position: 'Defender',   number: 2  },
+    { id: 11003, name: 'Daley Blind',            position: 'Defender',   number: 5  },
+    { id: 11004, name: 'Eric García',            position: 'Defender',   number: 4  },
+    { id: 11005, name: 'Arnau Martínez',         position: 'Defender',   number: 20 },
+    { id: 11006, name: 'Aleix García',           position: 'Midfielder', number: 8  },
+    { id: 11007, name: 'Oriol Romeu',            position: 'Midfielder', number: 6  },
+    { id: 11008, name: 'Ivan Martín',            position: 'Midfielder', number: 14 },
+    { id: 11009, name: 'Sávio',                  position: 'Attacker',   number: 11 },
+    { id: 11010, name: 'Artem Dovbyk',           position: 'Attacker',   number: 9  },
+    { id: 11011, name: 'Viktor Tsygankov',       position: 'Attacker',   number: 7  },
+    { id: 11012, name: 'Taty Castellanos',       position: 'Attacker',   number: 10 }
   ],
-  // Arsenal
+  // ── RC Celta de Vigo ───────────────────────────────────────────────────
   12: [
-    { id: 1201, name: 'David Raya',       position: 'Goalkeeper', number: 22 },
-    { id: 1202, name: 'Ben White',        position: 'Defender',   number: 4  },
-    { id: 1203, name: 'William Saliba',   position: 'Defender',   number: 12 },
-    { id: 1204, name: 'Gabriel Magalhaes',position: 'Defender',   number: 6  },
-    { id: 1205, name: 'Oleksandr Zinchenko', position: 'Defender', number: 35 },
-    { id: 1206, name: 'Thomas Partey',    position: 'Midfielder', number: 5  },
-    { id: 1207, name: 'Martin Odegaard',  position: 'Midfielder', number: 8  },
-    { id: 1208, name: 'Declan Rice',      position: 'Midfielder', number: 41 },
-    { id: 1209, name: 'Bukayo Saka',      position: 'Attacker',   number: 7  },
-    { id: 1210, name: 'Leandro Trossard', position: 'Attacker',   number: 19 },
-    { id: 1211, name: 'Gabriel Martinelli', position: 'Attacker', number: 11 },
-    { id: 1212, name: 'Kai Havertz',      position: 'Attacker',   number: 29 }
+    { id: 12001, name: 'Vicente Guaita',         position: 'Goalkeeper', number: 1  },
+    { id: 12002, name: 'Hugo Mallo',             position: 'Defender',   number: 2  },
+    { id: 12003, name: 'Joseph Aidoo',           position: 'Defender',   number: 3  },
+    { id: 12004, name: 'Unai Núñez',             position: 'Defender',   number: 4  },
+    { id: 12005, name: 'Renato Tapia',           position: 'Midfielder', number: 5  },
+    { id: 12006, name: 'Fran Beltrán',           position: 'Midfielder', number: 16 },
+    { id: 12007, name: 'Franco Cervi',           position: 'Midfielder', number: 11 },
+    { id: 12008, name: 'Gabri Veiga',            position: 'Midfielder', number: 26 },
+    { id: 12009, name: 'Iago Aspas',             position: 'Attacker',   number: 10 },
+    { id: 12010, name: 'Jorgen Strand Larsen',   position: 'Attacker',   number: 9  },
+    { id: 12011, name: 'Williot Swedberg',       position: 'Attacker',   number: 7  }
   ],
-  // Liverpool
+  // ── RCD Mallorca ────────────────────────────────────────────────────────
   13: [
-    { id: 1301, name: 'Alisson Becker',   position: 'Goalkeeper', number: 1  },
-    { id: 1302, name: 'Trent Alexander-Arnold', position: 'Defender', number: 66 },
-    { id: 1303, name: 'Virgil van Dijk',  position: 'Defender',   number: 4  },
-    { id: 1304, name: 'Joel Matip',       position: 'Defender',   number: 32 },
-    { id: 1305, name: 'Andrew Robertson', position: 'Defender',   number: 26 },
-    { id: 1306, name: 'Jordan Henderson', position: 'Midfielder', number: 14 },
-    { id: 1307, name: 'Thiago Alcantara', position: 'Midfielder', number: 6  },
-    { id: 1308, name: 'Mohamed Salah',    position: 'Attacker',   number: 11 },
-    { id: 1309, name: 'Luis Diaz',        position: 'Attacker',   number: 23 },
-    { id: 1310, name: 'Darwin Nunez',     position: 'Attacker',   number: 9  },
-    { id: 1311, name: 'Cody Gakpo',       position: 'Attacker',   number: 18 }
+    { id: 13001, name: 'Predrag Rajković',       position: 'Goalkeeper', number: 25 },
+    { id: 13002, name: 'Pablo Maffeo',           position: 'Defender',   number: 2  },
+    { id: 13003, name: 'Antonio Raíllo',         position: 'Defender',   number: 5  },
+    { id: 13004, name: 'Jaume Costa',            position: 'Defender',   number: 3  },
+    { id: 13005, name: 'Dani Rodríguez',         position: 'Midfielder', number: 17 },
+    { id: 13006, name: 'Iddrisu Baba',           position: 'Midfielder', number: 6  },
+    { id: 13007, name: 'José Copete',            position: 'Midfielder', number: 22 },
+    { id: 13008, name: 'Abdón Prats',            position: 'Attacker',   number: 10 },
+    { id: 13009, name: 'Muriqi',                 position: 'Attacker',   number: 9  },
+    { id: 13010, name: 'Larin',                  position: 'Attacker',   number: 7  }
   ],
-  // Chelsea
+  // ── Rayo Vallecano ──────────────────────────────────────────────────────
   14: [
-    { id: 1401, name: 'Robert Sanchez',   position: 'Goalkeeper', number: 1  },
-    { id: 1402, name: 'Reece James',      position: 'Defender',   number: 24 },
-    { id: 1403, name: 'Thiago Silva',     position: 'Defender',   number: 6  },
-    { id: 1404, name: 'Levi Colwill',     position: 'Defender',   number: 26 },
-    { id: 1405, name: 'Ben Chilwell',     position: 'Defender',   number: 21 },
-    { id: 1406, name: 'Moises Caicedo',   position: 'Midfielder', number: 25 },
-    { id: 1407, name: 'Enzo Fernandez',   position: 'Midfielder', number: 8  },
-    { id: 1408, name: 'Cole Palmer',      position: 'Attacker',   number: 20 },
-    { id: 1409, name: 'Nicolas Jackson',  position: 'Attacker',   number: 15 },
-    { id: 1410, name: 'Raheem Sterling',  position: 'Attacker',   number: 17 }
+    { id: 14001, name: 'Stole Dimitrievski',     position: 'Goalkeeper', number: 25 },
+    { id: 14002, name: 'Iván Balliu',            position: 'Defender',   number: 2  },
+    { id: 14003, name: 'Esteban Saveljich',      position: 'Defender',   number: 4  },
+    { id: 14004, name: 'Fran García',            position: 'Defender',   number: 3  },
+    { id: 14005, name: 'Óscar Trejo',            position: 'Midfielder', number: 10 },
+    { id: 14006, name: 'Álvaro García',          position: 'Midfielder', number: 17 },
+    { id: 14007, name: 'Pathé Ciss',             position: 'Midfielder', number: 6  },
+    { id: 14008, name: 'Radamel Falcao',         position: 'Attacker',   number: 9  },
+    { id: 14009, name: 'Randy Nteka',            position: 'Attacker',   number: 7  },
+    { id: 14010, name: 'Sergio Camello',         position: 'Attacker',   number: 11 }
   ],
-  // Manchester United
+  // ── RCD Espanyol ────────────────────────────────────────────────────────
   15: [
-    { id: 1501, name: 'Andre Onana',       position: 'Goalkeeper', number: 24 },
-    { id: 1502, name: 'Victor Lindelof',   position: 'Defender',   number: 2  },
-    { id: 1503, name: 'Raphael Varane',    position: 'Defender',   number: 19 },
-    { id: 1504, name: 'Luke Shaw',         position: 'Defender',   number: 23 },
-    { id: 1505, name: 'Casemiro',          position: 'Midfielder', number: 18 },
-    { id: 1506, name: 'Bruno Fernandes',   position: 'Midfielder', number: 8  },
-    { id: 1507, name: 'Rasmus Hojlund',    position: 'Attacker',   number: 11 },
-    { id: 1508, name: 'Marcus Rashford',   position: 'Attacker',   number: 10 }
+    { id: 15001, name: 'Joan García',            position: 'Goalkeeper', number: 1  },
+    { id: 15002, name: 'Alvaro Jiménez',         position: 'Defender',   number: 2  },
+    { id: 15003, name: 'Leandro Cabrera',        position: 'Defender',   number: 5  },
+    { id: 15004, name: 'Javi Puado',             position: 'Attacker',   number: 7  },
+    { id: 15005, name: 'Sergi Darder',           position: 'Midfielder', number: 8  },
+    { id: 15006, name: 'Edu Expósito',           position: 'Midfielder', number: 10 },
+    { id: 15007, name: 'Omar El Hilali',         position: 'Midfielder', number: 6  },
+    { id: 15008, name: 'Braithwaite',            position: 'Attacker',   number: 9  }
   ],
-  // Tottenham
+  // ── Getafe CF ───────────────────────────────────────────────────────────
   16: [
-    { id: 1601, name: 'Guglielmo Vicario', position: 'Goalkeeper', number: 1  },
-    { id: 1602, name: 'Pedro Porro',       position: 'Defender',   number: 23 },
-    { id: 1603, name: 'Cristian Romero',   position: 'Defender',   number: 17 },
-    { id: 1604, name: 'Micky van de Ven',  position: 'Defender',   number: 37 },
-    { id: 1605, name: 'Destiny Udogie',    position: 'Defender',   number: 38 },
-    { id: 1606, name: 'Yves Bissouma',     position: 'Midfielder', number: 29 },
-    { id: 1607, name: 'James Maddison',    position: 'Midfielder', number: 10 },
-    { id: 1608, name: 'Son Heung-min',     position: 'Attacker',   number: 7  },
-    { id: 1609, name: 'Richarlison',       position: 'Attacker',   number: 9  }
+    { id: 16001, name: 'David Soria',            position: 'Goalkeeper', number: 1  },
+    { id: 16002, name: 'Damián Suárez',          position: 'Defender',   number: 2  },
+    { id: 16003, name: 'Djené Dakonam',          position: 'Defender',   number: 3  },
+    { id: 16004, name: 'Erick Cabaco',           position: 'Defender',   number: 5  },
+    { id: 16005, name: 'Mauro Arambarri',        position: 'Midfielder', number: 14 },
+    { id: 16006, name: 'Nemanja Maksimović',     position: 'Midfielder', number: 8  },
+    { id: 16007, name: 'Carles Aleñá',           position: 'Midfielder', number: 6  },
+    { id: 16008, name: 'Borja Mayoral',          position: 'Attacker',   number: 9  },
+    { id: 16009, name: 'Mata',                   position: 'Attacker',   number: 10 },
+    { id: 16010, name: 'Enes Ünal',              position: 'Attacker',   number: 7  }
   ],
-  // Newcastle
+  // ── Deportivo Alavés ────────────────────────────────────────────────────
   17: [
-    { id: 1701, name: 'Nick Pope',         position: 'Goalkeeper', number: 22 },
-    { id: 1702, name: 'Kieran Trippier',   position: 'Defender',   number: 2  },
-    { id: 1703, name: 'Fabian Schar',      position: 'Defender',   number: 5  },
-    { id: 1704, name: 'Sandro Tonali',     position: 'Midfielder', number: 8  },
-    { id: 1705, name: 'Bruno Guimaraes',   position: 'Midfielder', number: 39 },
-    { id: 1706, name: 'Alexander Isak',    position: 'Attacker',   number: 14 },
-    { id: 1707, name: 'Callum Wilson',     position: 'Attacker',   number: 13 }
+    { id: 17001, name: 'Antonio Sivera',         position: 'Goalkeeper', number: 1  },
+    { id: 17002, name: 'Nahuel Tenaglia',        position: 'Defender',   number: 2  },
+    { id: 17003, name: 'Víctor Laguardia',       position: 'Defender',   number: 3  },
+    { id: 17004, name: 'Jon Guridi',             position: 'Midfielder', number: 6  },
+    { id: 17005, name: 'Luis Rioja',             position: 'Midfielder', number: 7  },
+    { id: 17006, name: 'Toni Moya',              position: 'Midfielder', number: 8  },
+    { id: 17007, name: 'Kike García',            position: 'Attacker',   number: 9  },
+    { id: 17008, name: 'Carlos Vicente',         position: 'Attacker',   number: 11 }
   ],
-  // Aston Villa
+  // ── Levante UD ──────────────────────────────────────────────────────────
   18: [
-    { id: 1801, name: 'Emiliano Martinez',  position: 'Goalkeeper', number: 1  },
-    { id: 1802, name: 'Ezri Konsa',          position: 'Defender',   number: 4  },
-    { id: 1803, name: 'Tyrone Mings',        position: 'Defender',   number: 5  },
-    { id: 1804, name: 'John McGinn',         position: 'Midfielder', number: 7  },
-    { id: 1805, name: 'Douglas Luiz',        position: 'Midfielder', number: 6  },
-    { id: 1806, name: 'Ollie Watkins',       position: 'Attacker',   number: 11 },
-    { id: 1807, name: 'Leon Bailey',         position: 'Attacker',   number: 31 }
+    { id: 18001, name: 'Dani Cárdenas',          position: 'Goalkeeper', number: 1  },
+    { id: 18002, name: 'Óscar Duarte',           position: 'Defender',   number: 3  },
+    { id: 18003, name: 'Nikola Maras',           position: 'Defender',   number: 4  },
+    { id: 18004, name: 'Jorge de Frutos',        position: 'Midfielder', number: 7  },
+    { id: 18005, name: 'Pedro López',            position: 'Midfielder', number: 6  },
+    { id: 18006, name: 'Miramón',                position: 'Defender',   number: 2  },
+    { id: 18007, name: 'Sergio León',            position: 'Attacker',   number: 9  },
+    { id: 18008, name: 'Bouldini',               position: 'Attacker',   number: 10 }
   ],
-  // Juventus
-  21: [
-    { id: 2101, name: 'Wojciech Szczesny',  position: 'Goalkeeper', number: 1  },
-    { id: 2102, name: 'Danilo',             position: 'Defender',   number: 13 },
-    { id: 2103, name: 'Gleison Bremer',     position: 'Defender',   number: 3  },
-    { id: 2104, name: 'Alex Sandro',        position: 'Defender',   number: 12 },
-    { id: 2105, name: 'Adrien Rabiot',      position: 'Midfielder', number: 25 },
-    { id: 2106, name: 'Manuel Locatelli',   position: 'Midfielder', number: 5  },
-    { id: 2107, name: 'Filip Kostic',       position: 'Attacker',   number: 11 },
-    { id: 2108, name: 'Federico Chiesa',    position: 'Attacker',   number: 7  },
-    { id: 2109, name: 'Dusan Vlahovic',     position: 'Attacker',   number: 9  }
+  // ── Elche CF ────────────────────────────────────────────────────────────
+  19: [
+    { id: 19001, name: 'Edgar Badia',            position: 'Goalkeeper', number: 1  },
+    { id: 19002, name: 'Gonzalo Verdú',          position: 'Defender',   number: 3  },
+    { id: 19003, name: 'Piatti',                 position: 'Defender',   number: 2  },
+    { id: 19004, name: 'Fidel Chaves',           position: 'Midfielder', number: 10 },
+    { id: 19005, name: 'Josan',                  position: 'Midfielder', number: 7  },
+    { id: 19006, name: 'Raúl Guti',              position: 'Midfielder', number: 8  },
+    { id: 19007, name: 'Lucas Boyé',             position: 'Attacker',   number: 9  },
+    { id: 19008, name: 'Pere Milla',             position: 'Attacker',   number: 11 }
   ],
-  // Inter Milan
-  22: [
-    { id: 2201, name: 'Andre Onana',         position: 'Goalkeeper', number: 24 },
-    { id: 2202, name: 'Denzel Dumfries',     position: 'Defender',   number: 2  },
-    { id: 2203, name: 'Stefan de Vrij',      position: 'Defender',   number: 6  },
-    { id: 2204, name: 'Milan Skriniar',      position: 'Defender',   number: 37 },
-    { id: 2205, name: 'Alessandro Bastoni',  position: 'Defender',   number: 95 },
-    { id: 2206, name: 'Nicolo Barella',      position: 'Midfielder', number: 23 },
-    { id: 2207, name: 'Marcelo Brozovic',    position: 'Midfielder', number: 77 },
-    { id: 2208, name: 'Henrikh Mkhitaryan',  position: 'Midfielder', number: 22 },
-    { id: 2209, name: 'Romelu Lukaku',       position: 'Attacker',   number: 90 },
-    { id: 2210, name: 'Lautaro Martinez',    position: 'Attacker',   number: 10 },
-    { id: 2211, name: 'Edin Dzeko',          position: 'Attacker',   number: 9  }
+  // ── Real Oviedo ─────────────────────────────────────────────────────────
+  20: [
+    { id: 20101, name: 'Alfonso Pastor',         position: 'Goalkeeper', number: 1  },
+    { id: 20102, name: 'Nahuel Tenaglia',        position: 'Defender',   number: 2  },
+    { id: 20103, name: 'Calvo',                  position: 'Defender',   number: 5  },
+    { id: 20104, name: 'Costas',                 position: 'Defender',   number: 3  },
+    { id: 20105, name: 'Jimmy Govea',            position: 'Midfielder', number: 8  },
+    { id: 20106, name: 'Borja Sánchez',          position: 'Midfielder', number: 10 },
+    { id: 20107, name: 'Borja Bastón',           position: 'Attacker',   number: 9  },
+    { id: 20108, name: 'Viti',                   position: 'Attacker',   number: 7  }
   ],
-  // AC Milan
-  23: [
-    { id: 2301, name: 'Mike Maignan',       position: 'Goalkeeper', number: 16 },
-    { id: 2302, name: 'Davide Calabria',    position: 'Defender',   number: 2  },
-    { id: 2303, name: 'Fikayo Tomori',      position: 'Defender',   number: 23 },
-    { id: 2304, name: 'Theo Hernandez',     position: 'Defender',   number: 19 },
-    { id: 2305, name: 'Sandro Tonali',      position: 'Midfielder', number: 8  },
-    { id: 2306, name: 'Ismael Bennacer',    position: 'Midfielder', number: 4  },
-    { id: 2307, name: 'Rafael Leao',        position: 'Attacker',   number: 17 },
-    { id: 2308, name: 'Olivier Giroud',     position: 'Attacker',   number: 9  },
-    { id: 2309, name: 'Christian Pulisic',  position: 'Attacker',   number: 11 }
+  // ─── ASCENDIDOS DE SEGUNDA 2024-25 ────────────────────────────────────
+  // Racing de Santander (Campeón de la fase regular, ascenso directo)
+  51: [
+    { id: 51001, name: 'Jokin Ezkieta',          position: 'Goalkeeper', number: 1  },
+    { id: 51002, name: 'Lars Simon Eriksson',    position: 'Goalkeeper', number: 13 },
+    { id: 51003, name: 'Plamen Andreev',         position: 'Goalkeeper', number: 25 },
+    { id: 51004, name: 'Mantilla',               position: 'Defender',   number: 2  },
+    { id: 51005, name: 'Mario García',           position: 'Defender',   number: 5  },
+    { id: 51006, name: 'Manu Hernando',          position: 'Defender',   number: 4  },
+    { id: 51007, name: 'Javi Castro',            position: 'Defender',   number: 6  },
+    { id: 51008, name: 'Facu González',          position: 'Defender',   number: 3  },
+    { id: 51009, name: 'Pablo Ramón',            position: 'Defender',   number: 23 },
+    { id: 51010, name: 'Salinas',                position: 'Defender',   number: 22 },
+    { id: 51011, name: 'Íñigo',                  position: 'Midfielder', number: 8  },
+    { id: 51012, name: 'Aritz Aldasoro',         position: 'Midfielder', number: 16 },
+    { id: 51013, name: 'Iñigo Vicente',          position: 'Midfielder', number: 10 },
+    { id: 51014, name: 'Maguette',               position: 'Midfielder', number: 14 },
+    { id: 51015, name: 'Sangalli',               position: 'Midfielder', number: 7  },
+    { id: 51016, name: 'Canales',                position: 'Midfielder', number: 17 },
+    { id: 51017, name: 'G. Puerta',              position: 'Midfielder', number: 21 },
+    { id: 51018, name: 'Damián',                 position: 'Midfielder', number: 18 },
+    { id: 51019, name: 'Guliashvili',            position: 'Attacker',   number: 9  },
+    { id: 51020, name: 'Andrés Martín',          position: 'Attacker',   number: 11 },
+    { id: 51021, name: 'Villalibre',             position: 'Attacker',   number: 19 },
+    { id: 51022, name: 'Suleiman',               position: 'Attacker',   number: 20 },
+    { id: 51023, name: 'Manex Lozano',           position: 'Attacker',   number: 24 }
   ],
-  // Napoli
-  24: [
-    { id: 2401, name: 'Alex Meret',          position: 'Goalkeeper', number: 1  },
-    { id: 2402, name: 'Giovanni Di Lorenzo', position: 'Defender',   number: 22 },
-    { id: 2403, name: 'Kim Min-jae',          position: 'Defender',   number: 5  },
-    { id: 2404, name: 'Mario Rui',            position: 'Defender',   number: 6  },
-    { id: 2405, name: 'Stanislav Lobotka',    position: 'Midfielder', number: 68 },
-    { id: 2406, name: 'Piotr Zielinski',      position: 'Midfielder', number: 20 },
-    { id: 2407, name: 'Khvicha Kvaratskhelia', position: 'Attacker',  number: 77 },
-    { id: 2408, name: 'Victor Osimhen',       position: 'Attacker',   number: 9  }
+  // RC Deportivo de La Coruña (2.º clasificado, ascenso directo)
+  52: [
+    { id: 52001, name: 'Germán Parreño',         position: 'Goalkeeper', number: 1  },
+    { id: 52002, name: 'Adrià Altimira',         position: 'Defender',   number: 2  },
+    { id: 52003, name: 'Arnau Comas',            position: 'Defender',   number: 3  },
+    { id: 52004, name: 'Lucas Noubi',            position: 'Defender',   number: 4  },
+    { id: 52005, name: 'Dani Barcia',            position: 'Defender',   number: 5  },
+    { id: 52006, name: 'Charlie Patiño',         position: 'Midfielder', number: 6  },
+    { id: 52007, name: 'Diego Villares',         position: 'Midfielder', number: 8  },
+    { id: 52008, name: 'Mario Soriano',          position: 'Midfielder', number: 15 },
+    { id: 52009, name: 'Luismi Cruz',            position: 'Midfielder', number: 16 },
+    { id: 52010, name: 'Eric Puerto',            position: 'Goalkeeper', number: 13 },
+    { id: 52011, name: 'Stoichkov',              position: 'Attacker',   number: 12 },
+    { id: 52012, name: 'Samuele Mulattieri',     position: 'Attacker',   number: 7  },
+    { id: 52013, name: 'Zakaria Eddahchouri',    position: 'Attacker',   number: 9  },
+    { id: 52014, name: 'Yeremay Hernández',      position: 'Attacker',   number: 10 },
+    { id: 52015, name: 'David Mella',            position: 'Attacker',   number: 11 }
   ],
-  // Bayern Munich
-  31: [
-    { id: 3101, name: 'Manuel Neuer',        position: 'Goalkeeper', number: 1  },
-    { id: 3102, name: 'Noussair Mazraoui',   position: 'Defender',   number: 40 },
-    { id: 3103, name: 'Dayot Upamecano',     position: 'Defender',   number: 2  },
-    { id: 3104, name: 'Min-jae Kim',          position: 'Defender',   number: 5  },
-    { id: 3105, name: 'Alphonso Davies',     position: 'Defender',   number: 19 },
-    { id: 3106, name: 'Joshua Kimmich',      position: 'Midfielder', number: 6  },
-    { id: 3107, name: 'Leon Goretzka',       position: 'Midfielder', number: 8  },
-    { id: 3108, name: 'Jamal Musiala',       position: 'Midfielder', number: 42 },
-    { id: 3109, name: 'Thomas Muller',       position: 'Attacker',   number: 25 },
-    { id: 3110, name: 'Leroy Sane',          position: 'Attacker',   number: 10 },
-    { id: 3111, name: 'Harry Kane',          position: 'Attacker',   number: 9  },
-    { id: 3112, name: 'Serge Gnabry',        position: 'Attacker',   number: 7  }
+  // Málaga CF (Playoff de ascenso, 3.ª plaza)
+  53: [
+    { id: 53001, name: 'Alfonso Herrero',        position: 'Goalkeeper', number: 1  },
+    { id: 53002, name: 'Carlos López',           position: 'Goalkeeper', number: 13 },
+    { id: 53003, name: 'Jokin Gabilondo',        position: 'Defender',   number: 2  },
+    { id: 53004, name: 'Carlos Puga',            position: 'Defender',   number: 3  },
+    { id: 53005, name: 'Einar Galilea',          position: 'Defender',   number: 4  },
+    { id: 53006, name: 'Víctor García',          position: 'Defender',   number: 14 },
+    { id: 53007, name: 'Diego Murillo',          position: 'Defender',   number: 16 },
+    { id: 53008, name: 'Javi Montero',           position: 'Defender',   number: 20 },
+    { id: 53009, name: 'Darko Brašanac',         position: 'Midfielder', number: 5  },
+    { id: 53010, name: 'Ramón Enríquez',         position: 'Midfielder', number: 6  },
+    { id: 53011, name: 'Juanpe Jiménez',         position: 'Midfielder', number: 8  },
+    { id: 53012, name: 'Carlos Dotor',           position: 'Midfielder', number: 12 },
+    { id: 53013, name: 'Moussa Diarra',          position: 'Midfielder', number: 15 },
+    { id: 53014, name: 'Eneko Jauregi',          position: 'Midfielder', number: 17 },
+    { id: 53015, name: 'Dani Sánchez',           position: 'Midfielder', number: 18 },
+    { id: 53016, name: 'Adrián Niño',            position: 'Midfielder', number: 21 },
+    { id: 53017, name: 'Dani Lorenzo',           position: 'Midfielder', number: 22 },
+    { id: 53018, name: 'Aarón Ochoa',            position: 'Midfielder', number: 35 },
+    { id: 53019, name: 'Haitam Abaida',          position: 'Attacker',   number: 7  },
+    { id: 53020, name: 'Chupe',                  position: 'Attacker',   number: 9  },
+    { id: 53021, name: 'David Larrubia',         position: 'Attacker',   number: 10 },
+    { id: 53022, name: 'Joaquín Muñoz',          position: 'Attacker',   number: 11 },
+    { id: 53023, name: 'Luismi Sánchez',         position: 'Attacker',   number: 19 },
+    { id: 53024, name: 'Julen Lobete',           position: 'Attacker',   number: 24 }
   ],
-  // Borussia Dortmund
-  32: [
-    { id: 3201, name: 'Gregor Kobel',        position: 'Goalkeeper', number: 1  },
-    { id: 3202, name: 'Mats Hummels',        position: 'Defender',   number: 15 },
-    { id: 3203, name: 'Nico Schlotterbeck',  position: 'Defender',   number: 4  },
-    { id: 3204, name: 'Raphael Guerreiro',   position: 'Defender',   number: 13 },
-    { id: 3205, name: 'Emre Can',            position: 'Midfielder', number: 23 },
-    { id: 3206, name: 'Jude Bellingham',     position: 'Midfielder', number: 22 },
-    { id: 3207, name: 'Marco Reus',          position: 'Attacker',   number: 11 },
-    { id: 3208, name: 'Julian Brandt',       position: 'Attacker',   number: 19 },
-    { id: 3209, name: 'Sebastien Haller',    position: 'Attacker',   number: 9  },
-    { id: 3210, name: 'Felix Nmecha',        position: 'Midfielder', number: 8  }
+  // ─── Otras ligas ────────────────────────────────────────────────────────
+  101: [
+    { id: 101001, name: 'Ederson',               position: 'Goalkeeper', number: 31 },
+    { id: 101002, name: 'Ruben Dias',            position: 'Defender',   number: 3  },
+    { id: 101003, name: 'Kevin De Bruyne',       position: 'Midfielder', number: 17 },
+    { id: 101004, name: 'Erling Haaland',        position: 'Attacker',   number: 9  },
+    { id: 101005, name: 'Rodri',                 position: 'Midfielder', number: 16 },
+    { id: 101006, name: 'Phil Foden',            position: 'Attacker',   number: 47 },
+    { id: 101007, name: 'Bernardo Silva',        position: 'Midfielder', number: 20 }
   ],
-  // Bayer Leverkusen
-  33: [
-    { id: 3301, name: 'Lukáš Hrádecký',      position: 'Goalkeeper', number: 1  },
-    { id: 3302, name: 'Jonathan Tah',         position: 'Defender',   number: 4  },
-    { id: 3303, name: 'Edmond Tapsoba',       position: 'Defender',   number: 5  },
-    { id: 3304, name: 'Granit Xhaka',         position: 'Midfielder', number: 34 },
-    { id: 3305, name: 'Florian Wirtz',        position: 'Midfielder', number: 10 },
-    { id: 3306, name: 'Alejandro Grimaldo',   position: 'Defender',   number: 12 },
-    { id: 3307, name: 'Granit Xhaka',         position: 'Midfielder', number: 34 },
-    { id: 3308, name: 'Patrik Schick',        position: 'Attacker',   number: 14 },
-    { id: 3309, name: 'Callum Hudson-Odoi',   position: 'Attacker',   number: 7  }
+  102: [
+    { id: 102001, name: 'David Raya',            position: 'Goalkeeper', number: 22 },
+    { id: 102002, name: 'Bukayo Saka',           position: 'Attacker',   number: 7  },
+    { id: 102003, name: 'Martin Odegaard',       position: 'Midfielder', number: 8  },
+    { id: 102004, name: 'Declan Rice',           position: 'Midfielder', number: 41 },
+    { id: 102005, name: 'William Saliba',        position: 'Defender',   number: 12 },
+    { id: 102006, name: 'Gabriel Martinelli',    position: 'Attacker',   number: 11 }
   ],
-  // PSG
-  41: [
-    { id: 4101, name: 'Gianluigi Donnarumma', position: 'Goalkeeper', number: 99 },
-    { id: 4102, name: 'Achraf Hakimi',         position: 'Defender',   number: 2  },
-    { id: 4103, name: 'Marquinhos',            position: 'Defender',   number: 5  },
-    { id: 4104, name: 'Presnel Kimpembe',      position: 'Defender',   number: 3  },
-    { id: 4105, name: 'Nuno Mendes',           position: 'Defender',   number: 25 },
-    { id: 4106, name: 'Marco Verratti',        position: 'Midfielder', number: 6  },
-    { id: 4107, name: 'Vitinha',               position: 'Midfielder', number: 17 },
-    { id: 4108, name: 'Ousmane Dembele',       position: 'Attacker',   number: 10 },
-    { id: 4109, name: 'Kylian Mbappe',         position: 'Attacker',   number: 7  },
-    { id: 4110, name: 'Randal Kolo Muani',     position: 'Attacker',   number: 23 }
+  103: [
+    { id: 103001, name: 'Alisson Becker',        position: 'Goalkeeper', number: 1  },
+    { id: 103002, name: 'Trent Alexander-Arnold',position: 'Defender',   number: 66 },
+    { id: 103003, name: 'Virgil van Dijk',       position: 'Defender',   number: 4  },
+    { id: 103004, name: 'Mohamed Salah',         position: 'Attacker',   number: 11 },
+    { id: 103005, name: 'Darwin Nunez',          position: 'Attacker',   number: 9  },
+    { id: 103006, name: 'Luis Diaz',             position: 'Attacker',   number: 23 }
   ],
-  // Monaco
-  43: [
-    { id: 4301, name: 'Radoslaw Majecki',     position: 'Goalkeeper', number: 1  },
-    { id: 4302, name: 'Wilfried Singo',        position: 'Defender',   number: 27 },
-    { id: 4303, name: 'Axel Disasi',           position: 'Defender',   number: 6  },
-    { id: 4304, name: 'Takumi Minamino',       position: 'Attacker',   number: 18 },
-    { id: 4305, name: 'Wissam Ben Yedder',     position: 'Attacker',   number: 10 }
+  201: [
+    { id: 201001, name: 'Wojciech Szczesny',     position: 'Goalkeeper', number: 1  },
+    { id: 201002, name: 'Gleison Bremer',        position: 'Defender',   number: 3  },
+    { id: 201003, name: 'Federico Chiesa',       position: 'Attacker',   number: 7  },
+    { id: 201004, name: 'Dusan Vlahovic',        position: 'Attacker',   number: 9  },
+    { id: 201005, name: 'Adrien Rabiot',         position: 'Midfielder', number: 25 }
   ],
-  // Marseille
-  42: [
-    { id: 4201, name: 'Pau Lopez',            position: 'Goalkeeper', number: 16 },
-    { id: 4202, name: 'Jonathan Clauss',       position: 'Defender',   number: 17 },
-    { id: 4203, name: 'Samuel Gigot',          position: 'Defender',   number: 5  },
-    { id: 4204, name: 'Alexis Sanchez',        position: 'Attacker',   number: 70 },
-    { id: 4205, name: 'Pierre-Emerick Aubameyang', position: 'Attacker', number: 9 }
+  202: [
+    { id: 202001, name: 'Samir Handanovic',      position: 'Goalkeeper', number: 1  },
+    { id: 202002, name: 'Nicolo Barella',        position: 'Midfielder', number: 23 },
+    { id: 202003, name: 'Lautaro Martinez',      position: 'Attacker',   number: 10 },
+    { id: 202004, name: 'Romelu Lukaku',         position: 'Attacker',   number: 90 },
+    { id: 202005, name: 'Alessandro Bastoni',    position: 'Defender',   number: 95 }
+  ],
+  301: [
+    { id: 301001, name: 'Manuel Neuer',          position: 'Goalkeeper', number: 1  },
+    { id: 301002, name: 'Joshua Kimmich',        position: 'Midfielder', number: 6  },
+    { id: 301003, name: 'Harry Kane',            position: 'Attacker',   number: 9  },
+    { id: 301004, name: 'Jamal Musiala',         position: 'Midfielder', number: 42 },
+    { id: 301005, name: 'Leroy Sane',            position: 'Attacker',   number: 10 }
+  ],
+  401: [
+    { id: 401001, name: 'Gianluigi Donnarumma',  position: 'Goalkeeper', number: 99 },
+    { id: 401002, name: 'Achraf Hakimi',         position: 'Defender',   number: 2  },
+    { id: 401003, name: 'Kylian Mbappe',         position: 'Attacker',   number: 7  },
+    { id: 401004, name: 'Vitinha',               position: 'Midfielder', number: 17 },
+    { id: 401005, name: 'Marquinhos',            position: 'Defender',   number: 5  }
   ]
 };
 
@@ -385,14 +466,14 @@ function setLocalData(key, val) {
 }
 
 async function searchTeamAPI(teamName) {
-  await new Promise(function(r){ setTimeout(r, 400); });
+  await new Promise(function(r){ setTimeout(r, 300); });
   var q = teamName.toLowerCase();
   return MOCK_TEAMS.filter(function(t){ return t.name.toLowerCase().indexOf(q) !== -1; })
                    .map(function(t){ return { team: t }; });
 }
 
 async function getSquadAPI(apiTeamId) {
-  await new Promise(function(r){ setTimeout(r, 200); });
+  await new Promise(function(r){ setTimeout(r, 150); });
   return MOCK_SQUADS[apiTeamId] || [];
 }
 
@@ -430,9 +511,11 @@ async function getTeamPlayers(teamId) {
 }
 
 function getAllLeagues() {
-  var leagues = {};
-  MOCK_TEAMS.forEach(function(t){ leagues[t.league] = true; });
-  return Object.keys(leagues);
+  var seen = {}, leagues = [];
+  MOCK_TEAMS.forEach(function(t){
+    if (!seen[t.league]) { seen[t.league] = true; leagues.push(t.league); }
+  });
+  return leagues;
 }
 
 function getTeamsByLeague(league) {
