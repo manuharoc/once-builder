@@ -30,6 +30,9 @@
       <button id="start-wizard-btn" class="primary-btn huge-btn">
         <i class="fa-solid fa-wand-magic-sparkles"></i> Crear once
       </button>
+      <button id="start-compare-btn" class="secondary-btn huge-btn" style="margin-top: 1rem;">
+        <i class="fa-solid fa-code-compare"></i> Comparar equipos
+      </button>
     </div>
   </div>
 
@@ -95,7 +98,34 @@
     </div>
   </div>
 
-  <!-- Layout Principal -->
+      <!-- Modal Compare -->
+  <div id="compare-modal" class="modal hidden">
+    <div class="modal-content panel" style="max-width: 500px;">
+      <div class="step-header">
+        <h2>Comparar Equipos</h2>
+        <p>Selecciona dos equipos para ver sus posibles onces enfrentados.</p>
+      </div>
+      
+      <div class="form-row" style="margin: 2rem 0;">
+        <div style="flex:1;">
+          <label>Equipo Local (A)</label>
+          <select id="compare-team-a" class="modern-input"></select>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.5rem; margin-top:1.5rem; color: var(--primary);">VS</div>
+        <div style="flex:1;">
+          <label>Equipo Visitante (B)</label>
+          <select id="compare-team-b" class="modern-input"></select>
+        </div>
+      </div>
+
+      <div class="wizard-footer" style="justify-content: space-between;">
+        <button id="cancel-compare-btn" class="secondary-btn" onclick="document.getElementById('compare-modal').classList.add('hidden'); document.getElementById('welcome-screen').classList.remove('hidden');"><i class="fa-solid fa-times"></i> Cancelar</button>
+        <button id="run-compare-btn" class="primary-btn"><i class="fa-solid fa-bolt"></i> ¡Comparar!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Layout Principal (Builder) -->
   <main id="main-layout" class="layout hidden">
     <section class="panel formation-panel">
       <div class="panel-header">
@@ -129,10 +159,31 @@
     </section>
   </main>
 
+  <!-- Layout de Comparación -->
+  <main id="compare-layout" class="layout compare-layout hidden">
+    <div class="compare-header">
+      <button id="back-to-home-btn" class="secondary-btn"><i class="fa-solid fa-arrow-left"></i> Volver a inicio</button>
+      <h2>Comparativa de Posibles Onces</h2>
+    </div>
+    
+    <div class="compare-grid">
+      <section class="panel compare-panel">
+        <h2 id="compare-title-a" style="text-align:center;">Equipo A</h2>
+        <div id="pitch-container-a" class="static-pitch-container"></div>
+      </section>
+      
+      <section class="panel compare-panel">
+        <h2 id="compare-title-b" style="text-align:center;">Equipo B</h2>
+        <div id="pitch-container-b" class="static-pitch-container"></div>
+      </section>
+    </div>
+  </main>
+
   <script src="js/formations.js"></script>
   <script src="js/jersey.js"></script>
   <script src="js/players.js"></script>
   <script src="js/pitch.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/compare.js"></script>
 </body>
 </html>
