@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js"></script>
 </head>
 <body>
   <div id="toast-container"></div>
@@ -173,12 +174,26 @@
     <div class="compare-grid">
       <section class="panel compare-panel">
         <h2 id="compare-title-a" style="text-align:center;">Equipo A</h2>
+        <div style="margin-bottom: 1rem;">
+          <label class="filter-label">Formación</label>
+          <select id="compare-formation-a" class="modern-input"></select>
+        </div>
         <div id="pitch-container-a" class="static-pitch-container"></div>
+        <div class="divider"></div>
+        <h3>Banquillo</h3>
+        <ul id="bench-list-a" class="compare-bench-list"></ul>
       </section>
       
       <section class="panel compare-panel">
         <h2 id="compare-title-b" style="text-align:center;">Equipo B</h2>
+        <div style="margin-bottom: 1rem;">
+          <label class="filter-label">Formación</label>
+          <select id="compare-formation-b" class="modern-input"></select>
+        </div>
         <div id="pitch-container-b" class="static-pitch-container"></div>
+        <div class="divider"></div>
+        <h3>Banquillo</h3>
+        <ul id="bench-list-b" class="compare-bench-list"></ul>
       </section>
     </div>
   </main>

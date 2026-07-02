@@ -1,112 +1,226 @@
-// compare.js — Lógica para comparar dos equipos
+// compare.js — Lógica para comparar dos equipos interactivos
 
-async function autoGenerateLineup(teamId) {
-  var players = await getTeamPlayers(teamId);
-  var gks = players.filter(p => p.position === 'Goalkeeper').sort((a,b) => (a.number||99) - (b.number||99));
-  var defs = players.filter(p => p.position === 'Defender').sort((a,b) => (a.number||99) - (b.number||99));
-  var mids = players.filter(p => p.position === 'Midfielder').sort((a,b) => (a.number||99) - (b.number||99));
-  var atts = players.filter(p => p.position === 'Attacker').sort((a,b) => (a.number||99) - (b.number||99));
+var compareStateA = { team: null, squad: [], lineup: {}, bench: [], formation: '4-3-3', jersey: {} };
+var compareStateB = { team: null, squad: [], lineup: {}, bench: [], formation: '4-3-3', jersey: {} };
 
-  // Para un 4-3-3
-  var lineup = [];
-  if (gks.length > 0) lineup.push(gks[0]);
-  for(var i=0; i<4 && i<defs.length; i++) lineup.push(defs[i]);
-  for(var i=0; i<3 && i<mids.length; i++) lineup.push(mids[i]);
-  for(var i=0; i<3 && i<atts.length; i++) lineup.push(atts[i]);
-
-  return lineup;
+async function initCompareState(teamId, stateObj, jerseyConfig) {
+  var team = MOCK_TEAMS.find(t => String(t.id) === String(teamId));
+  var squad = await getTeamPlayers(teamId);
+  
+  stateObj.team = team;
+  stateObj.squad = [...squad];
+  stateObj.formation = '4-3-3'; // default
+  stateObj.jersey = jerseyConfig;
+  
+  autoBuildLineup(stateObj);
 }
 
-function renderStaticPitch(container, formationName, lineup, jerseyConfig) {
-  var slots = FORMATIONS[formationName];
-  if (!slots) return;
+function autoBuildLineup(stateObj) {
+  stateObj.lineup = {};
+  stateObj.bench = [];
+  
+  var gks = stateObj.squad.filter(p => p.position === 'Goalkeeper').sort((a,b) => (a.number||99) - (b.number||99));
+  var defs = stateObj.squad.filter(p => p.position === 'Defender').sort((a,b) => (a.number||99) - (b.number||99));
+  var mids = stateObj.squad.filter(p => p.position === 'Midfielder').sort((a,b) => (a.number||99) - (b.number||99));
+  var atts = stateObj.squad.filter(p => p.position === 'Attacker').sort((a,b) => (a.number||99) - (b.number||99));
 
-  container.innerHTML = '';
+  var slots = FORMATIONS[stateObj.formation];
+  
+  slots.forEach(slot => {
+    var cat = getSlotCategory(slot.id);
+    var player = null;
+    
+    if (cat === 'GK' && gks.length > 0) player = gks.shift();
+    else if (cat === 'DEF' && defs.length > 0) player = defs.shift();
+    else if (cat === 'MID' && mids.length > 0) player = mids.shift();
+    else if (cat === 'ATT' && atts.length > 0) player = atts.shift();
+    // fallback
+    else if (gks.length > 0) player = gks.shift();
+    else if (defs.length > 0) player = defs.shift();
+    else if (mids.length > 0) player = mids.shift();
+    else if (atts.length > 0) player = atts.shift();
+    
+    if (player) {
+      stateObj.lineup[slot.id] = player;
+    }
+  });
+
+  // El resto va al banquillo
+  stateObj.bench = [...gks, ...defs, ...mids, ...atts];
+}
+
+function changeFormation(stateObj, newFormation) {
+  var oldLineup = Object.values(stateObj.lineup);
+  stateObj.formation = newFormation;
+  stateObj.lineup = {};
+  
+  // Re-meter a todos al squad temporalmente y reconstruir (para simplificar)
+  // O podemos intentar reasignarlos a la nueva formación
+  var gks = oldLineup.filter(p => p.position === 'Goalkeeper');
+  var defs = oldLineup.filter(p => p.position === 'Defender');
+  var mids = oldLineup.filter(p => p.position === 'Midfielder');
+  var atts = oldLineup.filter(p => p.position === 'Attacker');
+  
+  var slots = FORMATIONS[newFormation];
+  slots.forEach(slot => {
+    var cat = getSlotCategory(slot.id);
+    var player = null;
+    if (cat === 'GK' && gks.length > 0) player = gks.shift();
+    else if (cat === 'DEF' && defs.length > 0) player = defs.shift();
+    else if (cat === 'MID' && mids.length > 0) player = mids.shift();
+    else if (cat === 'ATT' && atts.length > 0) player = atts.shift();
+    else if (gks.length > 0) player = gks.shift();
+    else if (defs.length > 0) player = defs.shift();
+    else if (mids.length > 0) player = mids.shift();
+    else if (atts.length > 0) player = atts.shift();
+    
+    if (player) stateObj.lineup[slot.id] = player;
+  });
+  
+  // Los sobrantes van al banquillo
+  var leftover = [...gks, ...defs, ...mids, ...atts];
+  stateObj.bench = stateObj.bench.concat(leftover);
+}
+
+function getPlayerById(stateObj, playerId) {
+  return stateObj.squad.find(p => String(p.id) === String(playerId));
+}
+
+function renderCompareTeam(side, stateObj) {
+  var pitchContainer = document.getElementById(side === 'A' ? 'pitch-container-a' : 'pitch-container-b');
+  var benchContainer = document.getElementById(side === 'A' ? 'bench-list-a' : 'bench-list-b');
+  var formationSelect = document.getElementById(side === 'A' ? 'compare-formation-a' : 'compare-formation-b');
+  
+  formationSelect.value = stateObj.formation;
+  
+  var slots = FORMATIONS[stateObj.formation];
+  pitchContainer.innerHTML = '';
+  
   var pitch = document.createElement('div');
   pitch.className = 'pitch static';
-
-  // Copia de lineup para ir sacando jugadores
-  var availableGKs = lineup.filter(p => p.position === 'Goalkeeper');
-  var availableDefs = lineup.filter(p => p.position === 'Defender');
-  var availableMids = lineup.filter(p => p.position === 'Midfielder');
-  var availableAtts = lineup.filter(p => p.position === 'Attacker');
-
-  // Mantener estado interno para los swaps
-  var slotData = {};
-
+  
   slots.forEach(function(slot) {
     var el = document.createElement('div');
     el.className = 'slot';
     el.dataset.slotId = slot.id;
-    el.style.left   = slot.x + '%';
+    el.dataset.side = side;
+    el.style.left = slot.x + '%';
     el.style.bottom = slot.y + '%';
-
-    var cat = getSlotCategory(slot.id);
-    var player = null;
     
-    if (cat === 'GK' && availableGKs.length > 0) player = availableGKs.shift();
-    else if (cat === 'DEF' && availableDefs.length > 0) player = availableDefs.shift();
-    else if (cat === 'MID' && availableMids.length > 0) player = availableMids.shift();
-    else if (cat === 'ATT' && availableAtts.length > 0) player = availableAtts.shift();
-    else if (lineup.length > 0) player = lineup.shift();
-
+    var player = stateObj.lineup[slot.id];
+    
     if (player) {
       el.classList.add('filled');
       el.draggable = true;
-      var chapaSVG = jerseySVG(Object.assign({}, jerseyConfig, { number: player.number || '' }));
+      el.dataset.playerId = player.id;
+      var chapaSVG = jerseySVG(Object.assign({}, stateObj.jersey, { number: player.number || '' }));
       el.innerHTML = '<div class="slot-chapa">' + chapaSVG + '</div><span class="slot-name">' + player.name + '</span>';
-      slotData[slot.id] = player;
     } else {
       el.innerHTML = '<div class="slot-empty">' + slot.label + '</div>';
     }
-
-    // Lógica Drag & Drop aislada
+    
+    // Eventos Drag & Drop de Slot
     el.addEventListener('dragstart', function(e) {
       if (!el.classList.contains('filled')) return;
       e.dataTransfer.setData('sourceSlotId', slot.id);
-      e.dataTransfer.setData('containerId', container.id);
+      e.dataTransfer.setData('sourceSide', side);
+      e.dataTransfer.setData('playerId', player.id);
       el.classList.add('dragging');
     });
-
+    
     el.addEventListener('dragend', function() { el.classList.remove('dragging'); });
     el.addEventListener('dragenter', function(e) { e.preventDefault(); el.classList.add('drag-over'); });
     el.addEventListener('dragleave', function(e) { e.preventDefault(); el.classList.remove('drag-over'); });
-    el.addEventListener('dragover',  function(e) { e.preventDefault(); });
-
+    el.addEventListener('dragover', function(e) { e.preventDefault(); });
+    
     el.addEventListener('drop', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
+      e.preventDefault(); e.stopPropagation();
       el.classList.remove('drag-over');
-
-      var sourceSlotId = e.dataTransfer.getData('sourceSlotId');
-      var sourceContainerId = e.dataTransfer.getData('containerId');
       
-      // Solo permitir mover dentro del mismo campo
-      if (!sourceSlotId || sourceContainerId !== container.id) return;
-
-      var sourceEl = container.querySelector('[data-slot-id="' + sourceSlotId + '"]');
-      if (!sourceEl) return;
-
-      // Intercambiar HTML y clases
-      var tempHtml = el.innerHTML;
-      var tempFilled = el.classList.contains('filled');
-      var tempPlayer = slotData[slot.id];
-
-      el.innerHTML = sourceEl.innerHTML;
-      if (sourceEl.classList.contains('filled')) el.classList.add('filled'); else el.classList.remove('filled');
-      el.draggable = el.classList.contains('filled');
-      slotData[slot.id] = slotData[sourceSlotId];
-
-      sourceEl.innerHTML = tempHtml;
-      if (tempFilled) sourceEl.classList.add('filled'); else sourceEl.classList.remove('filled');
-      sourceEl.draggable = sourceEl.classList.contains('filled');
-      slotData[sourceSlotId] = tempPlayer;
+      var sourceSide = e.dataTransfer.getData('sourceSide');
+      var sourceSlotId = e.dataTransfer.getData('sourceSlotId');
+      var sourceBench = e.dataTransfer.getData('sourceBench');
+      var playerId = e.dataTransfer.getData('playerId');
+      
+      if (sourceSide !== side) return; // No mezclar equipos
+      
+      var targetPlayerId = el.dataset.playerId;
+      
+      if (sourceBench === 'true') {
+        // Viene del banquillo
+        var pToPitch = stateObj.bench.find(p => String(p.id) === playerId);
+        stateObj.bench = stateObj.bench.filter(p => String(p.id) !== playerId);
+        
+        if (targetPlayerId) {
+           // Intercambio con el banquillo
+           var pToBench = stateObj.lineup[slot.id];
+           stateObj.bench.push(pToBench);
+        }
+        stateObj.lineup[slot.id] = pToPitch;
+        
+      } else if (sourceSlotId) {
+        // Intercambio en el campo
+        var sourcePlayer = stateObj.lineup[sourceSlotId];
+        var targetPlayer = stateObj.lineup[slot.id];
+        
+        if (targetPlayer) {
+          stateObj.lineup[sourceSlotId] = targetPlayer;
+        } else {
+          delete stateObj.lineup[sourceSlotId];
+        }
+        stateObj.lineup[slot.id] = sourcePlayer;
+      }
+      
+      renderCompareTeam(side, stateObj);
     });
-
+    
+    // Doble clic manda al banquillo
+    el.addEventListener('dblclick', function() {
+       if (stateObj.lineup[slot.id]) {
+           stateObj.bench.push(stateObj.lineup[slot.id]);
+           delete stateObj.lineup[slot.id];
+           renderCompareTeam(side, stateObj);
+       }
+    });
+    
     pitch.appendChild(el);
   });
-
-  container.appendChild(pitch);
+  
+  pitchContainer.appendChild(pitch);
+  
+  // Renderizar banquillo
+  benchContainer.innerHTML = '';
+  stateObj.bench.forEach(function(player) {
+    var li = document.createElement('li');
+    li.draggable = true;
+    li.innerHTML = '<span class="player-number-badge">' + (player.number || '-') + '</span>' +
+                   '<span class="player-name">' + player.name + '</span>' +
+                   '<span class="player-pos-badge">' + (player.position ? player.position.substring(0, 3).toUpperCase() : '?') + '</span>';
+                   
+    li.addEventListener('dragstart', function(e) {
+       e.dataTransfer.setData('sourceBench', 'true');
+       e.dataTransfer.setData('sourceSide', side);
+       e.dataTransfer.setData('playerId', player.id);
+    });
+    
+    benchContainer.appendChild(li);
+  });
+  
+  // Soltar en banquillo para sacar del campo
+  benchContainer.addEventListener('dragover', function(e) { e.preventDefault(); });
+  benchContainer.addEventListener('drop', function(e) {
+      e.preventDefault();
+      var sourceSide = e.dataTransfer.getData('sourceSide');
+      var sourceSlotId = e.dataTransfer.getData('sourceSlotId');
+      
+      if (sourceSide === side && sourceSlotId) {
+          if (stateObj.lineup[sourceSlotId]) {
+              stateObj.bench.push(stateObj.lineup[sourceSlotId]);
+              delete stateObj.lineup[sourceSlotId];
+              renderCompareTeam(side, stateObj);
+          }
+      }
+  });
 }
 
 // ── Inicialización UI de Compare ─────────────────────────────────────────────
@@ -118,25 +232,45 @@ var btnRunCompare   = document.getElementById('run-compare-btn');
 var compareLayout   = document.getElementById('compare-layout');
 var backToHomeBtn   = document.getElementById('back-to-home-btn');
 
-var pitchContainerA = document.getElementById('pitch-container-a');
-var pitchContainerB = document.getElementById('pitch-container-b');
+var formationSelectA = document.getElementById('compare-formation-a');
+var formationSelectB = document.getElementById('compare-formation-b');
 var titleA = document.getElementById('compare-title-a');
 var titleB = document.getElementById('compare-title-b');
+
+function populateFormations(selectEl) {
+  var html = '';
+  Object.keys(FORMATIONS).forEach(function(f) {
+    html += '<option value="'+f+'">'+f+'</option>';
+  });
+  selectEl.innerHTML = html;
+}
 
 if (btnStartCompare) {
   btnStartCompare.addEventListener('click', function() {
     welcomeScreen.classList.add('hidden');
     compareModal.classList.remove('hidden');
     
-    // Rellenar selects
     var optionsHtml = '<option value="" disabled selected>Selecciona equipo...</option>';
     MOCK_TEAMS.forEach(t => {
       optionsHtml += '<option value="'+t.id+'">'+t.name+'</option>';
     });
     compareSelectA.innerHTML = optionsHtml;
     compareSelectB.innerHTML = optionsHtml;
+    
+    populateFormations(formationSelectA);
+    populateFormations(formationSelectB);
   });
 }
+
+formationSelectA.addEventListener('change', function(e) {
+  changeFormation(compareStateA, e.target.value);
+  renderCompareTeam('A', compareStateA);
+});
+
+formationSelectB.addEventListener('change', function(e) {
+  changeFormation(compareStateB, e.target.value);
+  renderCompareTeam('B', compareStateB);
+});
 
 if (btnRunCompare) {
   btnRunCompare.addEventListener('click', async function() {
@@ -150,26 +284,17 @@ if (btnRunCompare) {
     compareModal.classList.add('hidden');
     compareLayout.classList.remove('hidden');
 
-    var teamA = MOCK_TEAMS.find(t => String(t.id) === teamIdA);
-    var teamB = MOCK_TEAMS.find(t => String(t.id) === teamIdB);
-
-    titleA.innerHTML = '<i class="fa-solid fa-shield"></i> ' + teamA.name;
-    titleB.innerHTML = '<i class="fa-solid fa-shield"></i> ' + teamB.name;
-
-    // Asegurarnos de que los jugadores están en localStorage (si no, los cargamos)
-    await saveTeamWithPlayers(teamA, await getSquadAPI(teamA.id), 'mock');
-    await saveTeamWithPlayers(teamB, await getSquadAPI(teamB.id), 'mock');
-
-    var lineupA = await autoGenerateLineup(teamA.id);
-    var lineupB = await autoGenerateLineup(teamB.id);
-
-    // Renderizamos los campos
     var jerseyA = { primary: '#1e3a8a', secondary: '#ffffff', pattern: 'stripes-v' };
     var jerseyB = { primary: '#dc2626', secondary: '#ffffff', pattern: 'none' };
     
-    // Podemos extraer colores si los tuviéramos, pero usamos fijos de prueba
-    renderStaticPitch(pitchContainerA, '4-3-3', lineupA, jerseyA);
-    renderStaticPitch(pitchContainerB, '4-3-3', lineupB, jerseyB);
+    await initCompareState(teamIdA, compareStateA, jerseyA);
+    await initCompareState(teamIdB, compareStateB, jerseyB);
+
+    titleA.innerHTML = '<i class="fa-solid fa-shield"></i> ' + compareStateA.team.name;
+    titleB.innerHTML = '<i class="fa-solid fa-shield"></i> ' + compareStateB.team.name;
+
+    renderCompareTeam('A', compareStateA);
+    renderCompareTeam('B', compareStateB);
   });
 }
 

@@ -247,3 +247,9 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .static-pitch-container { flex: 1; position: relative; min-height: 500px; display: flex; align-items: stretch; justify-content: stretch; }
 .pitch.static { flex: 1; min-height: 100%; }
 
+
+/* Compare Bench */
+.compare-bench-list { list-style: none; padding: 0; margin: 0; max-height: 250px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; background: white; }
+.compare-bench-list li { display: flex; align-items: center; padding: 0.5rem; border-bottom: 1px solid var(--border-color); cursor: grab; }
+.compare-bench-list li:hover { background: #f8fafc; }
+.compare-bench-list li:last-child { border-bottom: none; }
