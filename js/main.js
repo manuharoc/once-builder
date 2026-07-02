@@ -249,3 +249,13 @@ document.getElementById('main-back-btn').addEventListener('click', function() {
   document.getElementById('main-layout').classList.add('hidden');
   document.getElementById('welcome-screen').classList.remove('hidden');
 });
+
+// Botón Cancelar Wizard
+document.getElementById('cancel-wizard-btn').addEventListener('click', function() {
+  document.getElementById('wizard-modal').classList.add('hidden');
+  document.getElementById('welcome-screen').classList.remove('hidden');
+  // Reset steps just in case
+  document.getElementById('wizard-step-1').classList.remove('hidden');
+  document.getElementById('wizard-step-2').classList.add('hidden');
+  document.getElementById('wizard-step-3').classList.add('hidden');
+});
