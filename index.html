@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <!-- Toast Container para notificaciones -->
   <div id="toast-container"></div>
 
   <header>
@@ -21,11 +20,53 @@
     </div>
   </header>
 
-  <main class="layout">
+  <!-- Pantalla Inicial -->
+  <div id="welcome-screen" class="welcome-screen">
+    <button id="start-wizard-btn" class="primary-btn huge-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Crear once</button>
+  </div>
+
+  <!-- Modal del Wizard -->
+  <div id="wizard-modal" class="modal hidden">
+    <div class="modal-content panel">
+      <div id="wizard-step-1" class="wizard-step">
+        <h2>Paso 1: Selecciona tu equipo</h2>
+        <div class="team-search">
+          <input type="text" id="wizard-team-search" class="modern-input" placeholder="Buscar equipo (ej: Real Madrid)">
+          <button id="wizard-team-search-btn" class="primary-btn search-btn">Buscar</button>
+        </div>
+        <div id="wizard-loader" class="loader hidden"></div>
+        <p id="wizard-team-result" class="success-text hidden"></p>
+        <div class="wizard-footer">
+          <button id="wizard-next-1" class="primary-btn" disabled>Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div id="wizard-step-2" class="wizard-step hidden">
+        <h2>Paso 2: Diseña la "Chapa"</h2>
+        <div id="jersey-container"></div>
+        <div class="wizard-footer">
+          <button id="wizard-prev-2" class="secondary-btn"><i class="fa-solid fa-arrow-left"></i> Atrás</button>
+          <button id="wizard-next-2" class="primary-btn">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div id="wizard-step-3" class="wizard-step hidden">
+        <h2>Paso 3: Elige la Formación</h2>
+        <select id="wizard-formation-select" class="modern-input"></select>
+        <div class="wizard-footer">
+          <button id="wizard-prev-3" class="secondary-btn"><i class="fa-solid fa-arrow-left"></i> Atrás</button>
+          <button id="wizard-finish" class="primary-btn">¡Empezar a construir! <i class="fa-solid fa-check"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Layout Principal -->
+  <main id="main-layout" class="layout hidden">
     <section class="panel formation-panel">
       <div class="panel-header">
         <h2><i class="fa-solid fa-chess-board"></i> Formación</h2>
-        <select id="formation-select" class="modern-input" style="width: auto;"></select>
+        <select id="main-formation-select" class="modern-input" style="width: auto;"></select>
       </div>
       <div id="pitch-container"></div>
       <button id="save-lineup-btn" class="primary-btn"><i class="fa-solid fa-download"></i> Guardar alineación</button>
@@ -33,18 +74,8 @@
 
     <section class="panel players-panel">
       <h2><i class="fa-solid fa-users"></i> Plantilla</h2>
-      <div class="team-search">
-        <input type="text" id="team-search" class="modern-input" placeholder="Buscar equipo (ej: Real Madrid)">
-        <button id="team-search-btn" class="primary-btn search-btn">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <span class="btn-text">Buscar</span>
-        </button>
-      </div>
-      <div id="loader" class="loader hidden"></div>
       <ul id="player-list"></ul>
-
       <div class="divider"></div>
-      
       <h3><i class="fa-solid fa-user-plus"></i> Añadir jugador</h3>
       <form id="manual-player-form" class="modern-form">
         <input type="text" name="name" class="modern-input" placeholder="Nombre" required>
@@ -60,11 +91,6 @@
         </div>
         <button type="submit" class="secondary-btn"><i class="fa-solid fa-plus"></i> Añadir</button>
       </form>
-    </section>
-
-    <section class="panel jersey-panel">
-      <h2><i class="fa-solid fa-shirt"></i> Camiseta</h2>
-      <div id="jersey-container"></div>
     </section>
   </main>
 

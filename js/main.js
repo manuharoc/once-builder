@@ -1,31 +1,45 @@
 import { getFormationNames } from './formations.js';
-import { renderPitch, exportLineup, clearFormation } from './pitch.js';
+import { renderPitch, exportLineup, clearFormation, updateJerseyConfig } from './pitch.js';
 import { renderJerseyDesigner } from './jersey.js';
-import { searchTeamAPI, getSquadAPI, saveTeamWithPlayers, addManualPlayer, listTeams, getTeamPlayers } from './players.js';
+import { searchTeamAPI, getSquadAPI, saveTeamWithPlayers, addManualPlayer, getTeamPlayers } from './players.js';
 
-const formationSelect = document.getElementById('formation-select');
+const mainLayout = document.getElementById('main-layout');
+const welcomeScreen = document.getElementById('welcome-screen');
+const wizardModal = document.getElementById('wizard-modal');
+
+// DOM Elements
 const pitchContainer = document.getElementById('pitch-container');
 const jerseyContainer = document.getElementById('jersey-container');
 const playerListEl = document.getElementById('player-list');
-const teamSearchInput = document.getElementById('team-search');
-const teamSearchBtn = document.getElementById('team-search-btn');
 const manualPlayerForm = document.getElementById('manual-player-form');
 const saveLineupBtn = document.getElementById('save-lineup-btn');
-const loader = document.getElementById('loader');
+
+// Wizard Elements
+const btnStartWizard = document.getElementById('start-wizard-btn');
+const wizStep1 = document.getElementById('wizard-step-1');
+const wizStep2 = document.getElementById('wizard-step-2');
+const wizStep3 = document.getElementById('wizard-step-3');
+const wizSearchInput = document.getElementById('wizard-team-search');
+const wizSearchBtn = document.getElementById('wizard-team-search-btn');
+const wizLoader = document.getElementById('wizard-loader');
+const wizResult = document.getElementById('wizard-team-result');
+const wizNext1 = document.getElementById('wizard-next-1');
+const wizPrev2 = document.getElementById('wizard-prev-2');
+const wizNext2 = document.getElementById('wizard-next-2');
+const wizPrev3 = document.getElementById('wizard-prev-3');
+const wizFinish = document.getElementById('wizard-finish');
+const wizFormationSelect = document.getElementById('wizard-formation-select');
+const mainFormationSelect = document.getElementById('main-formation-select');
 
 let currentTeamId = null;
 let currentPlayers = [];
 let jerseyConfig = null;
 
-// --- Notificaciones Toast ---
 function showToast(message, isError = false) {
   const container = document.getElementById('toast-container');
   const toast = document.createElement('div');
   toast.className = `toast ${isError ? 'error' : ''}`;
-  toast.innerHTML = isError 
-    ? `<i class="fa-solid fa-circle-exclamation"></i> ${message}` 
-    : `<i class="fa-solid fa-circle-check"></i> ${message}`;
-  
+  toast.innerHTML = isError ? `<i class="fa-solid fa-circle-exclamation"></i> ${message}` : `<i class="fa-solid fa-circle-check"></i> ${message}`;
   container.appendChild(toast);
   setTimeout(() => {
     toast.style.animation = 'fadeOut 0.3s ease forwards';
@@ -33,64 +47,81 @@ function showToast(message, isError = false) {
   }, 3000);
 }
 
-// --- Formaciones ---
+// Inicializar Formaciones
 getFormationNames().forEach(name => {
-  const opt = document.createElement('option');
-  opt.value = name;
-  opt.textContent = name;
-  formationSelect.appendChild(opt);
+  const opt1 = document.createElement('option'); opt1.value = name; opt1.textContent = name;
+  const opt2 = document.createElement('option'); opt2.value = name; opt2.textContent = name;
+  wizFormationSelect.appendChild(opt1);
+  mainFormationSelect.appendChild(opt2);
 });
 
-function draw() {
-  renderPitch(pitchContainer, formationSelect.value, slot => {
-    // Se puede expandir aquí, pero borrar jugador ahora se hace con dblclick
-  });
-}
+// Jersey Designer (Step 2)
+jerseyConfig = renderJerseyDesigner(jerseyContainer, {}, cfg => { jerseyConfig = cfg; updateJerseyConfig(cfg); });
 
-formationSelect.addEventListener('change', draw);
-draw();
+// --- WIZARD FLOW ---
+btnStartWizard.addEventListener('click', () => {
+  welcomeScreen.classList.add('hidden');
+  wizardModal.classList.remove('hidden');
+  wizStep1.classList.remove('hidden');
+});
 
-// --- Camiseta ---
-jerseyConfig = renderJerseyDesigner(jerseyContainer, {}, cfg => { jerseyConfig = cfg; });
+wizSearchBtn.addEventListener('click', async () => {
+  const query = wizSearchInput.value.trim();
+  if (!query) return showToast('Introduce un nombre.', true);
+  
+  wizLoader.classList.remove('hidden');
+  wizResult.classList.add('hidden');
+  wizNext1.disabled = true;
 
-// --- Búsqueda de equipo (API Mock) ---
-teamSearchBtn.addEventListener('click', async () => {
-  const query = teamSearchInput.value.trim();
-  if (!query) {
-    showToast('Introduce un nombre de equipo para buscar.', true);
-    return;
-  }
-
-  loader.classList.remove('hidden');
   const teams = await searchTeamAPI(query);
+  wizLoader.classList.add('hidden');
+
   if (teams.length === 0) {
-    loader.classList.add('hidden');
-    showToast('Sin resultados. Añade jugadores manualmente abajo.', true);
+    showToast('Sin resultados. Escribe Real Madrid o Barcelona.', true);
     return;
   }
 
   const team = teams[0].team;
   const squad = await getSquadAPI(team.id);
   const savedTeam = await saveTeamWithPlayers(team, squad, 'api');
+  
   currentTeamId = savedTeam.id;
   currentPlayers = await getTeamPlayers(currentTeamId);
+  
+  wizResult.textContent = `✅ Equipo seleccionado: ${team.name} (${squad.length} jugadores)`;
+  wizResult.classList.remove('hidden');
+  wizNext1.disabled = false;
+});
+
+// Navegación Wizard
+wizNext1.addEventListener('click', () => { wizStep1.classList.add('hidden'); wizStep2.classList.remove('hidden'); });
+wizPrev2.addEventListener('click', () => { wizStep2.classList.add('hidden'); wizStep1.classList.remove('hidden'); });
+wizNext2.addEventListener('click', () => { wizStep2.classList.add('hidden'); wizStep3.classList.remove('hidden'); });
+wizPrev3.addEventListener('click', () => { wizStep3.classList.add('hidden'); wizStep2.classList.remove('hidden'); });
+
+wizFinish.addEventListener('click', () => {
+  wizardModal.classList.add('hidden');
+  mainLayout.classList.remove('hidden');
+  
+  // Sincronizar selectores
+  mainFormationSelect.value = wizFormationSelect.value;
+  
+  // Render inicial
   renderPlayerList();
-  loader.classList.add('hidden');
-  showToast(`Equipo cargado: ${team.name}`);
+  renderPitch(pitchContainer, mainFormationSelect.value, () => {});
+  showToast('¡A construir tu once!');
+});
+
+// Cambios de formación en Main Layout
+mainFormationSelect.addEventListener('change', e => {
+  renderPitch(pitchContainer, e.target.value, () => {});
 });
 
 function renderPlayerList() {
   playerListEl.innerHTML = '';
   currentPlayers.forEach(p => {
     const li = document.createElement('li');
-    
-    // Estructura HTML para la lista
-    li.innerHTML = `
-      <span class="player-number-badge">${p.number || '-'}</span>
-      <span class="player-name">${p.name}</span>
-      <span class="player-pos-badge">${p.position ? p.position.substring(0,3) : '?'}</span>
-    `;
-    
+    li.innerHTML = `<span class="player-number-badge">${p.number || '-'}</span><span class="player-name">${p.name}</span><span class="player-pos-badge">${p.position ? p.position.substring(0,3) : '?'}</span>`;
     li.draggable = true;
     li.addEventListener('dragstart', e => {
       e.dataTransfer.setData('playerId', p.id);
@@ -101,18 +132,13 @@ function renderPlayerList() {
   });
 }
 
-// --- Carga manual de jugador ---
+// Carga manual
 manualPlayerForm.addEventListener('submit', async e => {
   e.preventDefault();
-  if (!currentTeamId) {
-    showToast('Primero busca un equipo o guárdalo.', true);
-    return;
-  }
+  if (!currentTeamId) return showToast('Error: No hay equipo.', true);
   const formData = new FormData(manualPlayerForm);
   const player = await addManualPlayer(currentTeamId, {
-    name: formData.get('name'),
-    position: formData.get('position'),
-    number: Number(formData.get('number')) || null
+    name: formData.get('name'), position: formData.get('position'), number: Number(formData.get('number')) || null
   });
   currentPlayers.push(player);
   renderPlayerList();
@@ -120,15 +146,9 @@ manualPlayerForm.addEventListener('submit', async e => {
   showToast('Jugador añadido.');
 });
 
-// --- Guardar alineación ---
 saveLineupBtn.addEventListener('click', () => {
   const lineup = exportLineup();
   lineup.jersey = jerseyConfig;
   console.log('Alineación exportada:', lineup);
-  showToast('Alineación guardada (Revisa la consola)');
+  showToast('Alineación guardada (Consola)');
 });
-
-// Mensaje inicial
-setTimeout(() => {
-  showToast('Prueba a buscar "Real Madrid", "Barcelona", "City" o "Bayern"');
-}, 1000);

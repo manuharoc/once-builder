@@ -1,18 +1,15 @@
-// Diseñador simple de camiseta en SVG: color principal, secundario, patrón y número.
-
-const PATTERNS = ['none', 'stripes-v', 'stripes-h', 'sleeves-diff'];
+const PATTERNS = ['none', 'stripes-v', 'stripes-h', 'halves', 'checker'];
 
 export function renderJerseyDesigner(container, initialConfig, onChange) {
   const config = {
-    primary: initialConfig?.primary ?? '#e63946',
+    primary: initialConfig?.primary ?? '#10b981',
     secondary: initialConfig?.secondary ?? '#ffffff',
     pattern: initialConfig?.pattern ?? 'none',
-    number: initialConfig?.number ?? '10'
   };
 
   container.innerHTML = `
     <div class="jersey-editor">
-      <div class="jersey-preview"></div>
+      <div class="jersey-preview" style="text-align: center; margin: 10px 0;"></div>
       <div class="jersey-controls">
         <label>Color principal
           <input type="color" id="jc-primary" value="${config.primary}">
@@ -21,12 +18,9 @@ export function renderJerseyDesigner(container, initialConfig, onChange) {
           <input type="color" id="jc-secondary" value="${config.secondary}">
         </label>
         <label>Patrón
-          <select id="jc-pattern">
+          <select id="jc-pattern" class="modern-input" style="width: auto; padding: 0.3rem;">
             ${PATTERNS.map(p => `<option value="${p}" ${p === config.pattern ? 'selected' : ''}>${p}</option>`).join('')}
           </select>
-        </label>
-        <label>Número
-          <input type="text" id="jc-number" maxlength="2" value="${config.number}">
         </label>
       </div>
     </div>
@@ -35,36 +29,56 @@ export function renderJerseyDesigner(container, initialConfig, onChange) {
   const preview = container.querySelector('.jersey-preview');
 
   function draw() {
-    preview.innerHTML = jerseySVG(config);
+    preview.innerHTML = jerseySVG({ ...config, number: '10' });
     onChange?.(config);
   }
 
   container.querySelector('#jc-primary').addEventListener('input', e => { config.primary = e.target.value; draw(); });
   container.querySelector('#jc-secondary').addEventListener('input', e => { config.secondary = e.target.value; draw(); });
   container.querySelector('#jc-pattern').addEventListener('change', e => { config.pattern = e.target.value; draw(); });
-  container.querySelector('#jc-number').addEventListener('input', e => { config.number = e.target.value; draw(); });
 
   draw();
   return config;
 }
 
 export function jerseySVG({ primary, secondary, pattern, number }) {
-  const stripes = pattern === 'stripes-v'
-    ? `<rect x="60" y="20" width="15" height="120" fill="${secondary}"/><rect x="90" y="20" width="15" height="120" fill="${secondary}"/><rect x="120" y="20" width="15" height="120" fill="${secondary}"/>`
-    : pattern === 'stripes-h'
-    ? `<rect x="30" y="50" width="140" height="15" fill="${secondary}"/><rect x="30" y="80" width="140" height="15" fill="${secondary}"/><rect x="30" y="110" width="140" height="15" fill="${secondary}"/>`
-    : '';
+  let patternContent = '';
+  
+  if (pattern === 'stripes-v') {
+    patternContent = `
+      <rect x="25" y="0" width="15" height="100" fill="${secondary}"/>
+      <rect x="60" y="0" width="15" height="100" fill="${secondary}"/>
+    `;
+  } else if (pattern === 'stripes-h') {
+    patternContent = `
+      <rect x="0" y="25" width="100" height="15" fill="${secondary}"/>
+      <rect x="0" y="60" width="100" height="15" fill="${secondary}"/>
+    `;
+  } else if (pattern === 'halves') {
+    patternContent = `<rect x="50" y="0" width="50" height="100" fill="${secondary}"/>`;
+  } else if (pattern === 'checker') {
+    patternContent = `
+      <rect x="50" y="0" width="50" height="50" fill="${secondary}"/>
+      <rect x="0" y="50" width="50" height="50" fill="${secondary}"/>
+    `;
+  }
 
-  const sleeves = pattern === 'sleeves-diff'
-    ? `<path d="M30 20 L0 50 L15 90 L45 60 Z" fill="${secondary}"/><path d="M170 20 L200 50 L185 90 L155 60 Z" fill="${secondary}"/>`
-    : `<path d="M30 20 L0 50 L15 90 L45 60 Z" fill="${primary}"/><path d="M170 20 L200 50 L185 90 L155 60 Z" fill="${primary}"/>`;
+  const textBg = pattern !== 'none' ? `<circle cx="50" cy="50" r="22" fill="rgba(255,255,255,0.85)" />` : '';
+  const textColor = pattern !== 'none' ? '#000' : (secondary === primary ? '#000' : secondary);
 
   return `
-    <svg viewBox="0 0 200 180" width="160" height="150" xmlns="http://www.w3.org/2000/svg">
-      <path d="M45 60 L30 20 Q100 -5 170 20 L155 60 L155 170 L45 170 Z" fill="${primary}"/>
-      ${stripes}
-      ${sleeves}
-      <text x="100" y="120" font-size="40" font-weight="bold" text-anchor="middle" fill="${secondary === primary ? '#000' : secondary}">${number}</text>
+    <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="circleClip">
+          <circle cx="50" cy="50" r="48" />
+        </clipPath>
+      </defs>
+      <circle cx="50" cy="50" r="48" fill="${primary}" stroke="#ffffff" stroke-width="3"/>
+      <g clip-path="url(#circleClip)">
+        ${patternContent}
+      </g>
+      ${textBg}
+      <text x="50" y="62" font-family="Outfit, sans-serif" font-size="34" font-weight="800" text-anchor="middle" fill="${textColor}">${number || ''}</text>
     </svg>
   `;
 }
