@@ -133,6 +133,13 @@ wizPrev2.addEventListener('click',  function() { wizStep2.classList.add('hidden'
 wizNext2.addEventListener('click',  function() { wizStep2.classList.add('hidden'); wizStep3.classList.remove('hidden'); });
 wizPrev3.addEventListener('click',  function() { wizStep3.classList.add('hidden'); wizStep2.classList.remove('hidden'); });
 
+document.getElementById('reset-data-btn').addEventListener('click', function() {
+  if (confirm('Esto borrará todas las alineaciones y plantillas guardadas y recargará los datos por defecto. ¿Estás seguro?')) {
+    localStorage.clear();
+    location.reload();
+  }
+});
+
 // ── Finalizar Wizard → mostrar layout principal ──────────────────────────────
 wizFinish.addEventListener('click', function() {
   wizardModal.classList.add('hidden');
