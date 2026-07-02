@@ -1,5 +1,6 @@
-// main.js
+// main.js — Once Builder
 
+// ── Referencias al DOM ───────────────────────────────────────────────────────
 var mainLayout        = document.getElementById('main-layout');
 var welcomeScreen     = document.getElementById('welcome-screen');
 var wizardModal       = document.getElementById('wizard-modal');
@@ -27,24 +28,27 @@ var mainFormationSelect = document.getElementById('main-formation-select');
 var teamResultsEl       = document.getElementById('team-results');
 var leagueBtnsEl        = document.getElementById('league-buttons');
 
-var currentTeamId  = null;
-var currentPlayers = [];
-var jerseyConfig   = null;
+// ── Estado global ────────────────────────────────────────────────────────────
+var currentTeamId      = null;
+var currentPlayers     = [];   // ← UNA SOLA variable, usada en todas partes
+var jerseyConfig       = null;
 
-// ── Toast ───────────────────────────────────────────────────────────────
+// ── Toast ────────────────────────────────────────────────────────────────────
 function showToast(message, isError) {
   var c = document.getElementById('toast-container');
   var t = document.createElement('div');
   t.className = 'toast' + (isError ? ' error' : '');
-  t.innerHTML = (isError ? '<i class="fa-solid fa-circle-exclamation"></i> ' : '<i class="fa-solid fa-circle-check"></i> ') + message;
+  t.innerHTML = (isError
+    ? '<i class="fa-solid fa-circle-exclamation"></i> '
+    : '<i class="fa-solid fa-circle-check"></i> ') + message;
   c.appendChild(t);
   setTimeout(function() {
     t.style.animation = 'fadeOut 0.3s ease forwards';
-    setTimeout(function(){ t.remove(); }, 300);
+    setTimeout(function() { t.remove(); }, 300);
   }, 3000);
 }
 
-// ── Formaciones ─────────────────────────────────────────────────────────
+// ── Poblar selectores de formación ───────────────────────────────────────────
 getFormationNames().forEach(function(name) {
   var o1 = document.createElement('option'); o1.value = name; o1.textContent = name;
   var o2 = document.createElement('option'); o2.value = name; o2.textContent = name;
@@ -52,34 +56,37 @@ getFormationNames().forEach(function(name) {
   mainFormationSelect.appendChild(o2);
 });
 
-// ── Jersey Designer ─────────────────────────────────────────────────────
+// ── Jersey Designer ──────────────────────────────────────────────────────────
 jerseyConfig = renderJerseyDesigner(jerseyContainer, {}, function(cfg) {
   jerseyConfig = cfg;
   updateJerseyConfig(cfg);
 });
 
-// ── Liga Buttons (Wizard paso 1) ─────────────────────────────────────────
-var allLeagues = getAllLeagues();
-allLeagues.forEach(function(league) {
+// ── Botones de liga (Wizard paso 1) ──────────────────────────────────────────
+getAllLeagues().forEach(function(league) {
   var btn = document.createElement('button');
+  btn.type = 'button';
   btn.className = 'league-btn secondary-btn';
   btn.textContent = league;
   btn.addEventListener('click', function() {
-    document.querySelectorAll('.league-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('.league-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
     renderTeamGrid(getTeamsByLeague(league));
   });
   leagueBtnsEl.appendChild(btn);
 });
 
+// ── Grid de equipos ──────────────────────────────────────────────────────────
 function renderTeamGrid(teams) {
   teamResultsEl.innerHTML = '';
   teams.forEach(function(t) {
     var card = document.createElement('div');
     card.className = 'team-card';
-    card.innerHTML = '<span class="team-code">' + t.code + '</span><span class="team-name-small">' + t.name + '</span>';
+    card.innerHTML =
+      '<span class="team-code">' + t.code + '</span>' +
+      '<span class="team-name-small">' + t.name + '</span>';
     card.addEventListener('click', function() {
-      document.querySelectorAll('.team-card').forEach(function(c){ c.classList.remove('selected'); });
+      document.querySelectorAll('.team-card').forEach(function(c) { c.classList.remove('selected'); });
       card.classList.add('selected');
       selectTeam(t);
     });
@@ -87,121 +94,120 @@ function renderTeamGrid(teams) {
   });
 }
 
+// ── Seleccionar equipo ───────────────────────────────────────────────────────
 async function selectTeam(team) {
   wizLoader.classList.remove('hidden');
   wizResult.classList.add('hidden');
   wizNext1.disabled = true;
 
-  var squad = await getSquadAPI(team.id);
-  var saved = await saveTeamWithPlayers(team, squad, 'api');
+  var squad  = await getSquadAPI(team.id);
+  var saved  = await saveTeamWithPlayers(team, squad, 'api');
   currentTeamId  = saved.id;
   currentPlayers = await getTeamPlayers(currentTeamId);
 
   wizLoader.classList.add('hidden');
-  wizResult.textContent = '✅ ' + team.name + (squad.length ? ' (' + squad.length + ' jugadores)' : '');
+  wizResult.textContent = '✅ ' + team.name +
+    (squad.length ? ' (' + squad.length + ' jugadores)' : '');
   wizResult.classList.remove('hidden');
   wizNext1.disabled = false;
 }
 
-// ── Wizard: búsqueda por texto ───────────────────────────────────────────
+// ── Búsqueda por texto ───────────────────────────────────────────────────────
 wizSearchBtn.addEventListener('click', async function() {
   var query = wizSearchInput.value.trim();
   if (!query) return showToast('Introduce un nombre de equipo.', true);
   wizLoader.classList.remove('hidden');
   var teams = await searchTeamAPI(query);
   wizLoader.classList.add('hidden');
-  if (!teams.length) return showToast('Sin resultados. Prueba LaLiga, Premier League…', true);
-  renderTeamGrid(teams.map(function(r){ return r.team; }));
+  if (!teams.length) return showToast('Sin resultados. Prueba con LaLiga, Premier…', true);
+  renderTeamGrid(teams.map(function(r) { return r.team; }));
 });
 
-// ── Wizard: navegación de pasos ──────────────────────────────────────────
+// ── Navegación del Wizard ────────────────────────────────────────────────────
 btnStartWizard.addEventListener('click', function() {
   welcomeScreen.classList.add('hidden');
   wizardModal.classList.remove('hidden');
 });
+wizNext1.addEventListener('click',  function() { wizStep1.classList.add('hidden'); wizStep2.classList.remove('hidden'); });
+wizPrev2.addEventListener('click',  function() { wizStep2.classList.add('hidden'); wizStep1.classList.remove('hidden'); });
+wizNext2.addEventListener('click',  function() { wizStep2.classList.add('hidden'); wizStep3.classList.remove('hidden'); });
+wizPrev3.addEventListener('click',  function() { wizStep3.classList.add('hidden'); wizStep2.classList.remove('hidden'); });
 
-wizNext1.addEventListener('click', function() { wizStep1.classList.add('hidden'); wizStep2.classList.remove('hidden'); });
-wizPrev2.addEventListener('click', function() { wizStep2.classList.add('hidden'); wizStep1.classList.remove('hidden'); });
-wizNext2.addEventListener('click', function() { wizStep2.classList.add('hidden'); wizStep3.classList.remove('hidden'); });
-wizPrev3.addEventListener('click', function() { wizStep3.classList.add('hidden'); wizStep2.classList.remove('hidden'); });
-
+// ── Finalizar Wizard → mostrar layout principal ──────────────────────────────
 wizFinish.addEventListener('click', function() {
   wizardModal.classList.add('hidden');
   mainLayout.classList.remove('hidden');
   mainFormationSelect.value = wizFormationSelect.value;
   renderPlayerList();
   renderPitch(pitchContainer, mainFormationSelect.value, null);
-  showToast('¡A construir tu once! Arrastra chapas para intercambiarlas.');
+  showToast('¡A construir tu once! Pulsa o arrastra un jugador para colocarlo.');
 });
 
-// ── Cambio de formación ─────────────────────────────────────────────────
+// ── Cambio de formación ──────────────────────────────────────────────────────
 mainFormationSelect.addEventListener('change', function(e) {
   renderPitch(pitchContainer, e.target.value, null);
 });
 
-// ── Render plantilla ─────────────────────────────────────────────────────
+// ── Render lista de jugadores ────────────────────────────────────────────────
 function renderPlayerList() {
-  if (!currentTeamPlayers) return;
-  var filterPos = document.querySelector('.pos-btn.active').dataset.pos;
-  var list = document.getElementById('player-list');
-  list.innerHTML = '';
-  
-  var filtered = currentTeamPlayers;
-  if (filterPos !== 'ALL') {
-    filtered = currentTeamPlayers.filter(function(p) { return p.position === filterPos; });
-  }
+  if (!currentPlayers || !currentPlayers.length) return;
 
-  filtered.forEach(function(p) {
+  playerListEl.innerHTML = '';
+
+  currentPlayers.forEach(function(p) {
     var li = document.createElement('li');
-    li.className = 'player-item';
     li.draggable = true;
-    
-    // Si ya está asignado al once, marcamos visualmente
+
+    // Marcar si ya está en el campo
     if (isPlayerAssigned(p.id)) {
       li.classList.add('in-pitch');
     }
 
-    li.innerHTML = '<span class="player-num">' + (p.number || '-') + '</span>' +
-                   '<span class="player-name">' + p.name + '</span>' +
-                   '<span class="player-pos">' + (p.position ? p.position.substring(0,3).toUpperCase() : '') + '</span>';
+    li.innerHTML =
+      '<span class="player-number-badge">' + (p.number || '-') + '</span>' +
+      '<span class="player-name">' + p.name + '</span>' +
+      '<span class="player-pos-badge">' + (p.position ? p.position.substring(0, 3).toUpperCase() : '?') + '</span>';
 
-    // Manejador Drag & Drop original
+    // Arrastrar
     li.addEventListener('dragstart', function(e) {
-      e.dataTransfer.setData('playerId', p.id);
-      e.dataTransfer.setData('playerName', p.name);
+      e.dataTransfer.setData('playerId',     p.id);
+      e.dataTransfer.setData('playerName',   p.name);
       e.dataTransfer.setData('playerNumber', p.number || '');
     });
-    
-    // Nuevo: Auto-asignación al hacer clic
+
+    // Clic → auto-asignar / quitar
     li.addEventListener('click', function() {
       var res = autoAssignPlayer(p);
-      if (res === "already_assigned") {
+      if (res === 'already_assigned') {
         unassignPlayer(p.id);
+        showToast(p.name + ' quitado del once.');
       } else if (res === true) {
-        // RenderPlayerList se re-llamará por el evento pitchChanged
+        showToast(p.name + ' añadido al once.');
       } else {
-        showToast('No hay hueco libre para ' + (p.position || 'esta posición') + '. Usa arrastrar y soltar.', true);
+        showToast('No hay hueco libre para esa posición. Arrástralo manualmente.', true);
       }
     });
 
-    list.appendChild(li);
+    playerListEl.appendChild(li);
   });
 }
 
-// Escuchar cambios en el once para actualizar la vista de la lista (opacidad en-pitch)
+// Re-renderizar lista cuando el campo cambie (para actualizar el estado in-pitch)
 document.addEventListener('pitchChanged', function() {
-  if (currentTeamPlayers) {
+  if (currentPlayers && currentPlayers.length) {
     renderPlayerList();
   }
 });
 
-// ── Añadir jugador manual ────────────────────────────────────────────────
+// ── Añadir jugador manual ────────────────────────────────────────────────────
 manualPlayerForm.addEventListener('submit', async function(e) {
   e.preventDefault();
   if (!currentTeamId) return showToast('No hay equipo seleccionado.', true);
   var fd = new FormData(manualPlayerForm);
   var player = await addManualPlayer(currentTeamId, {
-    name: fd.get('name'), position: fd.get('position'), number: Number(fd.get('number')) || null
+    name:     fd.get('name'),
+    position: fd.get('position'),
+    number:   Number(fd.get('number')) || null
   });
   currentPlayers.push(player);
   renderPlayerList();
@@ -209,10 +215,10 @@ manualPlayerForm.addEventListener('submit', async function(e) {
   showToast('Jugador añadido.');
 });
 
-// ── Guardar alineación ───────────────────────────────────────────────────
+// ── Guardar alineación ───────────────────────────────────────────────────────
 saveLineupBtn.addEventListener('click', function() {
   var lineup = exportLineup();
   lineup.jersey = jerseyConfig;
   console.log('Alineación exportada:', lineup);
-  showToast('Alineación guardada (ver Consola)');
+  showToast('Alineación guardada (ver Consola).');
 });
