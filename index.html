@@ -22,27 +22,55 @@
 
   <!-- Pantalla Inicial -->
   <div id="welcome-screen" class="welcome-screen">
-    <button id="start-wizard-btn" class="primary-btn huge-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Crear once</button>
+    <div class="welcome-card">
+      <div class="welcome-icon"><i class="fa-solid fa-futbol"></i></div>
+      <h2>Bienvenido a Once Builder</h2>
+      <p>Selecciona tu equipo, diseña tu chapa y construye tu alineación ideal.</p>
+      <button id="start-wizard-btn" class="primary-btn huge-btn">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Crear once
+      </button>
+    </div>
   </div>
 
   <!-- Modal del Wizard -->
   <div id="wizard-modal" class="modal hidden">
     <div class="modal-content panel">
+
+      <!-- Paso 1: Equipo -->
       <div id="wizard-step-1" class="wizard-step">
-        <h2>Paso 1: Selecciona tu equipo</h2>
+        <div class="step-header">
+          <span class="step-badge">1/3</span>
+          <h2>Selecciona tu equipo</h2>
+        </div>
+
+        <!-- Buscar por texto -->
         <div class="team-search">
-          <input type="text" id="wizard-team-search" class="modern-input" placeholder="Buscar equipo (ej: Real Madrid)">
-          <button id="wizard-team-search-btn" class="primary-btn search-btn">Buscar</button>
+          <input type="text" id="wizard-team-search" class="modern-input" placeholder="Buscar equipo (ej: Real Madrid, City…)">
+          <button id="wizard-team-search-btn" class="primary-btn search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
         <div id="wizard-loader" class="loader hidden"></div>
+
+        <!-- O filtrar por liga -->
+        <div class="league-filter">
+          <label class="filter-label"><i class="fa-solid fa-filter"></i> O filtra por liga:</label>
+          <div id="league-buttons" class="league-btns"></div>
+        </div>
+
+        <!-- Lista de equipos resultantes -->
+        <div id="team-results" class="team-grid"></div>
+
         <p id="wizard-team-result" class="success-text hidden"></p>
         <div class="wizard-footer">
           <button id="wizard-next-1" class="primary-btn" disabled>Siguiente <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </div>
 
+      <!-- Paso 2: Chapa -->
       <div id="wizard-step-2" class="wizard-step hidden">
-        <h2>Paso 2: Diseña la "Chapa"</h2>
+        <div class="step-header">
+          <span class="step-badge">2/3</span>
+          <h2>Diseña tu Chapa</h2>
+        </div>
         <div id="jersey-container"></div>
         <div class="wizard-footer">
           <button id="wizard-prev-2" class="secondary-btn"><i class="fa-solid fa-arrow-left"></i> Atrás</button>
@@ -50,14 +78,19 @@
         </div>
       </div>
 
+      <!-- Paso 3: Formación -->
       <div id="wizard-step-3" class="wizard-step hidden">
-        <h2>Paso 3: Elige la Formación</h2>
+        <div class="step-header">
+          <span class="step-badge">3/3</span>
+          <h2>Elige la Formación</h2>
+        </div>
         <select id="wizard-formation-select" class="modern-input"></select>
         <div class="wizard-footer">
           <button id="wizard-prev-3" class="secondary-btn"><i class="fa-solid fa-arrow-left"></i> Atrás</button>
           <button id="wizard-finish" class="primary-btn">¡Empezar a construir! <i class="fa-solid fa-check"></i></button>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -69,6 +102,7 @@
         <select id="main-formation-select" class="modern-input" style="width: auto;"></select>
       </div>
       <div id="pitch-container"></div>
+      <div class="field-hint"><i class="fa-solid fa-circle-info"></i> Arrastra chapas entre posiciones para intercambiarlas · Doble click para quitar</div>
       <button id="save-lineup-btn" class="primary-btn"><i class="fa-solid fa-download"></i> Guardar alineación</button>
     </section>
 
@@ -94,7 +128,6 @@
     </section>
   </main>
 
-  <!-- Scripts cargados en orden, sin módulos ES para compatibilidad con file:// -->
   <script src="js/formations.js"></script>
   <script src="js/jersey.js"></script>
   <script src="js/players.js"></script>
