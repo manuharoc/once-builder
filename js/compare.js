@@ -326,9 +326,17 @@ function openSubstituteModal(side, slotId, stateObj) {
   var targetPos = cat === 'GK' ? 'Goalkeeper' : (cat === 'DEF' ? 'Defender' : (cat === 'MID' ? 'Midfielder' : 'Attacker'));
   
   var candidates = stateObj.bench.filter(p => p.position === targetPos);
-  if (candidates.length === 0) candidates = stateObj.bench; // Mostrar todos si no hay de la posición
+  if (candidates.length === 0) {
+    candidates = stateObj.bench; // Mostrar todos si no hay de la posición
+  }
   
   subList.innerHTML = '';
+  
+  if (candidates.length === 0) {
+    var debugLi = document.createElement('li');
+    debugLi.innerHTML = '<span style="color:red;">Error: Banquillo vacío. Squad: ' + stateObj.squad.length + ' | Lineup: ' + Object.keys(stateObj.lineup).length + '</span>';
+    subList.appendChild(debugLi);
+  }
   
   candidates.forEach(function(player) {
     var li = document.createElement('li');
